@@ -16,6 +16,7 @@
 #include "duckdb/storage/table/column_data_checkpointer.hpp"
 #include "duckdb/common/types/column/column_data_collection_iterators.hpp"
 #include "duckdb/common/types/column/column_data_scan_states.hpp"
+#include <optional>
 #include <thread>
 
 // OpenSSL linked through vcpkg
@@ -112,23 +113,18 @@ struct EvidenceSetBindData : public TableFunctionData {
     string table_name;
     vector<string> table_column_names;
     vector<LogicalType> table_types;
+    bool use_hashing = false;
+    bool use_vectorization = false;
 };
 
 struct EvidenceSetGlobalState : public GlobalTableFunctionState {
-    // idx_t row_i = 0;
-    // idx_t row_j = 1;
     
     idx_t total_rows = 0;
-    // EvidenceSetGlobalState(idx_t rows) : total_rows(rows) {}
     
-    // unique_ptr<ColumnDataCollection> collection; // A tabela em memória
     shared_ptr<ColumnDataCollection> collection;
     atomic<idx_t> current_row_i;
 
-    // EvidenceSetGlobalState(idx_t rows, ClientContext &context, vector<LogicalType> &types) 
-    //     : total_rows(rows) {
-    //     collection = make_uniq<ColumnDataCollection>(context, types);
-    // }
+    vector<hash_t> row_hashes;
 
     EvidenceSetGlobalState(idx_t rows, ClientContext &context, const vector<LogicalType> &types) 
         : total_rows(rows), current_row_i(0) {
@@ -160,8 +156,20 @@ unique_ptr<FunctionData> EvidenceSetBind(ClientContext &context, TableFunctionBi
     auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
     auto &table_entry = entry.Cast<TableCatalogEntry>();
 
+
+
     auto result = make_uniq<EvidenceSetBindData>();
     result->table_name = table_name;
+
+    // Segundo parâmetro: Hashing
+    if (input.inputs.size() > 1) {
+        result->use_hashing = BooleanValue::Get(input.inputs[1]);
+    }
+    // Terceiro parâmetro: Vetorização
+    if (input.inputs.size() > 2) {
+        result->use_vectorization = BooleanValue::Get(input.inputs[2]);
+    }
+
 
     // 2. Salvar nomes e tipos para o EvidenceSet
     for (auto &col : table_entry.GetColumns().Logical()) {
@@ -295,6 +303,8 @@ void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &dat
     auto result_ptr = FlatVector::GetData<string_t>(output.data[0]);
     auto num_cols = bind_data.table_column_names.size();
 
+    auto row_collection = gstate.collection->GetRows();
+
     // Log para provar paralelismo:
     auto thread_id = std::this_thread::get_id();
     fprintf(stderr, ">>> [THREAD %zu] Processando linha i=%llu\n", 
@@ -305,6 +315,7 @@ void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &dat
         idx_t i = gstate.current_row_i++;
         if (i >= gstate.total_rows - 1) break;
 
+
         for (idx_t j = i + 1; j < gstate.total_rows; j++) {
             if (count >= STANDARD_VECTOR_SIZE) {
                 // Se o chunk de saída encher, precisamos salvar o estado e voltar
@@ -312,17 +323,42 @@ void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &dat
                 break;
             }
 
-            lstate.diff_buffer.clear();
-            for (idx_t c = 0; c < num_cols; c++) {
-                // VETORIZAÇÃO: Acesso via GetValue mas em memória local da coleção
-                auto val_i = gstate.collection->GetRows().GetValue(c, i);
-                auto val_j = gstate.collection->GetRows().GetValue(c, j);
 
-                if (val_i != val_j) {
-                    if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
-                    lstate.diff_buffer += bind_data.table_column_names[c];
+
+            // Filtro de Hash (Opcional)
+            if (bind_data.use_hashing && gstate.row_hashes[i] == gstate.row_hashes[j]) {
+                result_ptr[count++] = StringVector::AddString(output.data[0], "");
+                continue;
+            }
+
+
+
+            lstate.diff_buffer.clear();
+
+
+            if (bind_data.use_vectorization) {
+                // --- CAMINHO VETORIZADO (ACESSA ROW EM CACHE) ---
+                auto row_i = row_collection[i];
+                auto row_j = row_collection[j];
+                // auto row_j = row_collection.GetRow(j);
+                for (idx_t c = 0; c < num_cols; c++) {
+                    if (row_i.GetValue(c) != row_j.GetValue(c)) {
+                        if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
+                        lstate.diff_buffer += bind_data.table_column_names[c];
+                    }
+                }
+            } else {
+                // --- CAMINHO ESCALAR (ANTERIOR - ACESSA COLLECTION DIRETO) ---
+                for (idx_t c = 0; c < num_cols; c++) {
+                    auto val_i = gstate.collection->GetRows().GetValue(c, i);
+                    auto val_j = gstate.collection->GetRows().GetValue(c, j);
+                    if (val_i != val_j) {
+                        if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
+                        lstate.diff_buffer += bind_data.table_column_names[c];
+                    }
                 }
             }
+
             result_ptr[count++] = StringVector::AddString(output.data[0], lstate.diff_buffer);
         }
     }
@@ -334,7 +370,7 @@ void RegisterEvidenceSet(ExtensionLoader &loader) {
     // 1. Definir a assinatura da função
     // Nome, argumentos de entrada (vazio por enquanto), função principal, bind e init
     TableFunction evidence_set_fun("get_evidence_set", 
-                                    {LogicalType::VARCHAR}, 
+                                    {LogicalType::VARCHAR, LogicalType::BOOLEAN, LogicalType::BOOLEAN}, 
                                     EvidenceSetFunctionParallel, 
                                     EvidenceSetBind, 
                                     EvidenceSetInit);
