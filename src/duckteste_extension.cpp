@@ -130,6 +130,11 @@ struct EvidenceSetGlobalState : public GlobalTableFunctionState {
         : total_rows(rows), current_row_i(0) {
         collection = duckdb::make_shared_ptr<ColumnDataCollection>(context, types);
     }
+
+    idx_t MaxThreads() const override {
+        // Retorne um número alto ou baseado no total de linhas para permitir escalonamento
+        return 64; 
+    }
 };
 
 struct EvidenceSetLocalState : public LocalTableFunctionState {
@@ -138,10 +143,16 @@ struct EvidenceSetLocalState : public LocalTableFunctionState {
     // Buffer para evitar realocações de string constantes
     string diff_buffer;
 
+    idx_t i_start = 0;
+    idx_t i_end = 0;
+    idx_t current_i = (idx_t)-1; 
+    idx_t current_j = 0;
+
     EvidenceSetLocalState(ClientContext &context, const vector<LogicalType> &types) {
         chunk_i.Initialize(context, types);
         chunk_j.Initialize(context, types);
-        diff_buffer.reserve(256); // pq 256??
+        diff_buffer.reserve(256);
+        current_i = (idx_t)-1;
     }
 };
 
@@ -237,7 +248,6 @@ unique_ptr<LocalTableFunctionState> EvidenceSetInitLocal(ExecutionContext &conte
     auto &bind_data = (EvidenceSetBindData &)*input.bind_data;
     return make_uniq<EvidenceSetLocalState>(context.client, bind_data.table_types);
 }
-
 // idx_t EvidenceSetMaxThreads(ClientContext &context, const FunctionData *bind_data_p) {
 //     auto &bind_data = (EvidenceSetBindData &)*bind_data_p;
 //     // Se a tabela for pequena, use 1 thread. Se grande, use o máximo disponível.
@@ -294,6 +304,78 @@ unique_ptr<LocalTableFunctionState> EvidenceSetInitLocal(ExecutionContext &conte
 //     output.SetCardinality(count);
 // }
 
+
+// void EvidenceSetFunctionParallelOld(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
+//     auto &gstate = (EvidenceSetGlobalState &)*data_p.global_state;
+//     auto &lstate = (EvidenceSetLocalState &)*data_p.local_state;
+//     auto &bind_data = (EvidenceSetBindData &)*data_p.bind_data;
+
+//     idx_t count = 0;
+//     auto result_ptr = FlatVector::GetData<string_t>(output.data[0]);
+//     auto num_cols = bind_data.table_column_names.size();
+
+//     auto row_collection = gstate.collection->GetRows();
+
+//     // Log para provar paralelismo:
+//     auto thread_id = std::this_thread::get_id();
+//     fprintf(stderr, ">>> [THREAD %zu] Processando linha i=%llu\n", 
+//             std::hash<std::thread::id>{}(thread_id), (unsigned long long)gstate.current_row_i);
+
+//     // Cada thread pega uma linha 'i' para comparar com o resto
+//     while (count < STANDARD_VECTOR_SIZE) {
+//         idx_t i = gstate.current_row_i;
+//         if (i >= gstate.total_rows - 1) break;
+
+
+//         for (idx_t j = i + 1; j < gstate.total_rows; j++) {
+//             if (count >= STANDARD_VECTOR_SIZE) {
+//                 // Se o chunk de saída encher, precisamos salvar o estado e voltar
+//                 // Nota: Para simplificar no mestrado, i++ ocorre no loop externo
+//                 break;
+//             }
+
+
+
+//             // Filtro de Hash (Opcional)
+//             if (bind_data.use_hashing && gstate.row_hashes[i] == gstate.row_hashes[j]) {
+//                 result_ptr[count++] = StringVector::AddString(output.data[0], "");
+//                 continue;
+//             }
+
+
+
+//             lstate.diff_buffer.clear();
+
+
+//             if (bind_data.use_vectorization) {
+//                 // --- CAMINHO VETORIZADO (ACESSA ROW EM CACHE) ---
+//                 auto row_i = row_collection[i];
+//                 auto row_j = row_collection[j];
+//                 // auto row_j = row_collection.GetRow(j);
+//                 for (idx_t c = 0; c < num_cols; c++) {
+//                     if (row_i.GetValue(c) != row_j.GetValue(c)) {
+//                         if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
+//                         lstate.diff_buffer += bind_data.table_column_names[c];
+//                     }
+//                 }
+//             } else {
+//                 // --- CAMINHO ESCALAR (ANTERIOR - ACESSA COLLECTION DIRETO) ---
+//                 for (idx_t c = 0; c < num_cols; c++) {
+//                     auto val_i = gstate.collection->GetRows().GetValue(c, i);
+//                     auto val_j = gstate.collection->GetRows().GetValue(c, j);
+//                     if (val_i != val_j) {
+//                         if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
+//                         lstate.diff_buffer += bind_data.table_column_names[c];
+//                     }
+//                 }
+//             }
+
+//             result_ptr[count++] = StringVector::AddString(output.data[0], lstate.diff_buffer);
+//         }
+//     }
+//     output.SetCardinality(count);
+// }
+
 void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &data_p, DataChunk &output) {
     auto &gstate = (EvidenceSetGlobalState &)*data_p.global_state;
     auto &lstate = (EvidenceSetLocalState &)*data_p.local_state;
@@ -302,45 +384,43 @@ void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &dat
     idx_t count = 0;
     auto result_ptr = FlatVector::GetData<string_t>(output.data[0]);
     auto num_cols = bind_data.table_column_names.size();
-
     auto row_collection = gstate.collection->GetRows();
 
-    // Log para provar paralelismo:
-    auto thread_id = std::this_thread::get_id();
-    fprintf(stderr, ">>> [THREAD %zu] Processando linha i=%llu\n", 
-            std::hash<std::thread::id>{}(thread_id), (unsigned long long)gstate.current_row_i);
-
-    // Cada thread pega uma linha 'i' para comparar com o resto
     while (count < STANDARD_VECTOR_SIZE) {
-        idx_t i = gstate.current_row_i++;
-        if (i >= gstate.total_rows - 1) break;
+        // 1. Controle de Lote: Se não tem trabalho, pega um lote pequeno
+        if (lstate.current_i == (idx_t)-1 || (lstate.current_i >= lstate.i_end && lstate.current_j >= gstate.total_rows)) {
+            // Pegamos apenas 5 linhas 'i' por vez para forçar as threads a revezarem mais rápido
+            lstate.i_start = gstate.current_row_i.fetch_add(10); 
+            lstate.i_end = MinValue(lstate.i_start + 10, gstate.total_rows);
+            lstate.current_i = lstate.i_start;
+            lstate.current_j = lstate.current_i + 1;
+        }
 
+        if (lstate.current_i >= gstate.total_rows || lstate.current_i >= lstate.i_end) break;
+        
+        idx_t i = lstate.current_i;
 
-        for (idx_t j = i + 1; j < gstate.total_rows; j++) {
-            if (count >= STANDARD_VECTOR_SIZE) {
-                // Se o chunk de saída encher, precisamos salvar o estado e voltar
-                // Nota: Para simplificar no mestrado, i++ ocorre no loop externo
-                break;
+        // 2. Loop J
+        for (; lstate.current_j < gstate.total_rows && count < STANDARD_VECTOR_SIZE; lstate.current_j++) {
+            idx_t j = lstate.current_j;
+
+            // Log de Debug: Veremos IDs diferentes agora!
+            if (j % 5000 == 0) {
+                auto thread_id = std::this_thread::get_id();
+                fprintf(stderr, ">>> [THREAD %zu] i=%llu, j=%llu\n", 
+                    std::hash<std::thread::id>{}(thread_id), (unsigned long long)i, (unsigned long long)j);
             }
 
-
-
-            // Filtro de Hash (Opcional)
+            // --- Lógica de Comparação ---
             if (bind_data.use_hashing && gstate.row_hashes[i] == gstate.row_hashes[j]) {
                 result_ptr[count++] = StringVector::AddString(output.data[0], "");
                 continue;
             }
 
-
-
             lstate.diff_buffer.clear();
-
-
             if (bind_data.use_vectorization) {
-                // --- CAMINHO VETORIZADO (ACESSA ROW EM CACHE) ---
                 auto row_i = row_collection[i];
                 auto row_j = row_collection[j];
-                // auto row_j = row_collection.GetRow(j);
                 for (idx_t c = 0; c < num_cols; c++) {
                     if (row_i.GetValue(c) != row_j.GetValue(c)) {
                         if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
@@ -348,21 +428,35 @@ void EvidenceSetFunctionParallel(ClientContext &context, TableFunctionInput &dat
                     }
                 }
             } else {
-                // --- CAMINHO ESCALAR (ANTERIOR - ACESSA COLLECTION DIRETO) ---
                 for (idx_t c = 0; c < num_cols; c++) {
-                    auto val_i = gstate.collection->GetRows().GetValue(c, i);
-                    auto val_j = gstate.collection->GetRows().GetValue(c, j);
-                    if (val_i != val_j) {
+                    if (row_collection.GetValue(c, i) != row_collection.GetValue(c, j)) {
                         if (!lstate.diff_buffer.empty()) lstate.diff_buffer += ",";
                         lstate.diff_buffer += bind_data.table_column_names[c];
                     }
                 }
             }
 
+            // REMOVIDO o sleep_for longo para o paralelismo fluir melhor
             result_ptr[count++] = StringVector::AddString(output.data[0], lstate.diff_buffer);
+        }
+
+        // 3. Avanço: Se terminou o J, vai para o próximo I do lote local
+        if (lstate.current_j >= gstate.total_rows) {
+            lstate.current_i++;
+            lstate.current_j = lstate.current_i + 1;
+        } else {
+            // Se saiu porque o buffer de 2048 encheu, para e volta depois
+            break;
         }
     }
     output.SetCardinality(count);
+}
+// 1. Função de estimativa de linhas
+unique_ptr<NodeStatistics> EvidenceSetCardinality(ClientContext &context, const FunctionData *bind_data_p) {
+    auto &bind_data = (EvidenceSetBindData &)*bind_data_p;
+    // Se a tabela tem N linhas, o Evidence Set tem (N*(N-1))/2 linhas.
+    // Vamos apenas retornar um número grande para "assustar" o otimizador.
+    return make_uniq<NodeStatistics>(100000000); 
 }
 
 // Registro
@@ -377,6 +471,8 @@ void RegisterEvidenceSet(ExtensionLoader &loader) {
 
     evidence_set_fun.init_local = EvidenceSetInitLocal;
     
+    evidence_set_fun.cardinality = EvidenceSetCardinality;
+
     // ESSA LINHA É O QUE ATIVA O SCHEDULER:
     evidence_set_fun.projection_pushdown = true; 
     evidence_set_fun.filter_pushdown = true;
