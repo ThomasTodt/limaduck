@@ -377,23 +377,23 @@ void RegisterLimaDiscover(ExtensionLoader &loader) {
 
 static void LoadInternal(ExtensionLoader &loader) {
 	// Register a scalar function
-	auto duckteste_scalar_function = ScalarFunction("duckteste", {LogicalType::VARCHAR}, LogicalType::VARCHAR, DucktesteScalarFun);
-	loader.RegisterFunction(duckteste_scalar_function);
+	// auto duckteste_scalar_function = ScalarFunction("duckteste", {LogicalType::VARCHAR}, LogicalType::VARCHAR, DucktesteScalarFun);
+	// loader.RegisterFunction(duckteste_scalar_function);
 
-	auto duckteste_binary_function = ScalarFunction("duckteste_binary", {LogicalType::VARCHAR, LogicalType::VARCHAR},
-	                                                 LogicalType::VARCHAR, DucktesteBinaryFun);
-	loader.RegisterFunction(duckteste_binary_function);
+	// auto duckteste_binary_function = ScalarFunction("duckteste_binary", {LogicalType::VARCHAR, LogicalType::VARCHAR},
+	                                                //  LogicalType::VARCHAR, DucktesteBinaryFun);
+	// loader.RegisterFunction(duckteste_binary_function);
 
 	// Register another scalar function
-	auto duckteste_openssl_version_scalar_function = ScalarFunction("duckteste_openssl_version", {LogicalType::VARCHAR},
-	                                                            LogicalType::VARCHAR, DucktesteOpenSSLVersionScalarFun);
-	loader.RegisterFunction(duckteste_openssl_version_scalar_function);
+	// auto duckteste_openssl_version_scalar_function = ScalarFunction("duckteste_openssl_version", {LogicalType::VARCHAR},
+	//                                                             LogicalType::VARCHAR, DucktesteOpenSSLVersionScalarFun);
+	// loader.RegisterFunction(duckteste_openssl_version_scalar_function);
 
-	AggregateFunctionSet sumsq("sumsq");
-    RegisterSumSquares(sumsq);
-    loader.RegisterFunction(sumsq);
+	// AggregateFunctionSet sumsq("sumsq");
+    // RegisterSumSquares(sumsq);
+    // loader.RegisterFunction(sumsq);
 
-    RegisterEvidenceSet(loader);
+    // RegisterEvidenceSet(loader);
     RegisterLimaDiscover(loader);
 }
 
