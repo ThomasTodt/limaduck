@@ -3,77 +3,80 @@
 namespace duckdb {
 
 Schema::Schema(const std::vector<std::string>& colNames) : colnames(colNames) {
-    BuildColumns(colNames);     //
-    BuildColumnPairs();        //
-    BuildPredicates();         //
-    BuildLattice();           //
+    buildColumns(colNames);
+    buildColumnPairs();
+    buildPredicates();
+    buildLattice();
 }
 
-void Schema::BuildColumns(const std::vector<std::string>& colNames) {
+void Schema::buildColumns(const std::vector<std::string>& colNames) {
     columns.reserve(colNames.size());
     for (size_t i = 0; i < colNames.size(); i++) {
         auto col = std::make_unique<Column>(colNames[i]);
-        col->ID = (int)i;
+        col->ID = (int32_t)i;
         
-        // Mapeamento por tipo similar ao EnumMap
-        auto& typeVec = typeColumns[col->type];
-        col->typeID = (int)typeVec.size();
-        typeVec.push_back(col.get());
-        
+        Column* col_ptr = col.get();
         columns.push_back(std::move(col));
+        
+        // Organiza no mapa por tipo
+        auto& typeVec = typeColumns[col_ptr->type];
+        col_ptr->typeID = (int32_t)typeVec.size();
+        typeVec.push_back(col_ptr);
     }
 }
 
-void Schema::BuildColumnPairs() {
+void Schema::buildColumnPairs() {
     columnPairs.reserve(columns.size());
     for (auto& col : columns) {
-        int cID = (int)columnPairs.size();
-        // O Java cria pares (col, col) inicialmente
+        int32_t cID = (int32_t)columnPairs.size();
+        // O LIMA cria pares reflexivos (col, col) nesta fase
         auto colPair = std::make_unique<ColumnPair>(*col, *col, cID);
-        typeColumnPairs[colPair->type].push_back(colPair.get());
+        
+        ColumnPair* pair_ptr = colPair.get();
+        typeColumnPairs[pair_ptr->type].push_back(pair_ptr);
         columnPairs.push_back(std::move(colPair));
     }
 }
 
-void Schema::BuildPredicates() {
-    int numPreds = 0;
-    // Operadores seguem a ordem do Enum no Java
+void Schema::buildPredicates() {
+    // Ordem dos operadores deve bater com o enum no Predicate.hpp
     std::vector<Predicate::Operator> ops = {
         Predicate::Operator::EQ, Predicate::Operator::NE,
         Predicate::Operator::GT, Predicate::Operator::LE,
         Predicate::Operator::LT, Predicate::Operator::GE
     };
 
+    int32_t numPreds = 0;
     for (auto& colPair : columnPairs) {
-        // Strings recebem 2 predicados (EQ, NE), outros recebem 6
+        // Strings = 2 predicados (EQ, NE), Numéricos = 6
         int limit = (colPair->type == Column::Type::STRING) ? 2 : 6;
-        colPair->preds.resize(limit);
+        colPair->preds.reserve(limit);
 
         for (int i = 0; i < limit; i++) {
-            auto pred = std::make_unique<Predicate>(*colPair, ops[i], numPreds++, colPair->cID, i);
-            colPair->preds[i] = pred.get();
-            // No LIMA, o Schema mantém um repositório central de predicados
-            preds.push_back(pred.get());
+            auto pred = std::make_unique<Predicate>(colPair.get(), ops[i], numPreds++, colPair->cID, i);
             
-            // Nota: Em uma implementação completa, você precisaria gerenciar a 
-            // posse desses predicados, possivelmente movendo para um container
-            // de unique_ptr dentro do Schema.
+            // O ColumnPair guarda o ponteiro para consulta
+            colPair->preds.push_back(pred.get());
+            
+            // O Schema guarda a posse do objeto
+            preds.push_back(std::move(pred));
         }
     }
 }
 
-void Schema::BuildLattice() {
-    std::vector<int> predCounts(columnPairs.size());
-    for (size_t cp = 0; cp < columnPairs.size(); cp++) {
-        predCounts[cp] = (int)columnPairs[cp]->preds.size(); //
+void Schema::buildLattice() {
+    std::vector<int32_t> predCounts;
+    predCounts.reserve(columnPairs.size());
+    for (auto& cp : columnPairs) {
+        predCounts.push_back((int32_t)cp->preds.size());
     }
-    lattice = std::make_unique<SchemaLattice>(predCounts); //
+    lattice = std::make_unique<SchemaLattice>(predCounts);
 }
 
-bool Schema::Equals(const Schema& other) const {
-    if (columns.size() != other.columns.size()) return false; //
+bool Schema::equals(const Schema& other) const {
+    if (columns.size() != other.columns.size()) return false;
     for (size_t i = 0; i < columns.size(); i++) {
-        if (!columns[i]->Equals(*other.columns[i])) return false; //
+        if (!(columns[i]->operator==(*other.columns[i]))) return false;
     }
     return true;
 }
