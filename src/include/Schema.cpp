@@ -1,4 +1,6 @@
 #include "Schema.hpp"
+#include "duckdb/common/helper.hpp"
+
 
 namespace duckdb {
 
@@ -12,7 +14,7 @@ Schema::Schema(const std::vector<std::string>& colNames) : colnames(colNames) {
 void Schema::buildColumns(const std::vector<std::string>& colNames) {
     columns.reserve(colNames.size());
     for (size_t i = 0; i < colNames.size(); i++) {
-        auto col = std::make_unique<Column>(colNames[i]);
+        auto col = make_uniq<Column>(colNames[i]);
         col->ID = (int32_t)i;
         
         Column* col_ptr = col.get();
@@ -30,7 +32,7 @@ void Schema::buildColumnPairs() {
     for (auto& col : columns) {
         int32_t cID = (int32_t)columnPairs.size();
         // O LIMA cria pares reflexivos (col, col) nesta fase
-        auto colPair = std::make_unique<ColumnPair>(*col, *col, cID);
+        auto colPair = make_uniq<ColumnPair>(*col, *col, cID);
         
         ColumnPair* pair_ptr = colPair.get();
         typeColumnPairs[pair_ptr->type].push_back(pair_ptr);
@@ -53,7 +55,7 @@ void Schema::buildPredicates() {
         colPair->preds.reserve(limit);
 
         for (int i = 0; i < limit; i++) {
-            auto pred = std::make_unique<Predicate>(colPair.get(), ops[i], numPreds++, colPair->cID, i);
+            auto pred = make_uniq<Predicate>(colPair.get(), ops[i], numPreds++, colPair->cID, i);
             
             // O ColumnPair guarda o ponteiro para consulta
             colPair->preds.push_back(pred.get());
@@ -70,7 +72,7 @@ void Schema::buildLattice() {
     for (auto& cp : columnPairs) {
         predCounts.push_back((int32_t)cp->preds.size());
     }
-    lattice = std::make_unique<SchemaLattice>(predCounts);
+    lattice = make_uniq<SchemaLattice>(predCounts);
 }
 
 bool Schema::equals(const Schema& other) const {

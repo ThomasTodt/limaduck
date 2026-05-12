@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 #include <cassert>
+#include "duckdb/common/helper.hpp"
+
 
 namespace duckdb {
 
@@ -13,14 +15,14 @@ bool Scheduler::ar = false;
 
 Scheduler::SchedulerNode* Scheduler::getNode(SchedulerLattice::Node* node) {
     if (!node->n) {
-        node->n = std::make_unique<SchedulerNode>();
+        node->n = make_uniq<SchedulerNode>();
     }
     return node->n.get();
 }
 
 Scheduler::SchedulerEdge* Scheduler::getEdge(SchedulerLattice::Edge* edge) {
     if (!edge->e) {
-        edge->e = std::make_unique<SchedulerEdge>();
+        edge->e = make_uniq<SchedulerEdge>();
     }
     return edge->e.get();
 }

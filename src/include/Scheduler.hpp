@@ -14,6 +14,8 @@
 // Forward declaration if BetaDistribution is in its own header.
 // Assuming a simplified structure based on your Java usage.
 #include "BetaDistribution.hpp" 
+#include "duckdb/common/helper.hpp"
+
 
 namespace duckdb {
 
@@ -69,7 +71,7 @@ public:
     // --- Construtor ---
     
     explicit Scheduler(RelationalDataset* ds) : dataset(ds) {
-        schedulerLattice = std::make_unique<SchedulerLattice>(ds->schema->lattice.get());
+        schedulerLattice = make_uniq<SchedulerLattice>(ds->schema->lattice.get());
     }
 
     // --- Métodos Principais ---

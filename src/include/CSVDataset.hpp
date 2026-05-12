@@ -7,6 +7,8 @@
 #include <vector>
 #include <unordered_map>
 #include <random>
+#include "duckdb/common/helper.hpp"
+
 
 namespace duckdb {
 
@@ -34,6 +36,7 @@ public:
 
 private:
     void buildColumns(const std::string& path);
+    std::ifstream file_stream;
 };
 
 } // namespace duckdb

@@ -2,6 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include "duckdb/common/helper.hpp"
+#include <fstream>
+#include <string>
 
 namespace duckdb {
 
@@ -128,7 +131,8 @@ std::vector<std::vector<std::string>> CSVDataset::get(int32_t n) {
 
 std::unique_ptr<TPSubSet> CSVDataset::filter(TPSubSet& TPs, Predicate* pred) {
     // Cria o novo subconjunto clonando a origem
-    auto newTPSubset = std::make_unique<TPSubSet>(*TPs.source);
+    // auto newTPSubset = std::make_unique<TPSubSet>(*TPs.source);
+    auto newTPSubset = make_uniq<TPSubSet>(*TPs.source);
     
     // Atalhos (referências) para evitar cópias de memória
     const auto& tpx = TPs.source->x;
@@ -268,7 +272,7 @@ std::unique_ptr<TPSubSet> CSVDataset::sample(int32_t n) {
         tpSet->x[i] = x;
         tpSet->y[i] = y;
     }
-    return std::make_unique<TPSubSet>(tpSet);
+    return make_uniq<TPSubSet>(tpSet);
 }
 
 } // namespace duckdb

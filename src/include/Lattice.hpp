@@ -8,6 +8,8 @@
 #include <memory>
 #include <functional>
 #include <cassert>
+#include "duckdb/common/helper.hpp"
+
 
 namespace duckdb {
 
@@ -107,7 +109,7 @@ public:
             n = this->root;
         } else {
             // Criar novo nó
-            auto new_node = std::make_unique<Node>(ps);
+            auto new_node = make_uniq<Node>(ps);
             n = new_node.get();
             nodes[ps] = std::move(new_node);
         }
@@ -163,7 +165,7 @@ public:
             newPreds.Add(cp, p);
             
             Node* toNode = fetchNode(newPreds);
-            auto new_edge = std::make_unique<Edge>(n, cp, p, toNode);
+            auto new_edge = make_uniq<Edge>(n, cp, p, toNode);
             e = new_edge.get();
             linkEdge(e);
             all_edges.push_back(std::move(new_edge));
@@ -179,7 +181,7 @@ public:
             newPreds.Remove(cp, p);
             
             Node* fromNode = fetchNode(newPreds);
-            auto new_edge = std::make_unique<Edge>(fromNode, cp, p, n);
+            auto new_edge = make_uniq<Edge>(fromNode, cp, p, n);
             e = new_edge.get();
             linkEdge(e);
             all_edges.push_back(std::move(new_edge));
