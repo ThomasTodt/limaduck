@@ -1,10 +1,12 @@
 #pragma once
 
+#include <fstream> 
+#include <string>
+#include <vector>
+
 #include "RelationalDataset.hpp"
 #include "TPSubSet.hpp"
 #include "TPSet.hpp"
-#include <string>
-#include <vector>
 #include <unordered_map>
 #include <random>
 #include "duckdb/common/helper.hpp"
