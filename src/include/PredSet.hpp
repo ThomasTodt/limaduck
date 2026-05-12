@@ -77,8 +77,12 @@ public:
     }
 
     // Para iterar sobre os predicados (equivalente ao Cursor do Java)
-    auto begin() const { return preds.begin(); }
-    auto end() const { return preds.end(); }
+    // auto begin() const { return preds.begin(); }
+    // auto end() const { return preds.end(); }
+
+    // ✅ A correção (C++11):
+    auto begin() const -> decltype(preds.begin()) { return preds.begin(); }
+    auto end() const -> decltype(preds.end()) { return preds.end(); }
 
     std::string ToString() const {
         std::stringstream ss;

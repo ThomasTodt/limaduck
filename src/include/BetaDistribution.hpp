@@ -13,12 +13,19 @@ namespace duckdb {
 class BetaDistribution {
 private:
     // Constante de Euler-Mascheroni
-    inline static const double yConst = 0.5772156649015328606065120900824024310421;
+    // inline static const double yConst = 0.5772156649015328606065120900824024310421;
+    // Para tipos primitivos como double, usamos constexpr no C++11
+    static constexpr double yConst = 0.5772156649015328606065120900824024310421;
 
     // Tabelas de memorização estáticas (Lazy Initialization)
-    inline static std::vector<double> y1mem = {-yConst};
-    inline static std::vector<double> y2mem = {std::pow(M_PI, 2) / 6.0};
-    inline static std::vector<double> y3mem = {-2.404114};
+    // inline static std::vector<double> y1mem = {-yConst};
+    // inline static std::vector<double> y2mem = {std::pow(M_PI, 2) / 6.0};
+    // inline static std::vector<double> y3mem = {-2.404114};
+
+    // Para objetos complexos (vector), apenas declaramos no .hpp (sem 'inline' e sem '=').
+    static std::vector<double> y1mem;
+    static std::vector<double> y2mem;
+    static std::vector<double> y3mem;
 
 public:
     int a, b;
