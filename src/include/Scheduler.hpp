@@ -74,7 +74,7 @@ public:
 
     // --- Métodos Principais ---
 
-    void populatePredicates();
+    void populatePredicates(std::vector<std::string>& output_constraints);
 
 protected:
     // Métodos auxiliares para garantir a existência dos objetos de estado

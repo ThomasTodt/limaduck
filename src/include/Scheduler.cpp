@@ -34,7 +34,8 @@ int32_t Scheduler::getBatchSize(int32_t batch) {
 
 // --- Motor Principal: Avaliação Inicial e Agendamento ---
 
-void Scheduler::populatePredicates() {
+// void Scheduler::populatePredicates() {
+void Scheduler::populatePredicates(std::vector<std::string>& output_constraints) {
     auto& preds = dataset->schema->preds;
     int32_t num_preds = (int32_t)preds.size();
     
@@ -57,9 +58,12 @@ void Scheduler::populatePredicates() {
 
         // Se for coluna constante e o operador for NE, GT ou LT, nós penalizamos a distribuição
         if (dataset->constColumn[pred->cols->x->ID] && 
-           (pred->op == Predicate::Operator::NE || pred->op == Predicate::Operator::GT || pred->op == Predicate::Operator::LT)) {
+           (pred->op == Predicate::Operator::NE || pred->op == Predicate::Operator::GT || pred->op == Predicate::Operator::LT))
+        {
             sn->dist.add(0, 1000000000);
-        } else {
+        } 
+        else 
+        {
             predIDs.push_back(i);
         }
     }
@@ -136,11 +140,14 @@ void Scheduler::populatePredicates() {
 
     // 4. Busca em Profundidade (DFS)
     for (int32_t newPredSortedID = 0; newPredSortedID < num_preds; newPredSortedID++) {
+        // 1. Identifica o predicado atual com base na ordenação
         int32_t newPredIDx = sortedPreds[newPredSortedID];
         Predicate* newPred = preds[newPredIDx].get();
         
+        // 2. Busca o nó correspondente no Nível 1 da Lattice
         SchedulerLattice::Node* node = schedulerLattice->fetchRoot()->getTo(newPred->cID, newPred->pID, schedulerLattice.get())->to;
 
+        // --- LOG: Informações do Nó Atual ---
         std::cerr << "\n[LOOP PRINCIPAL] Iniciando busca a partir do Predicado Ordenado #" << newPredSortedID << "\n";
         std::cerr << " > No ID (PredSet): " << node->preds.ToString() << "\n";
         std::cerr << " > Coluna: " << newPred->cID << " | Valor/Pred: " << newPred->pID << "\n";
@@ -150,6 +157,7 @@ void Scheduler::populatePredicates() {
         std::vector<Predicate*> raw_preds(preds.size());
         for(size_t i=0; i<preds.size(); i++) raw_preds[i] = preds[i].get();
 
+        // 3. Dispara a busca recursiva (DFS)
         search(node, newPredSortedID, sortedPreds, raw_preds, res);
         
         // C++ não precisa de System.gc(). 
@@ -172,7 +180,11 @@ void Scheduler::populatePredicates() {
         }
         for (int32_t f = 0; f < numcols; f++) {
             for (int32_t t = 0; t < 1; t++) {
-                std::cout << f << " " << t << " " << pairs[f][t] << "\n";
+                // std::cout << f << " " << t << " " << pairs[f][t] << "\n";
+                // Monta a string do resultado
+                std::string result_str = std::to_string(f) + " " + std::to_string(t) + " " + std::to_string(pairs[f][t]);
+                // Envia para o DuckDB
+                output_constraints.push_back(result_str);
             }
         }
     } else {
@@ -184,7 +196,8 @@ void Scheduler::populatePredicates() {
                 s += dataset->schema->columnPairs[cp]->preds[p]->ToString() + " & ";
             }
             s += ")";
-            std::cout << s << "\n";
+            // std::cout << s << "\n";
+            output_constraints.push_back(s);
         }
     }
 }
@@ -230,8 +243,8 @@ void Scheduler::propagateAcross(SchedulerLattice::Edge* e, std::vector<ResultEnt
     int32_t a = 0, b = 0;
     
     // Filtro pesado de dados através dos ponteiros compartilhados
+    Predicate* edge_pred = dataset->schema->columnPairs[e->cp]->preds[e->p];
     for (auto& TPs : fn->TPs) {
-        Predicate* edge_pred = dataset->schema->columnPairs[e->cp]->preds[e->p];
         std::shared_ptr<TPSubSet> filteredTPs = dataset->filter(*TPs, edge_pred);
         
         tn->TPs.push_back(filteredTPs);
@@ -241,6 +254,7 @@ void Scheduler::propagateAcross(SchedulerLattice::Edge* e, std::vector<ResultEnt
     
     tn->dist.add(a, b);
     se->dist.add(tn->dist.a - 1, fn->dist.a - tn->dist.a);
+    
     se->sound = true;
 
     double minlogProbDist = 1e10;
