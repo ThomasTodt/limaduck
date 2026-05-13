@@ -3,10 +3,25 @@
 #include <sstream>
 #include <algorithm>
 #include "duckdb/common/helper.hpp"
-#include <fstream>
 #include <string>
+#include "Schema.hpp"
+#include <iostream>
 
 namespace duckdb {
+
+// Função auxiliar para dividir uma string com base em um delimitador
+std::vector<std::string> split(const std::string& s, char delimiter) {
+    std::vector<std::string> tokens;
+    std::string token;
+    std::stringstream tokenStream(s);
+    
+    // Lê a stream até encontrar o delimitador e extrai o token
+    while (std::getline(tokenStream, token, delimiter)) {
+        tokens.push_back(token);
+    }
+    
+    return tokens;
+}
 
 CSVDataset::CSVDataset(const std::string& path, int32_t n_size, uint64_t seed) 
     : RelationalDataset(nullptr, n_size) {
@@ -17,16 +32,53 @@ CSVDataset::CSVDataset(const std::string& path, int32_t n_size, uint64_t seed)
 void CSVDataset::buildColumns(const std::string& path) {
     std::ifstream file(path);
     std::string line;
+
+    std::cerr << "[DEBUG - LIMA] Tentando abrir o arquivo: " << path << "\n";
+
+    if (!file.is_open()) {
+        std::cerr << "[FATAL - LIMA] O arquivo CSV nao foi encontrado no caminho: " << path << "\n";
+        return; 
+    }
+    if (!std::getline(file, line)) {
+        std::cerr << "[FATAL - LIMA] O arquivo CSV esta vazio!\n";
+        return;
+    }
+
+    std::cerr << "[DEBUG - LIMA] Header lido com sucesso: " << line << "\n";
     
     // 1. Ler Cabeçalhos e criar Schema
-    if (!std::getline(file, line)) return;
-    // (Aqui você usaria uma lógica de split para pegar os nomes das colunas)
-    // Para simplificar: auto colnames = split(line, ',');
-    // this->schema = new Schema(colnames);
+    std::vector<std::string> colnames = split(line, ',');
+    std::cerr << "[DEBUG - LIMA] Criando o Schema para " << colnames.size() << " colunas...\n";
+    this->schema = new Schema(colnames);
 
+    int32_t actual_lines = this->size;
+    
+    if (actual_lines <= 0) {
+        std::cerr << "[DEBUG - LIMA] Auto-detectando total de linhas no arquivo...\n";
+        // Guarda a posição atual (logo após ler o cabeçalho)
+        std::streampos oldpos = file.tellg();
+        
+        actual_lines = 0;
+        std::string dummy;
+        while (std::getline(file, dummy)) {
+            if (!dummy.empty() && dummy != "\r") {
+                actual_lines++;
+            }
+        }
+        
+        // Volta o leitor de arquivos para o início (logo após o cabeçalho)
+        file.clear();
+        file.seekg(oldpos);
+        
+        // Atualiza o tamanho na classe
+        this->size = actual_lines;
+        std::cerr << "[DEBUG - LIMA] Arquivo contem " << actual_lines << " linhas de dados.\n";
+    }
+    
     int32_t n = this->size;
     this->constColumn.assign(schema->columns.size(), true);
 
+    
     // 2. Alocar espaço para os dados (Equivalente ao reserve() que discutimos)
     size_t numInt = schema->typeColumns[Column::Type::INTEGER].size();
     intData.assign(numInt, std::vector<int32_t>(n));
@@ -36,12 +88,14 @@ void CSVDataset::buildColumns(const std::string& path) {
     
     size_t numStr = schema->typeColumns[Column::Type::STRING].size();
     stringData.assign(numStr, std::vector<int32_t>(n));
-
+    
     // 3. Loop de Parsing Completo em C++
     auto& intCols = schema->typeColumns[Column::Type::INTEGER];
     auto& realCols = schema->typeColumns[Column::Type::REAL];
     auto& strCols = schema->typeColumns[Column::Type::STRING];
-
+    
+    std::cerr << "[DEBUG - LIMA] Alocando matrizes. Tipos -> Int: " << intCols.size() << " | Real: " << realCols.size() << " | Str: " << strCols.size() << "\n";
+    
     for (int row = 0; row < n; ++row) {
         if (!std::getline(file, line)) break;
         
@@ -95,20 +149,6 @@ void CSVDataset::buildColumns(const std::string& path) {
     }
 }
 
-// Função auxiliar para dividir uma string com base em um delimitador
-std::vector<std::string> split(const std::string& s, char delimiter) {
-    std::vector<std::string> tokens;
-    std::string token;
-    std::stringstream tokenStream(s);
-    
-    // Lê a stream até encontrar o delimitador e extrai o token
-    while (std::getline(tokenStream, token, delimiter)) {
-        tokens.push_back(token);
-    }
-    
-    return tokens;
-}
-
 std::vector<std::vector<std::string>> CSVDataset::get(int32_t n) {
     // 1. Cria o container de retorno (um vetor de vetores de strings)
     std::vector<std::vector<std::string>> res;
@@ -132,7 +172,7 @@ std::vector<std::vector<std::string>> CSVDataset::get(int32_t n) {
 std::unique_ptr<TPSubSet> CSVDataset::filter(TPSubSet& TPs, Predicate* pred) {
     // Cria o novo subconjunto clonando a origem
     // auto newTPSubset = std::make_unique<TPSubSet>(*TPs.source);
-    auto newTPSubset = make_uniq<TPSubSet>(*TPs.source);
+    auto newTPSubset = make_uniq<TPSubSet>(TPs.source);
     
     // Atalhos (referências) para evitar cópias de memória
     const auto& tpx = TPs.source->x;

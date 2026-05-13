@@ -15,3 +15,4 @@ LOAD 'duckteste';
 -- LOAD 'build/release/extension/duckteste/duckteste.duckdb_extension';
 CREATE TABLE funcionarios AS SELECT * FROM read_csv_auto('testes/test_complex_lima.csv');
 SELECT * FROM lima_discover('funcionarios');
+--SELECT * FROM lima_discover('testes/test_complex_lima.csv');

@@ -25,9 +25,11 @@ public:
     std::map<Column::Type, std::vector<Column*>> typeColumns;
     std::map<Column::Type, std::vector<ColumnPair*>> typeColumnPairs;
 
-    Schema(const std::vector<std::string>& colNames);
+    // Schema(const std::vector<std::string>& colNames);
+    Schema(const std::vector<std::string>& colNames, const std::vector<Column::Type>& colTypes);
 
-    void buildColumns(const std::vector<std::string>& colNames);
+    // void buildColumns(const std::vector<std::string>& colNames);
+    void buildColumns(const std::vector<std::string>& colNames, const std::vector<Column::Type>& colTypes);
     void buildColumnPairs();
     void buildPredicates();
     void buildLattice();

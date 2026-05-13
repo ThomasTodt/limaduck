@@ -74,14 +74,30 @@ public:
     Lattice(const std::vector<int32_t>& p_counts) : preds_count(p_counts) {
         this->base_lattice = this;
         InitializePredProd();
-        this->root = fetchNode(PredSet(this->predProd));
+
+        PredSet rootSet(this->predProd); // Raiz tem size 0
+        auto new_root = make_uniq<Node>(rootSet);
+        this->root = new_root.get();
+        this->root->base_node = (void*)this->root;
+
+        // this->root = fetchNode(PredSet(this->predProd));
+        nodes[rootSet] = std::move(new_root);
     }
 
     // Construtor baseado em outra Lattice
     Lattice(void* base_lat, const std::vector<int32_t>& p_counts) 
         : preds_count(p_counts), base_lattice(base_lat) {
         InitializePredProd();
-        this->root = fetchNode(PredSet(this->predProd));
+
+        PredSet rootSet(this->predProd);
+        auto new_root = make_uniq<Node>(rootSet);
+        this->root = new_root.get();
+
+        auto* base_ptr = static_cast<Lattice<void*, void*>*>(this->base_lattice);
+        this->root->base_node = (void*)base_ptr->root;
+
+        // this->root = fetchNode(PredSet(this->predProd));
+        nodes[rootSet] = std::move(new_root);
     }
 
     void InitializePredProd() {
@@ -102,17 +118,18 @@ public:
         auto it = nodes.find(ps);
         if (it != nodes.end()) return it->second.get();
 
-        Node* n = nullptr;
+        auto new_node = make_uniq<Node>(ps);
+        Node* n = new_node.get();
 
-        // 2. Garantir unicidade da raiz
-        if (ps.Size() == 0) {
-            n = this->root;
-        } else {
-            // Criar novo nó
-            auto new_node = make_uniq<Node>(ps);
-            n = new_node.get();
-            nodes[ps] = std::move(new_node);
-        }
+        // // 2. Garantir unicidade da raiz
+        // if (ps.Size() == 0) {
+        //     n = this->root;
+        // } else {
+        //     // Criar novo nó
+        //     auto new_node = make_uniq<Node>(ps);
+        //     n = new_node.get();
+        //     nodes[ps] = std::move(new_node);
+        // }
 
         // 3. Lógica de Link Recursivo (Base)
         if (this->base_lattice == (void*)this) {
@@ -125,6 +142,7 @@ public:
             n->base_node = (void*)base_ptr->fetchNode(ps);
         }
 
+        nodes[ps] = std::move(new_node);
         return n;
     }
 
