@@ -83,23 +83,25 @@ unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionB
 unique_ptr<GlobalTableFunctionState> LimaDiscoverInit(ClientContext &context, TableFunctionInitInput &input) {
     auto state = make_uniq<LimaDiscoverGlobalState>();
     auto &bind_data = (LimaDiscoverBindData &)*input.bind_data;
+
+    double real_threshold = bind_data.threshold * 0.01;
     
-    fprintf(stderr, ">>> [LIMA] Arquivo: %s | Linhas: %d | Threshold: %e\n", 
-            bind_data.file_name.c_str(), bind_data.num_lines, bind_data.threshold);
+    // fprintf(stderr, ">>> [LIMA] Arquivo: %s | Linhas: %d | Threshold: %e\n", 
+            // bind_data.file_name.c_str(), bind_data.num_lines, bind_data.threshold);
     
     // Passamos o caminho, o número de linhas dinâmico, e uma seed fixa 42
     // state->dataset = make_uniq<CSVDataset>(bind_data.file_name, bind_data.num_lines, 42);
-    state->dataset = make_uniq<DuckDBDataset>(context, bind_data.file_name);
+    state->dataset = make_uniq<DuckDBDataset>(context, bind_data.file_name, bind_data.num_lines);
 
-    fprintf(stderr, "dataset");
+    // fprintf(stderr, "dataset");
     
     // NOTA: Se você tiver uma variável global/estática para o minGrad no C++, 
     // defina ela aqui antes de criar o Scheduler! Ex:
     // Scheduler::minGrad = bind_data.threshold;
     
-    state->scheduler = make_uniq<Scheduler>(state->dataset.get());
+    state->scheduler = make_uniq<Scheduler>(state->dataset.get(), real_threshold);
 
-    fprintf(stderr, "scheduler");
+    // fprintf(stderr, "scheduler");
     
     return std::move(state);
 }
@@ -109,7 +111,7 @@ void LimaDiscoverFunction(ClientContext &context, TableFunctionInput &data_p, Da
     auto &state = (LimaDiscoverGlobalState &)*data_p.global_state;
     
     if (!state.finished_search) {
-        fprintf(stderr, ">>> [LIMA] Iniciando analise heuristica da Lattice...\n");
+        // fprintf(stderr, ">>> [LIMA] Iniciando analise heuristica da Lattice...\n");
         
         // AQUI ESTÁ A MÁGICA LIGADA:
         state.scheduler->populatePredicates(state.discovered_constraints);
@@ -133,7 +135,7 @@ void LimaDiscoverFunction(ClientContext &context, TableFunctionInput &data_p, Da
         state.result_idx++;
     }
 
-    fprintf(stderr, "antes cardinalidade");
+    // fprintf(stderr, "antes cardinalidade");
     
     output.SetCardinality(count);
 }

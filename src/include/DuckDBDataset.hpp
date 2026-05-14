@@ -20,7 +20,7 @@ public:
     std::mt19937 random_engine;
 
     // Construtor turbinado que recebe a conexão direta do DuckDB
-    DuckDBDataset(ClientContext &context, const std::string& table_name);
+    DuckDBDataset(ClientContext &context, const std::string& table_name, int32_t num_lines);
     ~DuckDBDataset() override = default;
 
     std::unique_ptr<TPSubSet> filter(TPSubSet& TPs, Predicate* pred) override;

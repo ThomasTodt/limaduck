@@ -62,7 +62,7 @@ public:
 
     // --- Atributos da Classe ---
 
-    static constexpr double MIN_GRAD = 1e-6;
+    double minGrad = 1e-6;
     static bool ar; // Definido no arquivo .cpp (equivalente a static boolean ar=false;)
 
     RelationalDataset* dataset;
@@ -70,7 +70,7 @@ public:
 
     // --- Construtor ---
     
-    explicit Scheduler(RelationalDataset* ds) : dataset(ds) {
+    explicit Scheduler(RelationalDataset* ds, double threshold_val) : dataset(ds), minGrad(threshold_val) {
         schedulerLattice = make_uniq<SchedulerLattice>(ds->schema->lattice.get());
     }
 

@@ -105,13 +105,13 @@ void Scheduler::populatePredicates(std::vector<std::string>& output_constraints)
             predNode->dist.add(a, b);
             predEdge->dist.add(a, b);
 
-            if (predNode->dist.grad > MIN_GRAD) {
-                std::cerr << "  [LIMA] Keeping Predicate " << predID << ": " << pred->ToString() 
-                          << " (grad: " << predNode->dist.grad << ")\n";
+            if (predNode->dist.grad > minGrad) {
+                // std::cerr << "  [LIMA] Keeping Predicate " << predID << ": " << pred->ToString() 
+                //           << " (grad: " << predNode->dist.grad << ")\n";
                 nextPredIDs.push_back(predID);
             } else {
-                std::cerr << "  [LIMA] Pruning Predicate " << predID << ": " << pred->ToString() 
-                          << " (grad: " << predNode->dist.grad << ")\n";
+                // std::cerr << "  [LIMA] Pruning Predicate " << predID << ": " << pred->ToString() 
+                //           << " (grad: " << predNode->dist.grad << ")\n";
             }
         }
 
@@ -129,14 +129,14 @@ void Scheduler::populatePredicates(std::vector<std::string>& output_constraints)
         return predNodes[a]->dist.meanLogOdds > predNodes[b]->dist.meanLogOdds; // Descendente
     });
 
-    std::cerr << "=== Predicados Ordenados para Busca ===\n";
+    // std::cerr << "=== Predicados Ordenados para Busca ===\n";
     for (size_t i = 0; i < sortedPreds.size(); i++) {
         int32_t idx = sortedPreds[i];
-        std::cerr << "Posicao " << i << " | PredID: " << idx 
-                  << " | MeanLogOdds: " << predNodes[idx]->dist.meanLogOdds 
-                  << " | Predicado: " << preds[idx]->ToString() << "\n";
+        // std::cerr << "Posicao " << i << " | PredID: " << idx 
+                //   << " | MeanLogOdds: " << predNodes[idx]->dist.meanLogOdds 
+                //   << " | Predicado: " << preds[idx]->ToString() << "\n";
     }
-    std::cerr << "=======================================\n";
+    // std::cerr << "=======================================\n";
 
     std::vector<ResultEntry> res;
 
@@ -150,10 +150,10 @@ void Scheduler::populatePredicates(std::vector<std::string>& output_constraints)
         SchedulerLattice::Node* node = schedulerLattice->fetchRoot()->getTo(newPred->cID, newPred->pID, schedulerLattice.get())->to;
 
         // --- LOG: Informações do Nó Atual ---
-        std::cerr << "\n[LOOP PRINCIPAL] Iniciando busca a partir do Predicado Ordenado #" << newPredSortedID << "\n";
-        std::cerr << " > No ID (PredSet): " << node->preds.ToString() << "\n";
-        std::cerr << " > Coluna: " << newPred->cID << " | Valor/Pred: " << newPred->pID << "\n";
-        std::cerr << " > Estatisticas do No: a=" << getNode(node)->dist.a << ", b=" << getNode(node)->dist.b << "\n";
+        // std::cerr << "\n[LOOP PRINCIPAL] Iniciando busca a partir do Predicado Ordenado #" << newPredSortedID << "\n";
+        // std::cerr << " > No ID (PredSet): " << node->preds.ToString() << "\n";
+        // std::cerr << " > Coluna: " << newPred->cID << " | Valor/Pred: " << newPred->pID << "\n";
+        // std::cerr << " > Estatisticas do No: a=" << getNode(node)->dist.a << ", b=" << getNode(node)->dist.b << "\n";
         
         // Passamos ponteiros brutos para preds na busca
         std::vector<Predicate*> raw_preds(preds.size());
@@ -175,7 +175,7 @@ void Scheduler::populatePredicates(std::vector<std::string>& output_constraints)
             for (auto it = ps.e->from->preds.begin(); it != ps.e->from->preds.end(); ++it) {
                 int32_t f = it->first;  // curCP
                 int32_t t = ps.e->cp;
-                if (t != 0) std::cerr << "bad\n";
+                // if (t != 0) std::cerr << "bad\n";
                 double s = ps.s;
                 if (s > pairs[f][t]) pairs[f][t] = s;
             }
@@ -211,7 +211,7 @@ void Scheduler::search(SchedulerLattice::Node* node, int32_t lastPredIdx,
                        const std::vector<Predicate*>& preds, 
                        std::vector<ResultEntry>& res) {
     
-    std::cerr << "  [LIMA] Searching from node: " << node->preds.ToString() << "\n";
+    // std::cerr << "  [LIMA] Searching from node: " << node->preds.ToString() << "\n";
     
     for (int32_t newPredSortedID = 0; newPredSortedID < lastPredIdx; newPredSortedID++) {
         int32_t newPredIDx = predIDXs[newPredSortedID];
@@ -290,21 +290,21 @@ void Scheduler::propagateAcross(SchedulerLattice::Edge* e, std::vector<ResultEnt
         if (normDist < minlogProbDist) minlogProbDist = normDist;
 
         if (normDist < 2.0) {
-            std::cerr << "    [PRUNING STAT] No " << e->to->preds.ToString() 
-                      << " | Pred " << e->p << " falhou: normDist=" << normDist << " (Threshold=2.0)\n";
-            std::cerr << "      -> MeanLogOdds Pai: " << lower.meanLogOdds << " vs Filho: " << upper.meanLogOdds << "\n";
+            // std::cerr << "    [PRUNING STAT] No " << e->to->preds.ToString() 
+            //           << " | Pred " << e->p << " falhou: normDist=" << normDist << " (Threshold=2.0)\n";
+            // std::cerr << "      -> MeanLogOdds Pai: " << lower.meanLogOdds << " vs Filho: " << upper.meanLogOdds << "\n";
             se->sound = false;
             break;
         }
     }
 
     if ((se->sound && se->dist.a == 1) || ar) {
-        std::cerr << "  [LIMA] *** DISCOVERY! *** " << e->to->preds.ToString() << "\n";
+        // std::cerr << "  [LIMA] *** DISCOVERY! *** " << e->to->preds.ToString() << "\n";
         res.emplace_back(e, minlogProbDist);
     } else if (se->sound) {
-        std::cerr << "  [LIMA] Node " << e->to->preds.ToString() << " is sound (violations: " << a << "). Going deeper...\n";
+        // std::cerr << "  [LIMA] Node " << e->to->preds.ToString() << " is sound (violations: " << a << "). Going deeper...\n";
     } else {
-        std::cerr << "  [LIMA] Node " << e->to->preds.ToString() << " is NOT sound. Pruning.\n";
+        // std::cerr << "  [LIMA] Node " << e->to->preds.ToString() << " is NOT sound. Pruning.\n";
     }
 }
 
@@ -326,8 +326,8 @@ bool Scheduler::exploreNode(SchedulerLattice::Node* n, int32_t cp, int32_t p) {
         SchedulerEdge* tSEdge = getEdge(tEdge);
         
         if (!tSEdge->sound) {
-            std::cerr << "  [PRUNING STRUCT] Abortando " << n->preds.ToString() 
-                      << " + {" << cp << "=" << p << "}: Subconjunto ancestral ja e unsound.\n";
+            // std::cerr << "  [PRUNING STRUCT] Abortando " << n->preds.ToString() 
+            //           << " + {" << cp << "=" << p << "}: Subconjunto ancestral ja e unsound.\n";
             return false;
         }
 

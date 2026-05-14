@@ -33,7 +33,7 @@ void CSVDataset::buildColumns(const std::string& path) {
     std::ifstream file(path);
     std::string line;
 
-    std::cerr << "[DEBUG - LIMA] Tentando abrir o arquivo: " << path << "\n";
+    // std::cerr << "[DEBUG - LIMA] Tentando abrir o arquivo: " << path << "\n";
 
     if (!file.is_open()) {
         std::cerr << "[FATAL - LIMA] O arquivo CSV nao foi encontrado no caminho: " << path << "\n";
@@ -44,17 +44,17 @@ void CSVDataset::buildColumns(const std::string& path) {
         return;
     }
 
-    std::cerr << "[DEBUG - LIMA] Header lido com sucesso: " << line << "\n";
+    // std::cerr << "[DEBUG - LIMA] Header lido com sucesso: " << line << "\n";
     
     // 1. Ler Cabeçalhos e criar Schema
     std::vector<std::string> colnames = split(line, ',');
-    std::cerr << "[DEBUG - LIMA] Criando o Schema para " << colnames.size() << " colunas...\n";
+    // std::cerr << "[DEBUG - LIMA] Criando o Schema para " << colnames.size() << " colunas...\n";
     this->schema = new Schema(colnames);
 
     int32_t actual_lines = this->size;
     
     if (actual_lines <= 0) {
-        std::cerr << "[DEBUG - LIMA] Auto-detectando total de linhas no arquivo...\n";
+        // std::cerr << "[DEBUG - LIMA] Auto-detectando total de linhas no arquivo...\n";
         // Guarda a posição atual (logo após ler o cabeçalho)
         std::streampos oldpos = file.tellg();
         
@@ -72,7 +72,7 @@ void CSVDataset::buildColumns(const std::string& path) {
         
         // Atualiza o tamanho na classe
         this->size = actual_lines;
-        std::cerr << "[DEBUG - LIMA] Arquivo contem " << actual_lines << " linhas de dados.\n";
+        // std::cerr << "[DEBUG - LIMA] Arquivo contem " << actual_lines << " linhas de dados.\n";
     }
     
     int32_t n = this->size;
@@ -94,7 +94,7 @@ void CSVDataset::buildColumns(const std::string& path) {
     auto& realCols = schema->typeColumns[Column::Type::REAL];
     auto& strCols = schema->typeColumns[Column::Type::STRING];
     
-    std::cerr << "[DEBUG - LIMA] Alocando matrizes. Tipos -> Int: " << intCols.size() << " | Real: " << realCols.size() << " | Str: " << strCols.size() << "\n";
+    // std::cerr << "[DEBUG - LIMA] Alocando matrizes. Tipos -> Int: " << intCols.size() << " | Real: " << realCols.size() << " | Str: " << strCols.size() << "\n";
     
     for (int row = 0; row < n; ++row) {
         if (!std::getline(file, line)) break;
