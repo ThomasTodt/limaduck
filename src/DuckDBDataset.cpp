@@ -147,31 +147,41 @@ DuckDBDataset::DuckDBDataset(ClientContext &context, const std::string& table_na
     while (true) {
         scan_chunk.Reset();
         storage.Scan(transaction, scan_chunk, scan_state);
-        if (scan_chunk.size() == 0) break;
 
-        for (idx_t r = 0; r < scan_chunk.size(); r++) {
-            if (current_row >= n) break;
-            // --- INTEIROS ---
-            for (size_t i = 0; i < intCols.size(); i++) {
-                int32_t colID = intCols[i]->ID;
+        idx_t chunk_size = scan_chunk.size();
+        
+        if (chunk_size == 0) break;
+
+        if (current_row + chunk_size > n) 
+        {
+            chunk_size = n - current_row;;
+        }
+
+        for (size_t i = 0; i < intCols.size(); i++) {
+            int32_t colID = intCols[i]->ID;
+            for (idx_t r = 0; r < chunk_size; r++) {
                 auto val = scan_chunk.GetValue(colID, r);
-                intData[i][current_row] = val.IsNull() ? 0 : std::stoi(val.ToString());
-                if (constColumn[colID] && intData[i][current_row] != intData[i][0]) constColumn[colID] = false;
+                // GetValue<int32_t>() evita a alocação de Strings e o std::stoi
+                intData[i][current_row + r] = val.IsNull() ? 0 : val.GetValue<int32_t>();
+                if (constColumn[colID] && intData[i][current_row + r] != intData[i][0]) constColumn[colID] = false;
             }
+        }
 
-            // --- REAIS (FLOAT) ---
-            for (size_t i = 0; i < realCols.size(); i++) {
-                int32_t colID = realCols[i]->ID;
+        for (size_t i = 0; i < realCols.size(); i++) {
+            int32_t colID = realCols[i]->ID;
+            for (idx_t r = 0; r < chunk_size; r++) {
                 auto val = scan_chunk.GetValue(colID, r);
-                realData[i][current_row] = val.IsNull() ? std::numeric_limits<float>::quiet_NaN() : std::stof(val.ToString());
-                if (constColumn[colID] && realData[i][current_row] != realData[i][0]) constColumn[colID] = false;
+                realData[i][current_row + r] = val.IsNull() ? std::numeric_limits<float>::quiet_NaN() : val.GetValue<float>();
+                if (constColumn[colID] && realData[i][current_row + r] != realData[i][0]) constColumn[colID] = false;
             }
+        }
 
-            // --- STRINGS ---
-            for (size_t i = 0; i < strCols.size(); i++) {
-                int32_t colID = strCols[i]->ID;
+        for (size_t i = 0; i < strCols.size(); i++) {
+            int32_t colID = strCols[i]->ID;
+            for (idx_t r = 0; r < chunk_size; r++) {
                 auto val = scan_chunk.GetValue(colID, r);
-                std::string k = val.IsNull() ? "" : val.ToString();
+                // GetValue<std::string>() é infinitamente mais rápido que ToString()
+                std::string k = val.IsNull() ? "" : val.GetValue<std::string>();
                 
                 auto it = stringMap.find(k);
                 int32_t v;
@@ -182,12 +192,54 @@ DuckDBDataset::DuckDBDataset(ClientContext &context, const std::string& table_na
                 } else {
                     v = it->second;
                 }
-                stringData[i][current_row] = v;
-                if (constColumn[colID] && stringData[i][current_row] != stringData[i][0]) constColumn[colID] = false;
+                stringData[i][current_row + r] = v;
+                if (constColumn[colID] && stringData[i][current_row + r] != stringData[i][0]) constColumn[colID] = false;
             }
-            current_row++;
         }
+
+        current_row += chunk_size;
         if (current_row >= n) break;
+
+
+        // for (idx_t r = 0; r < scan_chunk.size(); r++) {
+        //     if (current_row >= n) break;
+        //     // --- INTEIROS ---
+        //     for (size_t i = 0; i < intCols.size(); i++) {
+        //         int32_t colID = intCols[i]->ID;
+        //         auto val = scan_chunk.GetValue(colID, r);
+        //         intData[i][current_row] = val.IsNull() ? 0 : std::stoi(val.ToString());
+        //         if (constColumn[colID] && intData[i][current_row] != intData[i][0]) constColumn[colID] = false;
+        //     }
+
+        //     // --- REAIS (FLOAT) ---
+        //     for (size_t i = 0; i < realCols.size(); i++) {
+        //         int32_t colID = realCols[i]->ID;
+        //         auto val = scan_chunk.GetValue(colID, r);
+        //         realData[i][current_row] = val.IsNull() ? std::numeric_limits<float>::quiet_NaN() : std::stof(val.ToString());
+        //         if (constColumn[colID] && realData[i][current_row] != realData[i][0]) constColumn[colID] = false;
+        //     }
+
+        //     // --- STRINGS ---
+        //     for (size_t i = 0; i < strCols.size(); i++) {
+        //         int32_t colID = strCols[i]->ID;
+        //         auto val = scan_chunk.GetValue(colID, r);
+        //         std::string k = val.IsNull() ? "" : val.ToString();
+                
+        //         auto it = stringMap.find(k);
+        //         int32_t v;
+        //         if (it == stringMap.end()) {
+        //             v = stringMap.size() + 1;
+        //             stringMap[k] = v;
+        //             invStringMap.push_back(k);
+        //         } else {
+        //             v = it->second;
+        //         }
+        //         stringData[i][current_row] = v;
+        //         if (constColumn[colID] && stringData[i][current_row] != stringData[i][0]) constColumn[colID] = false;
+        //     }
+        //     current_row++;
+        // }
+        // if (current_row >= n) break;
     }
     // std::cerr << ">>> [LIMA] Ingestao de RAM completa (" << current_row << " linhas).\n";
 }
