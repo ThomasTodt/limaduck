@@ -50,15 +50,20 @@ namespace duckdb {
 //     return s;
 // }
 
-static Schema *BuildDuckSchema(ClientContext &context, const std::string &table_name) {
-	// std::cerr << "\n[RADAR] 1. Invocando BuildDuckSchema para a tabela: " << table_name << "\n";
-
+static Schema *BuildDuckSchema(ClientContext &context, std::string &table_name) {
 	auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
-	// std::cerr << "[RADAR] 2. Catalogo obtido com sucesso.\n";
+
+	if (!catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name, true)) {
+		// Se não existe como tabela, tenta carregar como CSV
+		std::string temp_name = "lima_auto_csv_" + std::to_string((uint64_t)&context);
+		auto query = "CREATE OR REPLACE TEMP TABLE " + temp_name + " AS SELECT * FROM read_csv_auto('" + table_name + "')";
+		auto res = context.Query(query, false);
+		if (!res->HasError()) {
+			table_name = temp_name;
+		}
+	}
 
 	auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
-	// std::cerr << "[RADAR] 3. Entry obtida do catalogo.\n";
-
 	auto &table_entry = entry.Cast<TableCatalogEntry>();
 	// std::cerr << "[RADAR] 4. Cast para TableCatalogEntry realizado.\n";
 
@@ -97,7 +102,7 @@ static Schema *BuildDuckSchema(ClientContext &context, const std::string &table_
 	return s;
 }
 
-DuckDBDataset::DuckDBDataset(ClientContext &context, const std::string &table_name, int32_t num_lines)
+DuckDBDataset::DuckDBDataset(ClientContext &context, std::string table_name, int32_t num_lines)
     : RelationalDataset(BuildDuckSchema(context, table_name), 0) {
 
 	// std::cerr << "[RADAR] 8. Entrou no construtor do DuckDBDataset! (O pai ja foi inicializado)\n";
