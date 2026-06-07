@@ -386,7 +386,7 @@ std::unique_ptr<TPSubSet> DuckDBDataset::filter(TPSubSet &TPs, Predicate *pred) 
 	}
 
 	newTPSubset->resize(newLength);
-	return newTPSubset;
+	return std::move(newTPSubset);
 }
 
 std::unique_ptr<TPSubSet> DuckDBDataset::sample(int32_t n) {

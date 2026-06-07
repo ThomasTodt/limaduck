@@ -312,7 +312,7 @@ std::unique_ptr<TPSubSet> CSVDataset::filter(TPSubSet &TPs, Predicate *pred) {
 
 	// Ajusta o tamanho final do vetor para economizar memória
 	newTPSubset->resize(newLength);
-	return newTPSubset;
+	return std::move(newTPSubset);
 }
 
 std::unique_ptr<TPSubSet> CSVDataset::sample(int32_t n) {
