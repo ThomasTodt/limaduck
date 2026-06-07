@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include "TPSet.hpp"
 #include <vector>
 #include <algorithm>

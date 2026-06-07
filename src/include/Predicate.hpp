@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ColumnPair.hpp"
+#include <cstdint>
 #include <string>
 #include <vector>
 

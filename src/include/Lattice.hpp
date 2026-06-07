@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <queue>
 #include <memory>
+#include <cstdint>
 #include <functional>
 #include <cassert>
 #include "duckdb/common/helper.hpp"

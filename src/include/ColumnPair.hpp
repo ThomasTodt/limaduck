@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Column.hpp"
-#include <vector>
+#include <cstdint>
 #include <string>
+#include <vector>
 
 namespace duckdb {
 

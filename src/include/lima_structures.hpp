@@ -1,6 +1,7 @@
 #pragma once
 
 #include "duckdb.hpp"
+#include <cstdint>
 #include <vector>
 #include <string>
 #include <cmath>

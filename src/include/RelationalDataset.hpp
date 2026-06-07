@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Schema.hpp"
+#include <cstdint>
 #include <vector>
 #include <memory>
 
