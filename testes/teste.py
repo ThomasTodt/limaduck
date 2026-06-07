@@ -7,11 +7,18 @@ import pandas as pd
 import numpy as np
 
 # Configurações de Caminhos
-EXTENSION_PATH = '/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/extension/lima/lima.duckdb_extension'
-CSV_ORIGINAL = '/home/thomas/mestrado/DCValidity/datasets/flights.csv'
-JAVA_JAR_PATH = '/home/thomas/mestrado/limajava/target/LIMA-0.1.jar'
-TMP_DIR = '/home/thomas/mestrado/DCValidity/datasets/tmp_slices/'
-DUCKDB_CLI_PATH = "/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/duckdb"
+
+EXTENSION_PATH = '/home/thomas/limaduck/mockdb/build/release/extension/lima/lima.duckdb_extension'
+CSV_ORIGINAL = '/home/thomas/limaduck/DCValidity/datasets/flights.csv'
+JAVA_JAR_PATH = '/home/thomas/limaduck/LIMA/target/LIMA-0.1.jar'
+TMP_DIR = '/home/thomas/limaduck/DCValidity/datasets/tmp_slices/'
+DUCKDB_CLI_PATH = "/home/thomas/limaduck/mockdb/build/release/duckdb"
+
+# EXTENSION_PATH = '/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/extension/lima/lima.duckdb_extension'
+# CSV_ORIGINAL = '/home/thomas/mestrado/DCValidity/datasets/flights.csv'
+# JAVA_JAR_PATH = '/home/thomas/mestrado/limajava/target/LIMA-0.1.jar'
+# TMP_DIR = '/home/thomas/mestrado/DCValidity/datasets/tmp_slices/'
+# DUCKDB_CLI_PATH = "/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/duckdb"
 
 # CONFIGURAÇÃO DE REPETIÇÕES
 NUM_RUNS = 10
@@ -215,5 +222,5 @@ for count in attribute_slices:
 
 # Exportação dos dados consolidados (médias)
 df = pd.DataFrame(results)
-df.to_csv("lima_completos_comparativos3.csv", index=False)
+df.to_csv("lima_completos_comparativos4.csv", index=False)
 print("\n\nTodos os cenários foram executados 10 vezes. Médias salvas com sucesso!")

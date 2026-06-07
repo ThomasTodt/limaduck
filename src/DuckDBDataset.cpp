@@ -11,45 +11,6 @@
 
 namespace duckdb {
 
-// Mágica para não dar Segfault no RelationalDataset!
-// static Schema* BuildDuckSchema(ClientContext &context, const std::string& table_name) {
-//     auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
-//     auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
-//     auto &table_entry = entry.Cast<TableCatalogEntry>();
-
-//     std::vector<std::string> colnames;
-//     for (auto &col : table_entry.GetColumns().Logical()) {
-//         colnames.push_back(col.GetName());
-//     }
-//     return new Schema(colnames);
-// }
-
-// static Schema* BuildDuckSchema(ClientContext &context, const std::string& table_name) {
-//     std::cerr << "\n[RADAR] 1. Invocando BuildDuckSchema para a tabela: " << table_name << "\n";
-
-//     auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
-//     std::cerr << "[RADAR] 2. Catalogo obtido com sucesso.\n";
-
-//     auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
-//     std::cerr << "[RADAR] 3. Entry obtida do catalogo.\n";
-
-//     auto &table_entry = entry.Cast<TableCatalogEntry>();
-//     std::cerr << "[RADAR] 4. Cast para TableCatalogEntry realizado.\n";
-
-//     std::vector<std::string> colnames;
-//     for (auto &col : table_entry.GetColumns().Logical()) {
-//         colnames.push_back(col.GetName());
-//         std::cerr << "[RADAR] 4.1. Coluna encontrada: " << col.GetName() << "\n";
-//     }
-//     std::cerr << "[RADAR] 5. Vetor de colunas preenchido. Total de colunas: " << colnames.size() << "\n";
-
-//     std::cerr << "[RADAR] 6. Chamando construtor 'new Schema(colnames)'...\n";
-//     Schema* s = new Schema(colnames);
-
-//     std::cerr << "[RADAR] 7. Schema instanciado! Retornando para construtor pai (RelationalDataset)...\n";
-//     return s;
-// }
-
 static Schema *BuildDuckSchema(ClientContext &context, std::string &table_name) {
 	auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
 
