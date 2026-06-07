@@ -6,7 +6,7 @@ import subprocess
 import pandas as pd
 
 # Configurações de Caminhos
-EXTENSION_PATH = '/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/extension/duckteste/duckteste.duckdb_extension'
+EXTENSION_PATH = '/home/thomas/mestrado/mestrado_mockdb/mockdb/build/release/extension/lima/lima.duckdb_extension'
 CSV_ORIGINAL = '/home/thomas/mestrado/DCValidity/datasets/flights.csv'
 JAVA_JAR_PATH = '/home/thomas/mestrado/limajava/target/LIMA-0.1.jar'
 TMP_DIR = '/home/thomas/mestrado/DCValidity/datasets/tmp_slices/'
@@ -32,7 +32,7 @@ def run_duckdb_experiment_isolated(csv_path, num_lines, threshold, ext_path):
     sql_script = f"""
     SET allow_unsigned_extensions=true;
     INSTALL '{ext_path}';
-    LOAD 'duckteste';
+    LOAD 'lima';
     CREATE TABLE t_run AS SELECT * FROM read_csv_auto('{csv_path}');
     SELECT * FROM lima_discover('t_run', num_lines={num_lines}, threshold={threshold});
     """
@@ -123,7 +123,7 @@ config = {
 
 con = duckdb.connect(config=config)
 con.execute(f"INSTALL '{EXTENSION_PATH}';")
-con.execute("LOAD 'duckteste';")
+con.execute("LOAD 'lima';")
 
 print("Carregando dataset de origem no DuckDB...")
 con.execute(f"CREATE TABLE flights_all AS SELECT * FROM read_csv_auto('{CSV_ORIGINAL}');")

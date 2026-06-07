@@ -1,5 +1,5 @@
--- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/duckteste/duckteste.duckdb_extension';
-LOAD 'duckteste';
+-- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/lima/lima.duckdb_extension';
+LOAD 'lima';
 
 --CREATE TABLE students (
 --    id INTEGER,
@@ -12,7 +12,7 @@ LOAD 'duckteste';
 --SELECT * FROM lima_discover('students');
 
 .timer on
--- LOAD 'build/release/extension/duckteste/duckteste.duckdb_extension';
+-- LOAD 'build/release/extension/lima/lima.duckdb_extension';
 CREATE TABLE funcionarios AS SELECT * FROM read_csv_auto('testes/test_complex_lima.csv');
 SELECT * FROM lima_discover('funcionarios');
 --SELECT * FROM lima_discover('testes/test_complex_lima.csv');

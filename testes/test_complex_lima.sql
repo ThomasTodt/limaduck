@@ -1,5 +1,5 @@
--- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/duckteste/duckteste.duckdb_extension';
-LOAD 'duckteste';
+-- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/lima/lima.duckdb_extension';
+LOAD 'lima';
 
 -- Create a more complex table to test dependencies
 -- Rules to expect:

@@ -1,6 +1,6 @@
 
--- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/duckteste/duckteste.duckdb_extension';
-LOAD 'duckteste';
+-- INSTALL '/home/thomas/limaduck/mockdb/build/release/extension/lima/lima.duckdb_extension';
+LOAD 'lima';
 
 CREATE TABLE flights_20 AS SELECT * FROM read_csv_auto('/home/thomas/mestrado/DCValidity/datasets/flights.csv');
 
