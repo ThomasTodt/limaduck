@@ -14,7 +14,7 @@
 # Confirm the extension works
 #query I
 #SELECT duckteste('Sam');
-----
+#----
 #Duckteste Sam 🐥
 
 #query I
