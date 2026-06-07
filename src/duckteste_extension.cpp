@@ -160,7 +160,7 @@ void DucktesteExtension::Load(ExtensionLoader &loader) {
 	LoadInternal(loader);
 }
 std::string DucktesteExtension::Name() {
-	return "duckteste";
+	return "lima";
 }
 std::string DucktesteExtension::Version() const {
 	return "";
@@ -169,7 +169,7 @@ std::string DucktesteExtension::Version() const {
 } // namespace duckdb
 
 extern "C" {
-DUCKDB_CPP_EXTENSION_ENTRY(duckteste, loader) {
+DUCKDB_CPP_EXTENSION_ENTRY(lima, loader) {
 	duckdb::LoadInternal(loader);
 }
 }
