@@ -53,7 +53,7 @@ namespace duckdb {
 static Schema *BuildDuckSchema(ClientContext &context, std::string &table_name) {
 	auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
 
-	if (!catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name, true)) {
+	if (!catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name, OnEntryNotFound::RETURN_NULL)) {
 		// Se não existe como tabela, tenta carregar como CSV
 		std::string temp_name = "lima_auto_csv_" + std::to_string((uint64_t)&context);
 		auto query = "CREATE OR REPLACE TEMP TABLE " + temp_name + " AS SELECT * FROM read_csv_auto('" + table_name + "')";
