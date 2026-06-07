@@ -4,7 +4,7 @@
 
 namespace duckdb {
 
-class DucktesteExtension : public Extension {
+class LimaExtension : public Extension {
 public:
 	void Load(ExtensionLoader &db) override;
 	std::string Name() override;

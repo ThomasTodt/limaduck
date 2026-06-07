@@ -15,7 +15,7 @@ project(${TARGET_NAME})
 include_directories(src/include)
 
 set(EXTENSION_SOURCES 
-    src/duckteste_extension.cpp
+    src/lima_extension.cpp
     src/BetaDistribution.cpp
     src/DuckDBDataset.cpp
     src/Scheduler.cpp

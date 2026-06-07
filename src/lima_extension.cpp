@@ -1,6 +1,6 @@
 #define DUCKDB_EXTENSION_MAIN
 
-#include "duckteste_extension.hpp"
+#include "lima_extension.hpp"
 #include "duckdb.hpp"
 #include "duckdb/function/table_function.hpp"
 
@@ -156,15 +156,16 @@ void RegisterLimaDiscover(ExtensionLoader &loader) {
 static void LoadInternal(ExtensionLoader &loader) {
 	RegisterLimaDiscover(loader);
 }
-void DucktesteExtension::Load(ExtensionLoader &loader) {
+void LimaExtension::Load(ExtensionLoader &loader) {
 	LoadInternal(loader);
 }
-std::string DucktesteExtension::Name() {
+std::string LimaExtension::Name() {
 	return "lima";
 }
-std::string DucktesteExtension::Version() const {
+std::string LimaExtension::Version() const {
 	return "";
 }
+
 
 } // namespace duckdb
 
