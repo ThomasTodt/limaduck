@@ -15,38 +15,38 @@ class TPSubSet;
  */
 class RelationalDataset {
 public:
-    // Referência ao esquema que define as colunas e predicados
-    Schema* schema;
-    
-    // Indica se uma coluna possui valor constante (otimização de busca)
-    std::vector<bool> constColumn;
-    
-    // Número total de tuplas no dataset
-    int32_t size;
+	// Referência ao esquema que define as colunas e predicados
+	Schema *schema;
 
-    /**
-     * Construtor base
-     */
-    RelationalDataset(Schema* s, int32_t n) : schema(s), size(n) {
-        constColumn.assign(s->columns.size(), false);
-    }
+	// Indica se uma coluna possui valor constante (otimização de busca)
+	std::vector<bool> constColumn;
 
-    /**
-     * Destrutor virtual: essencial para classes abstratas em C++.
-     * Garante que as classes filhas (ex: DuckDBDataset) sejam limpas corretamente.
-     */
-    virtual ~RelationalDataset() = default;
+	// Número total de tuplas no dataset
+	int32_t size;
 
-    /**
-     * Método Abstrato (Pure Virtual): Filtra um conjunto de pares de tuplas (TPs)
-     * que satisfazem um predicado específico.
-     */
-    virtual std::unique_ptr<TPSubSet> filter(TPSubSet& TPs, Predicate* pred) = 0;
+	/**
+	 * Construtor base
+	 */
+	RelationalDataset(Schema *s, int32_t n) : schema(s), size(n) {
+		constColumn.assign(s->columns.size(), false);
+	}
 
-    /**
-     * Método Abstrato (Pure Virtual): Gera uma amostra aleatória de 'n' tuplas.
-     */
-    virtual std::unique_ptr<TPSubSet> sample(int32_t n) = 0;
+	/**
+	 * Destrutor virtual: essencial para classes abstratas em C++.
+	 * Garante que as classes filhas (ex: DuckDBDataset) sejam limpas corretamente.
+	 */
+	virtual ~RelationalDataset() = default;
+
+	/**
+	 * Método Abstrato (Pure Virtual): Filtra um conjunto de pares de tuplas (TPs)
+	 * que satisfazem um predicado específico.
+	 */
+	virtual std::unique_ptr<TPSubSet> filter(TPSubSet &TPs, Predicate *pred) = 0;
+
+	/**
+	 * Método Abstrato (Pure Virtual): Gera uma amostra aleatória de 'n' tuplas.
+	 */
+	virtual std::unique_ptr<TPSubSet> sample(int32_t n) = 0;
 };
 
 } // namespace duckdb

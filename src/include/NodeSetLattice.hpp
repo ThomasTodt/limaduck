@@ -8,15 +8,15 @@ namespace duckdb {
  */
 class NodeSetLattice {
 public:
-    /**
-     * No C++, a classe Node dentro de NodeSetLattice é tratada como
-     * NodeSetLattice::Node. 
-     */
-    struct Node {
-        // O conteúdo do nó será implementado assim que você passar o restante do código.
-    };
+	/**
+	 * No C++, a classe Node dentro de NodeSetLattice é tratada como
+	 * NodeSetLattice::Node.
+	 */
+	struct Node {
+		// O conteúdo do nó será implementado assim que você passar o restante do código.
+	};
 
-    // A lógica da Lattice principal virá aqui.
+	// A lógica da Lattice principal virá aqui.
 };
 
 } // namespace duckdb
