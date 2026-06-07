@@ -3,21 +3,34 @@
 # group: [sql]
 
 # Before we load the extension, this will fail
-statement error
-SELECT duckteste('Sam');
-----
-Catalog Error: Scalar Function with name duckteste does not exist!
+#statement error
+#SELECT duckteste('Sam');
+#----
+#Catalog Error: Scalar Function with name duckteste does not exist!
 
 # Require statement will ensure this test is run with this extension loaded
-require duckteste
+#require duckteste
 
 # Confirm the extension works
-query I
-SELECT duckteste('Sam');
+#query I
+#SELECT duckteste('Sam');
 ----
-Duckteste Sam 🐥
+#Duckteste Sam 🐥
+
+#query I
+#SELECT duckteste_openssl_version('Michael') ILIKE 'Duckteste Michael, my linked OpenSSL version is OpenSSL%';
+#----
+#true
+
+
+# Before we load the extension, this will fail
+statement error
+SELECT * from lima_discover('testes/test_small.csv');
+----
+Catalog Error: Table Function with name lima_discover does not exist!
 
 query I
-SELECT duckteste_openssl_version('Michael') ILIKE 'Duckteste Michael, my linked OpenSSL version is OpenSSL%';
+require lima_discover
+SELECT count(*) > 0 from lima_discover('testes/test_small.csv');
 ----
 true
