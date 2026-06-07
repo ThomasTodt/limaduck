@@ -166,7 +166,6 @@ std::string LimaExtension::Version() const {
 	return "";
 }
 
-
 } // namespace duckdb
 
 extern "C" {
