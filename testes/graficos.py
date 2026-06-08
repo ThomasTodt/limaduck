@@ -1,0 +1,170 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import io
+
+# 1. Entrada dos dados reais consolidados
+actual_data = """scenario,engine,attrs,rows,threshold,time_s,mem_gb
+time_x_data,DuckDB,20,10000,0.01,0.6257407903671265,0.3552074432373047
+time_x_data,Java,20,10000,0.01,3.2771597385406492,0.1787139892578125
+time_x_data,DuckDB,20,50000,0.01,0.7459205150604248,0.36060295104980467
+time_x_data,Java,20,50000,0.01,3.459246778488159,0.17529029846191407
+time_x_data,DuckDB,20,100000,0.01,0.8689467668533325,0.36632499694824217
+time_x_data,Java,20,100000,0.01,3.2621012210845945,0.18962173461914061
+time_x_data,DuckDB,20,200000,0.01,1.1103729009628296,0.36380882263183595
+time_x_data,Java,20,200000,0.01,3.5169185400009155,0.2877498626708984
+time_x_data,DuckDB,20,499308,0.01,1.791378879547119,0.39118614196777346
+time_x_data,Java,20,499308,0.01,3.983943748474121,0.6765609741210937
+time_x_data,DuckDB,20,10000,0.0001,0.8527154922485352,0.39615440368652344
+time_x_data,Java,20,10000,0.0001,3.920620346069336,0.33922996520996096
+time_x_data,DuckDB,20,50000,0.0001,0.9431475877761841,0.3905994415283203
+time_x_data,Java,20,50000,0.0001,4.362955570220947,0.37514381408691405
+time_x_data,DuckDB,20,100000,0.0001,1.0407124042510987,0.3962703704833984
+time_x_data,Java,20,100000,0.0001,3.7176545381546022,0.34477958679199217
+time_x_data,DuckDB,20,200000,0.0001,1.2616986274719237,0.39515151977539065
+time_x_data,Java,20,200000,0.0001,3.924015212059021,0.3322944641113281
+time_x_data,DuckDB,20,499308,0.0001,1.9291947841644288,0.43089942932128905
+time_x_data,Java,20,499308,0.0001,4.358798384666443,0.6743984222412109
+time_x_data,DuckDB,20,10000,1e-06,1.513055944442749,0.4236930847167969
+time_x_data,Java,20,10000,1e-06,5.423215770721436,0.8374664306640625
+time_x_data,DuckDB,20,50000,1e-06,1.5174980163574219,0.4170997619628906
+time_x_data,Java,20,50000,1e-06,5.223971343040466,0.9185070037841797
+time_x_data,DuckDB,20,100000,1e-06,1.6549896001815796,0.42510986328125
+time_x_data,Java,20,100000,1e-06,5.254586982727051,0.8221729278564454
+time_x_data,DuckDB,20,200000,1e-06,2.013893890380859,0.4496650695800781
+time_x_data,Java,20,200000,1e-06,5.2294917345047,0.9629547119140625
+time_x_data,DuckDB,20,499308,1e-06,2.795169305801392,0.47182769775390626
+time_x_data,Java,20,499308,1e-06,6.21563868522644,0.9685680389404296
+time_x_data,DuckDB,20,10000,1e-08,6.875399899482727,0.5642169952392578
+time_x_data,Java,20,10000,1e-08,12.610776090621949,1.22607421875
+time_x_data,DuckDB,20,50000,1e-08,8.765146684646606,0.64837646484375
+time_x_data,Java,20,50000,1e-08,16.031484413146973,1.5844356536865234
+time_x_data,DuckDB,20,100000,1e-08,10.164640426635742,0.6652751922607422
+time_x_data,Java,20,100000,1e-08,14.881725454330445,1.3107902526855468
+time_x_data,DuckDB,20,200000,1e-08,12.09211618900299,0.8035224914550781
+time_x_data,Java,20,200000,1e-08,15.78940029144287,1.4593257904052734
+time_x_data,DuckDB,20,499308,1e-08,11.791397976875306,0.6885887145996094
+time_x_data,Java,20,499308,1e-08,18.466274094581603,1.5980453491210938
+mem_x_data,DuckDB,20,5000,1e-08,4.764208889007568,0.5098274230957032
+mem_x_data,Java,20,5000,1e-08,10.23928406238556,1.0398693084716797
+mem_x_data,DuckDB,20,15000,1e-08,8.441239047050477,0.6600425720214844
+mem_x_data,Java,20,15000,1e-08,15.361653995513915,1.334254837036133
+mem_x_data,DuckDB,20,25000,1e-08,11.622797775268555,0.8035758972167969
+mem_x_data,Java,20,25000,1e-08,13.052338218688964,1.2541698455810546
+mem_x_data,DuckDB,20,35000,1e-08,13.618039083480834,0.8277412414550781
+mem_x_data,Java,20,35000,1e-08,14.565184831619263,1.2627086639404297
+mem_x_data,DuckDB,20,45000,1e-08,13.276947355270385,0.8115211486816406
+mem_x_data,Java,20,45000,1e-08,14.252669143676759,1.3760433197021484
+mem_x_data,DuckDB,20,55000,1e-08,9.327672338485717,0.65877685546875
+mem_x_data,Java,20,55000,1e-08,15.186336779594422,1.393813705444336
+mem_x_data,DuckDB,20,65000,1e-08,8.684717774391174,0.6549938201904297
+mem_x_data,Java,20,65000,1e-08,19.911969566345213,1.7932003021240235
+mem_x_data,DuckDB,20,75000,1e-08,10.351760697364806,0.6753543853759766
+mem_x_data,Java,20,75000,1e-08,16.405136752128602,1.4092647552490234
+mem_x_data,DuckDB,20,85000,1e-08,9.559363865852356,0.6653732299804688
+mem_x_data,Java,20,85000,1e-08,15.43622546195984,1.3540939331054687
+time_mem_x_preds,DuckDB,4,5000,1e-08,0.2019484519958496,0.08006935119628907
+time_mem_x_preds,Java,4,5000,1e-08,0.42949178218841555,0.11470603942871094
+time_mem_x_preds,DuckDB,8,5000,1e-08,0.4573645114898682,0.13008193969726561
+time_mem_x_preds,Java,8,5000,1e-08,0.9759943723678589,0.28855094909667967
+time_mem_x_preds,DuckDB,12,5000,1e-08,1.0343835353851318,0.19834861755371094
+time_mem_x_preds,Java,12,5000,1e-08,2.4342408657073973,0.4319355010986328
+time_mem_x_preds,DuckDB,16,5000,1e-08,2.4771334648132326,0.3597614288330078
+time_mem_x_preds,Java,16,5000,1e-08,5.050103878974914,0.6346805572509766
+time_mem_x_preds,DuckDB,20,5000,1e-08,5.073790097236634,0.5125118255615234
+time_mem_x_preds,Java,20,5000,1e-08,11.052288603782653,1.107700729370117"""
+
+df = pd.read_csv(io.StringIO(actual_data))
+
+# Configuração estética para artigos (estilo limpo acadêmico)
+sns.set_theme(style="ticks")
+plt.rcParams.update({
+    'font.size': 11,
+    'axes.labelsize': 12,
+    'axes.titlesize': 13,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+    'legend.fontsize': 10
+})
+
+# ==============================================================================
+# GRAFICO 1: TIME X DATA (Linhas vs Tempo, quebrado por Threshold)
+# ==============================================================================
+plt.figure(figsize=(10, 5.5))
+df_g1 = df[df['scenario'] == 'time_x_data'].copy()
+df_g1['Engine (Threshold)'] = df_g1['engine'] + " ($\epsilon=" + df_g1['threshold'].astype(str) + "$)"
+
+# Ordena para garantir consistência visual nas cores
+df_g1 = df_g1.sort_values(by=['threshold', 'engine'], ascending=[False, True])
+
+g1 = sns.lineplot(
+    data=df_g1, x='rows', y='time_s', hue='Engine (Threshold)', 
+    style='engine', markers=True, dashes=False, linewidth=2, palette="tab10"
+)
+g1.set_title("Execution Time vs. Row Scale (20 Attributes)", fontweight='bold', pad=15)
+g1.set_xlabel("Number of Rows (Tuples)")
+g1.set_ylabel("Execution Time (seconds)")
+sns.despine()
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', title="Configurations", frameon=True)
+plt.tight_layout()
+plt.savefig("1_actual_time_x_data.png", dpi=300)
+plt.close()
+
+# ==============================================================================
+# GRAFICO 2: MEM X DATA (Evolução física do consumo de RAM)
+# ==============================================================================
+plt.figure(figsize=(7, 4.5))
+df_g2 = df[df['scenario'] == 'mem_x_data']
+
+g2 = sns.lineplot(
+    data=df_g2, x='rows', y='mem_gb', hue='engine', 
+    style='engine', markers=True, linewidth=2, palette=["#1f77b4", "#ff7f0e"]
+)
+g2.set_title("Memory Peak vs. Row Scale ($\epsilon=10^{-8}$, 20 Attributes)", fontweight='bold', pad=15)
+g2.set_xlabel("Number of Rows (Tuples)")
+g2.set_ylabel("Peak Memory Footprint (GB)")
+g2.get_legend().set_title("Engine")
+sns.despine()
+plt.tight_layout()
+plt.savefig("2_actual_mem_x_data.png", dpi=300)
+plt.close()
+
+# ==============================================================================
+# GRAFICO 3: TIME X PREDS (Variação de complexidade por Atributos/Predicados)
+# ==============================================================================
+plt.figure(figsize=(7, 4.5))
+df_g3 = df[df['scenario'] == 'time_mem_x_preds']
+
+g3 = sns.lineplot(
+    data=df_g3, x='attrs', y='time_s', hue='engine', 
+    style='engine', markers=True, linewidth=2, palette=["#1f77b4", "#ff7f0e"]
+)
+g3.set_title("Execution Time vs. Predicate Space Complexity (@ 5k rows)", fontweight='bold', pad=15)
+g3.set_xlabel("Number of Attributes (Predicate Space Scaling)")
+g3.set_ylabel("Execution Time (seconds)")
+g3.get_legend().set_title("Engine")
+sns.despine()
+plt.tight_layout()
+plt.savefig("3_actual_time_x_preds.png", dpi=300)
+plt.close()
+
+# ==============================================================================
+# GRAFICO 4: MEM X PREDS (Consumo de RAM conforme o espaço combinatório cresce)
+# ==============================================================================
+plt.figure(figsize=(7, 4.5))
+df_g4 = df[df['scenario'] == 'time_mem_x_preds']
+
+g4 = sns.lineplot(
+    data=df_g4, x='attrs', y='mem_gb', hue='engine', 
+    style='engine', markers=True, linewidth=2, palette=["#1f77b4", "#ff7f0e"]
+)
+g4.set_title("Memory Peak vs. Predicate Space Complexity (@ 5k rows)", fontweight='bold', pad=15)
+g4.set_xlabel("Number of Attributes (Predicate Space Scaling)")
+g4.set_ylabel("Peak Memory Footprint (GB)")
+g4.get_legend().set_title("Engine")
+sns.despine()
+plt.tight_layout()
+plt.savefig("4_actual_mem_x_preds.png", dpi=300)
+plt.close()
+
+print("Bateria de gráficos atualizada gerada com sucesso a partir dos dados reais!")
