@@ -145,9 +145,6 @@ public:
 		if (this->base_lattice == (void *)this) {
 			n->base_node = (void *)n;
 		} else {
-			// Como base_lattice é void*, precisamos tratá-lo como a
-			// classe base (SchemaLattice) para chamar fetchNode recursivamente.
-			// Assumimos que a base_lattice é uma Lattice<void*, void*>.
 			auto *base_ptr = static_cast<Lattice<void *, void *> *>(this->base_lattice);
 			n->base_node = (void *)base_ptr->fetchNode(ps);
 		}
@@ -175,7 +172,7 @@ public:
 		return nullptr;
 	}
 
-	// --- Métodos de Construção (Fetchers) ---
+	// --- (Fetchers) ---
 
 	std::vector<Edge *> &fetchToEdges(Node *n, int cp) {
 		auto &ecps = n->to[cp];

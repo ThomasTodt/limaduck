@@ -28,14 +28,12 @@ static Schema *BuildDuckSchema(ClientContext &context, std::string &table_name) 
 
 	auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
 	auto &table_entry = entry.Cast<TableCatalogEntry>();
-	// std::cerr << "[RADAR] 4. Cast para TableCatalogEntry realizado.\n";
 
 	std::vector<std::string> colnames;
 	std::vector<Column::Type> coltypes; // NOVO: Vetor de Tipos
 
 	for (auto &col : table_entry.GetColumns().Logical()) {
 		colnames.push_back(col.GetName());
-		// std::cerr << "[RADAR] 4.1. Coluna encontrada: " << col.GetName() << "\n";
 
 		// TRADUTOR DE TIPOS: DuckDB -> LIMA
 		switch (col.GetType().id()) {
@@ -56,21 +54,16 @@ static Schema *BuildDuckSchema(ClientContext &context, std::string &table_name) 
 			break;
 		}
 	}
-	// std::cerr << "[RADAR] 5. Vetor de colunas preenchido. Total de colunas: " << colnames.size() << "\n";
 
-	// std::cerr << "[RADAR] 6. Chamando construtor 'new Schema(colnames)'...\n";
 	Schema *s = new Schema(colnames, coltypes);
 
-	// std::cerr << "[RADAR] 7. Schema instanciado! Retornando para construtor pai (RelationalDataset)...\n";
 	return s;
 }
 
 DuckDBDataset::DuckDBDataset(ClientContext &context, std::string table_name, int32_t num_lines)
     : RelationalDataset(BuildDuckSchema(context, table_name), 0) {
 
-	// std::cerr << "[RADAR] 8. Entrou no construtor do DuckDBDataset! (O pai ja foi inicializado)\n";
 	random_engine.seed(42);
-	// std::cerr << ">>> [LIMA] Conectando diretamente na memoria do DuckDB: " << table_name << "\n";
 
 	auto &catalog = Catalog::GetCatalog(context, INVALID_CATALOG);
 	auto &entry = catalog.GetEntry(context, CatalogType::TABLE_ENTRY, DEFAULT_SCHEMA, table_name);
@@ -79,11 +72,10 @@ DuckDBDataset::DuckDBDataset(ClientContext &context, std::string table_name, int
 	int64_t total_rows = table_entry.GetStorage().GetTotalRows();
 	this->size = (num_lines > 0 && num_lines < total_rows) ? num_lines : total_rows;
 	int32_t n = this->size;
-	// std::cerr << ">>> [LIMA] Tabela encontrada! Linhas: " << n << " | Colunas: " << schema->columns.size() << "\n";
 
 	this->constColumn.assign(schema->columns.size(), true);
 
-	// --- 1. ALOCAR ESPAÇO PARA OS DADOS (Restaurando sua arquitetura) ---
+	// --- 1. ALOCAR ESPAÇO PARA OS DADOS ---
 	size_t numInt = schema->typeColumns[Column::Type::INTEGER].size();
 	intData.assign(numInt, std::vector<int32_t>(n));
 
@@ -216,10 +208,9 @@ DuckDBDataset::DuckDBDataset(ClientContext &context, std::string table_name, int
 		// }
 		// if (current_row >= n) break;
 	}
-	// std::cerr << ">>> [LIMA] Ingestao de RAM completa (" << current_row << " linhas).\n";
 }
 
-// --- 3. O SEU FILTRO PERFEITO INTACTO ---
+// --- 3. FILTRO ---
 std::unique_ptr<TPSubSet> DuckDBDataset::filter(TPSubSet &TPs, Predicate *pred) {
 	auto newTPSubset = make_uniq<TPSubSet>(TPs.source);
 

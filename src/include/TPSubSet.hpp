@@ -14,7 +14,6 @@ namespace duckdb {
  */
 class TPSubSet {
 public:
-	// Mantemos um ponteiro para o set de origem (sharding/sampling)
 	std::shared_ptr<TPSet> source;
 	std::vector<int32_t> TPs;
 	int32_t length;
@@ -37,13 +36,10 @@ public:
 
 	/**
 	 * Ajusta o tamanho do vetor após uma operação de filtragem.
-	 * No C++, o std::vector::resize lida com isso de forma eficiente.
 	 */
 	void resize(int32_t new_length) {
 		this->length = new_length;
 		this->TPs.resize(new_length);
-		// Opcional: usar shrink_to_fit se a memória for muito crítica,
-		// mas no LIMA a performance do allocator geralmente é prioridade.
 	}
 };
 

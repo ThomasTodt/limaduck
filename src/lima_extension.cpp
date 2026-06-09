@@ -17,7 +17,7 @@ struct LimaDiscoverBindData : public TableFunctionData {
 	double threshold;
 };
 
-// --- 1. O Estado Global ---
+// --- 1. Estado Global ---
 struct LimaDiscoverGlobalState : public GlobalTableFunctionState {
 	// Usando o nosso CSVDataset temporariamente para teste
 	std::unique_ptr<DuckDBDataset> dataset;
@@ -27,13 +27,6 @@ struct LimaDiscoverGlobalState : public GlobalTableFunctionState {
 	idx_t result_idx = 0;
 	bool finished_search = false;
 };
-
-// unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionBindInput &input,
-//                                          vector<LogicalType> &return_types, vector<string> &names) {
-//     return_types.push_back(LogicalType::VARCHAR);
-//     names.push_back("denial_constraint");
-//     return make_uniq<TableFunctionData>();
-// }
 
 // --- 2. BIND (Captura os argumentos do SQL) ---
 unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionBindInput &input,
@@ -64,21 +57,6 @@ unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionB
 	return std::move(result);
 }
 
-// // --- 3. INIT (Carregamento) ---
-// unique_ptr<GlobalTableFunctionState> LimaDiscoverInit(ClientContext &context, TableFunctionInitInput &input) {
-//     auto state = make_uniq<LimaDiscoverGlobalState>();
-
-//     fprintf(stderr, ">>> [LIMA] Lendo o arquivo CSV via C++...\n");
-//     // HARDCODED temporário apenas para teste de sanidade
-//     // Passamos o caminho, o número de linhas (10) e a seed (42)
-//     state->dataset = make_uniq<CSVDataset>("test_small.csv", 10, 42);
-
-//     fprintf(stderr, ">>> [LIMA] Instanciando o Scheduler...\n");
-//     state->scheduler = make_uniq<Scheduler>(state->dataset.get());
-
-//     return std::move(state);
-// }
-
 // --- 3. INIT (Injeta as variáveis no motor) ---
 unique_ptr<GlobalTableFunctionState> LimaDiscoverInit(ClientContext &context, TableFunctionInitInput &input) {
 	auto state = make_uniq<LimaDiscoverGlobalState>();
@@ -86,22 +64,9 @@ unique_ptr<GlobalTableFunctionState> LimaDiscoverInit(ClientContext &context, Ta
 
 	double real_threshold = bind_data.threshold * 0.01;
 
-	// fprintf(stderr, ">>> [LIMA] Arquivo: %s | Linhas: %d | Threshold: %e\n",
-	// bind_data.file_name.c_str(), bind_data.num_lines, bind_data.threshold);
-
-	// Passamos o caminho, o número de linhas dinâmico, e uma seed fixa 42
-	// state->dataset = make_uniq<CSVDataset>(bind_data.file_name, bind_data.num_lines, 42);
 	state->dataset = make_uniq<DuckDBDataset>(context, bind_data.file_name, bind_data.num_lines);
 
-	// fprintf(stderr, "dataset");
-
-	// NOTA: Se você tiver uma variável global/estática para o minGrad no C++,
-	// defina ela aqui antes de criar o Scheduler! Ex:
-	// Scheduler::minGrad = bind_data.threshold;
-
 	state->scheduler = make_uniq<Scheduler>(state->dataset.get(), real_threshold);
-
-	// fprintf(stderr, "scheduler");
 
 	return std::move(state);
 }
@@ -111,9 +76,6 @@ void LimaDiscoverFunction(ClientContext &context, TableFunctionInput &data_p, Da
 	auto &state = (LimaDiscoverGlobalState &)*data_p.global_state;
 
 	if (!state.finished_search) {
-		// fprintf(stderr, ">>> [LIMA] Iniciando analise heuristica da Lattice...\n");
-
-		// AQUI ESTÁ A MÁGICA LIGADA:
 		state.scheduler->populatePredicates(state.discovered_constraints);
 
 		state.finished_search = true;
@@ -134,8 +96,6 @@ void LimaDiscoverFunction(ClientContext &context, TableFunctionInput &data_p, Da
 		count++;
 		state.result_idx++;
 	}
-
-	// fprintf(stderr, "antes cardinalidade");
 
 	output.SetCardinality(count);
 }

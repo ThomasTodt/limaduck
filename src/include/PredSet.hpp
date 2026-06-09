@@ -9,10 +9,6 @@
 
 namespace duckdb {
 
-/**
- * PredSet armazena uma conjunção de predicados e mantém um hash incremental.
- * Traduzido de edu.upc.lattice.PredSet
- */
 class PredSet {
 public:
 	static constexpr int32_t MOD = 333333313; //
@@ -77,11 +73,6 @@ public:
 		return preds == other.preds; // Compara o conteúdo dos mapas
 	}
 
-	// Para iterar sobre os predicados (equivalente ao Cursor do Java)
-	// auto begin() const { return preds.begin(); }
-	// auto end() const { return preds.end(); }
-
-	// ✅ A correção (C++11):
 	auto begin() const -> decltype(preds.begin()) {
 		return preds.begin();
 	}
@@ -105,7 +96,7 @@ public:
 } // namespace duckdb
 
 /**
- * Especialização de std::hash para permitir que PredSet seja usado como chave
+ * permitir que PredSet seja usado como chave
  * em um std::unordered_map (como na Lattice).
  */
 namespace std {

@@ -190,7 +190,7 @@ struct LimaNode {
 			if (predicate_ids[i] != -1) {
 				if (!first)
 					res += " & ";
-				// Find the predicate within the column's predicates
+				// Find the predicate within the columns predicates
 				for (auto &p : schema.columns[i].predicates) {
 					if ((int8_t)p.op == predicate_ids[i]) {
 						res += p.ToString(col_names);

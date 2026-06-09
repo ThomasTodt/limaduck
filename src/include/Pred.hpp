@@ -5,14 +5,10 @@
 
 namespace duckdb {
 
-/**
- * Representa um predicado individual vinculado a um par de colunas.
- * Traduzido de edu.upc.lattice.Pred
- */
 struct Pred {
 	int32_t cp;    // ID do par de colunas (Column Pair)
 	int32_t p;     // ID do predicado específico
-	int32_t score; // Valor de hash/score pré-calculado para o PredSet
+	int32_t score;
 
 	/**
 	 * Construtor que calcula o score de posicionamento na Lattice.
@@ -31,10 +27,6 @@ struct Pred {
 		return static_cast<size_t>(score);
 	}
 
-	/**
-	 * Equivalente ao equals() do Java.
-	 * Compara se dois objetos representam o mesmo predicado no mesmo par de colunas.
-	 */
 	bool operator==(const Pred &other) const {
 		return cp == other.cp && p == other.p;
 	}

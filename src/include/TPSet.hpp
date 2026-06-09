@@ -14,7 +14,6 @@ struct TPSet {
 	std::vector<int32_t> y;
 	int32_t length;
 
-	// Construtor equivalente ao Java: inicializa os arrays com tamanho n
 	TPSet(int32_t n) : length(n) {
 		x.resize(n);
 		y.resize(n);

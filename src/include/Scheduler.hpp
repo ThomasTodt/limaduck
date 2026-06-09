@@ -12,8 +12,6 @@
 #include "Predicate.hpp"
 #include "TPSubSet.hpp"
 
-// Forward declaration if BetaDistribution is in its own header.
-// Assuming a simplified structure based on your Java usage.
 #include "BetaDistribution.hpp"
 #include "duckdb/common/helper.hpp"
 
@@ -64,18 +62,14 @@ public:
 	// --- Atributos da Classe ---
 
 	double minGrad = 1e-6;
-	static bool ar; // Definido no arquivo .cpp (equivalente a static boolean ar=false;)
+	static bool ar;
 
 	RelationalDataset *dataset;
 	std::unique_ptr<SchedulerLattice> schedulerLattice;
 
-	// --- Construtor ---
-
 	explicit Scheduler(RelationalDataset *ds, double threshold_val) : dataset(ds), minGrad(threshold_val) {
 		schedulerLattice = make_uniq<SchedulerLattice>(ds->schema->lattice.get());
 	}
-
-	// --- Métodos Principais ---
 
 	void populatePredicates(std::vector<std::string> &output_constraints);
 

@@ -13,7 +13,6 @@ Schema::Schema(const std::vector<std::string> &colNames, const std::vector<Colum
 }
 
 void Schema::buildColumns(const std::vector<std::string> &colNames, const std::vector<Column::Type> &colTypes) {
-	// std::cerr << "[RADAR] buildcolumns\n";
 	columns.reserve(colNames.size());
 	for (size_t i = 0; i < colNames.size(); i++) {
 		auto col = make_uniq<Column>(colNames[i]);
@@ -28,27 +27,21 @@ void Schema::buildColumns(const std::vector<std::string> &colNames, const std::v
 		col_ptr->typeID = (int32_t)typeVec.size();
 		typeVec.push_back(col_ptr);
 	}
-	// std::cerr << "[RADAR] buildcolumns 2\n";
 }
 
 void Schema::buildColumnPairs() {
-	// std::cerr << "[RADAR] buildcolumnpairs\n";
 	columnPairs.reserve(columns.size());
 	for (auto &col : columns) {
 		int32_t cID = (int32_t)columnPairs.size();
-		// O LIMA cria pares reflexivos (col, col) nesta fase
 		auto colPair = make_uniq<ColumnPair>(*col, *col, cID);
 
 		ColumnPair *pair_ptr = colPair.get();
 		typeColumnPairs[pair_ptr->type].push_back(pair_ptr);
 		columnPairs.push_back(std::move(colPair));
 	}
-	// std::cerr << "[RADAR] buildcolumnpairs 2\n";
 }
 
 void Schema::buildPredicates() {
-	// std::cerr << "[RADAR] buildpredicates\n";
-
 	// Ordem dos operadores deve bater com o enum no Predicate.hpp
 	std::vector<Predicate::Operator> ops = {Predicate::Operator::EQ, Predicate::Operator::NE, Predicate::Operator::GT,
 	                                        Predicate::Operator::LE, Predicate::Operator::LT, Predicate::Operator::GE};
@@ -69,18 +62,15 @@ void Schema::buildPredicates() {
 			preds.push_back(std::move(pred));
 		}
 	}
-	// std::cerr << "[RADAR] buildpredicates 2\n";
 }
 
 void Schema::buildLattice() {
-	// std::cerr << "[RADAR] buildlattice\n";
 	std::vector<int32_t> predCounts;
 	predCounts.reserve(columnPairs.size());
 	for (auto &cp : columnPairs) {
 		predCounts.push_back((int32_t)cp->preds.size());
 	}
 	lattice = make_uniq<SchemaLattice>(predCounts);
-	// std::cerr << "[RADAR] buildlattice 2\n";
 }
 
 bool Schema::equals(const Schema &other) const {

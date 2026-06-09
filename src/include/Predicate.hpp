@@ -7,10 +7,6 @@
 
 namespace duckdb {
 
-/**
- * Representa um predicado lógico (ex: col1 == col2) dentro de uma DC.
- * Traduzido de edu.upc.data.schema.Predicate
- */
 class Predicate {
 public:
 	// Enum class para evitar colisões e garantir tipagem forte
@@ -26,10 +22,6 @@ public:
 	    : op(operation), cols(column_pair), ID(id), cID(column_pair_id), pID(pred_id) {
 	}
 
-	/**
-	 * Converte o enum Operator para uma string legível.
-	 */
-
 	//  std::string OperatorToString() const {
 	//     static const std::vector<std::string> op_strings = {
 	//         "EQ", "NE", "GT", "LE", "LT", "GE"
@@ -42,9 +34,6 @@ public:
 		return op_strings[static_cast<int>(op)];
 	}
 
-	/**
-	 * Equivalente ao toString() do Java.
-	 */
 	std::string ToString() const {
 		if (!cols || !cols->x || !cols->y)
 			return "Invalid Predicate";

@@ -15,7 +15,6 @@ class Schema {
 public:
 	std::vector<std::string> colnames;
 
-	// Containers que detêm a posse da memória (Ownership)
 	std::vector<std::unique_ptr<Column>> columns;
 	std::vector<std::unique_ptr<ColumnPair>> columnPairs;
 	std::vector<std::unique_ptr<Predicate>> preds;
