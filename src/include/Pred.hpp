@@ -6,8 +6,8 @@
 namespace duckdb {
 
 struct Pred {
-	int32_t cp;    // ID do par de colunas (Column Pair)
-	int32_t p;     // ID do predicado específico
+	int32_t cp; // ID do par de colunas (Column Pair)
+	int32_t p;  // ID do predicado específico
 	int32_t score;
 
 	/**
