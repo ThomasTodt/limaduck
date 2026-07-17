@@ -1,0 +1,60 @@
+section
+--- customer ---
+section
+--- lineitem ---
+denial_constraint
+!(l_quantity <= l_quantity & l_extendedprice > l_extendedprice & l_partkey == l_partkey & )
+!(l_extendedprice > l_extendedprice & l_quantity < l_quantity & l_partkey == l_partkey & )
+!(l_extendedprice < l_extendedprice & l_quantity > l_quantity & l_partkey == l_partkey & )
+!(l_extendedprice < l_extendedprice & l_quantity == l_quantity & l_partkey == l_partkey & )
+!(l_linestatus != l_linestatus & l_shipdate == l_shipdate & )
+!(l_linenumber == l_linenumber & l_orderkey == l_orderkey & )
+!(l_partkey < l_partkey & l_suppkey == l_suppkey & l_extendedprice == l_extendedprice & )
+section
+--- nation ---
+section
+--- orders ---
+section
+--- part ---
+denial_constraint
+!(p_mfgr != p_mfgr & p_brand == p_brand & )
+section
+--- partsupp ---
+section
+--- region ---
+section
+--- supplier ---
+section
+--- join_lineitem_orders ---
+denial_constraint
+!(l_orderkey > l_orderkey & o_custkey == o_custkey & o_clerk == o_clerk & )
+!(l_quantity <= l_quantity & l_extendedprice > l_extendedprice & l_partkey == l_partkey & )
+!(l_extendedprice > l_extendedprice & l_quantity < l_quantity & l_partkey == l_partkey & )
+!(l_extendedprice < l_extendedprice & l_quantity > l_quantity & l_partkey == l_partkey & )
+!(l_extendedprice < l_extendedprice & l_quantity == l_quantity & l_partkey == l_partkey & )
+!(l_orderkey > l_orderkey & o_custkey == o_custkey & o_orderdate == o_orderdate & )
+!(o_totalprice > o_totalprice & o_custkey == o_custkey & o_orderdate == o_orderdate & )
+!(o_totalprice > o_totalprice & o_clerk == o_clerk & o_orderdate == o_orderdate & )
+!(l_linenumber == l_linenumber & o_clerk == o_clerk & o_orderdate == o_orderdate & )
+!(l_linestatus != l_linestatus & l_shipdate == l_shipdate & )
+!(l_orderkey < l_orderkey & o_comment == o_comment & )
+!(l_linenumber == l_linenumber & o_comment == o_comment & )
+!(o_orderpriority != o_orderpriority & o_totalprice == o_totalprice & )
+!(o_orderstatus != o_orderstatus & o_totalprice == o_totalprice & )
+!(o_custkey > o_custkey & o_totalprice == o_totalprice & )
+!(l_orderkey < l_orderkey & o_totalprice == o_totalprice & )
+!(o_comment != o_comment & l_orderkey == l_orderkey & )
+!(o_totalprice != o_totalprice & l_orderkey == l_orderkey & )
+!(o_clerk != o_clerk & l_orderkey == l_orderkey & )
+!(o_orderdate != o_orderdate & l_orderkey == l_orderkey & )
+!(o_custkey != o_custkey & l_orderkey == l_orderkey & )
+!(o_orderpriority != o_orderpriority & l_orderkey == l_orderkey & )
+!(o_orderstatus != o_orderstatus & l_orderkey == l_orderkey & )
+!(o_custkey > o_custkey & l_orderkey == l_orderkey & )
+!(o_totalprice < o_totalprice & l_orderkey == l_orderkey & )
+!(o_totalprice > o_totalprice & l_orderkey == l_orderkey & )
+!(o_custkey < o_custkey & l_orderkey == l_orderkey & )
+!(l_linenumber == l_linenumber & l_orderkey == l_orderkey & )
+!(l_partkey < l_partkey & l_suppkey == l_suppkey & l_extendedprice == l_extendedprice & )
+section
+--- join_lineitem_partsupp ---

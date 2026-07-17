@@ -8,3 +8,5 @@ test/python/__pycache__/
 .Rhistory
 venv
 venv/
+.tmp/
+*.tmp
