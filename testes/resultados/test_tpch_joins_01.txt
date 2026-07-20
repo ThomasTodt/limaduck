@@ -1,0 +1,187 @@
+section
+--- customer ---
+section
+--- lineitem ---
+section
+--- nation ---
+section
+--- orders ---
+section
+--- part ---
+denial_constraint
+!(p_mfgr != p_mfgr & p_brand == p_brand & )
+section
+--- partsupp ---
+section
+--- region ---
+section
+--- supplier ---
+section
+--- join_lineitem_orders ---
+denial_constraint
+!(o_orderstatus == o_orderstatus & l_linestatus != l_linestatus & )
+section
+--- join_lineitem_partsupp ---
+section
+--- join_customer_orders ---
+section
+--- join_partsupp_part ---
+denial_constraint
+!(p_mfgr != p_mfgr & p_brand == p_brand & )
+section
+--- join_partsupp_supplier ---
+denial_constraint
+!(s_comment != s_comment & s_address == s_address & )
+!(s_acctbal != s_acctbal & s_address == s_address & )
+!(s_phone != s_phone & s_address == s_address & )
+!(s_name != s_name & s_address == s_address & )
+!(ps_suppkey != ps_suppkey & s_address == s_address & )
+!(s_nationkey != s_nationkey & s_address == s_address & )
+!(s_comment != s_comment & s_name == s_name & )
+!(s_acctbal != s_acctbal & s_name == s_name & )
+!(s_phone != s_phone & s_name == s_name & )
+!(s_address != s_address & s_name == s_name & )
+!(ps_suppkey != ps_suppkey & s_name == s_name & )
+!(s_nationkey != s_nationkey & s_name == s_name & )
+!(s_comment != s_comment & s_phone == s_phone & )
+!(s_acctbal != s_acctbal & s_phone == s_phone & )
+!(s_address != s_address & s_phone == s_phone & )
+!(s_name != s_name & s_phone == s_phone & )
+!(ps_suppkey != ps_suppkey & s_phone == s_phone & )
+!(s_nationkey != s_nationkey & s_phone == s_phone & )
+!(s_comment != s_comment & ps_suppkey == ps_suppkey & )
+!(s_acctbal != s_acctbal & ps_suppkey == ps_suppkey & )
+!(s_phone != s_phone & ps_suppkey == ps_suppkey & )
+!(s_address != s_address & ps_suppkey == ps_suppkey & )
+!(s_name != s_name & ps_suppkey == ps_suppkey & )
+!(s_nationkey != s_nationkey & ps_suppkey == ps_suppkey & )
+!(s_comment != s_comment & s_acctbal == s_acctbal & )
+!(s_phone != s_phone & s_acctbal == s_acctbal & )
+!(s_address != s_address & s_acctbal == s_acctbal & )
+!(s_name != s_name & s_acctbal == s_acctbal & )
+!(ps_suppkey != ps_suppkey & s_acctbal == s_acctbal & )
+!(s_nationkey != s_nationkey & s_acctbal == s_acctbal & )
+!(s_acctbal != s_acctbal & s_comment == s_comment & )
+!(s_phone != s_phone & s_comment == s_comment & )
+!(s_address != s_address & s_comment == s_comment & )
+!(s_name != s_name & s_comment == s_comment & )
+!(ps_suppkey != ps_suppkey & s_comment == s_comment & )
+!(s_nationkey != s_nationkey & s_comment == s_comment & )
+section
+--- join_customer_nation ---
+denial_constraint
+!(n_comment != n_comment & n_name == n_name & )
+!(c_nationkey != c_nationkey & n_name == n_name & )
+!(n_regionkey != n_regionkey & n_name == n_name & )
+!(n_comment != n_comment & c_nationkey == c_nationkey & )
+!(n_name != n_name & c_nationkey == c_nationkey & )
+!(n_regionkey != n_regionkey & c_nationkey == c_nationkey & )
+!(c_nationkey != c_nationkey & n_comment == n_comment & )
+!(n_name != n_name & n_comment == n_comment & )
+!(n_regionkey != n_regionkey & n_comment == n_comment & )
+section
+--- join_nation_supplier ---
+denial_constraint
+!(n_comment != n_comment & n_nationkey == n_nationkey & )
+!(n_name != n_name & n_nationkey == n_nationkey & )
+!(n_regionkey != n_regionkey & n_nationkey == n_nationkey & )
+!(n_nationkey != n_nationkey & n_name == n_name & )
+!(n_comment != n_comment & n_name == n_name & )
+!(n_regionkey != n_regionkey & n_name == n_name & )
+!(n_nationkey < n_nationkey & n_name == n_name & )
+!(n_nationkey != n_nationkey & n_comment == n_comment & )
+!(n_name != n_name & n_comment == n_comment & )
+!(n_regionkey != n_regionkey & n_comment == n_comment & )
+!(n_nationkey < n_nationkey & n_comment == n_comment & )
+section
+--- join_nation_region ---
+denial_constraint
+!(r_comment != r_comment & n_regionkey == n_regionkey & )
+!(r_name != r_name & n_regionkey == n_regionkey & )
+!(r_comment != r_comment & r_name == r_name & )
+!(n_regionkey != n_regionkey & r_name == r_name & )
+!(r_name != r_name & r_comment == r_comment & )
+!(n_regionkey != n_regionkey & r_comment == r_comment & )
+section
+--- join_lineitem_part ---
+denial_constraint
+!(p_mfgr != p_mfgr & p_brand == p_brand & )
+section
+--- join_lineitem_supplier ---
+denial_constraint
+!(s_comment != s_comment & s_name == s_name & )
+!(s_acctbal != s_acctbal & s_name == s_name & )
+!(s_phone != s_phone & s_name == s_name & )
+!(s_address != s_address & s_name == s_name & )
+!(l_suppkey != l_suppkey & s_name == s_name & )
+!(s_nationkey != s_nationkey & s_name == s_name & )
+!(s_acctbal != s_acctbal & s_comment == s_comment & )
+!(s_phone != s_phone & s_comment == s_comment & )
+!(s_address != s_address & s_comment == s_comment & )
+!(s_name != s_name & s_comment == s_comment & )
+!(l_suppkey != l_suppkey & s_comment == s_comment & )
+!(s_nationkey != s_nationkey & s_comment == s_comment & )
+!(s_comment != s_comment & s_acctbal == s_acctbal & )
+!(s_phone != s_phone & s_acctbal == s_acctbal & )
+!(s_address != s_address & s_acctbal == s_acctbal & )
+!(s_name != s_name & s_acctbal == s_acctbal & )
+!(l_suppkey != l_suppkey & s_acctbal == s_acctbal & )
+!(s_nationkey != s_nationkey & s_acctbal == s_acctbal & )
+!(s_comment != s_comment & s_phone == s_phone & )
+!(s_acctbal != s_acctbal & s_phone == s_phone & )
+!(s_address != s_address & s_phone == s_phone & )
+!(s_name != s_name & s_phone == s_phone & )
+!(l_suppkey != l_suppkey & s_phone == s_phone & )
+!(s_nationkey != s_nationkey & s_phone == s_phone & )
+!(s_comment != s_comment & l_suppkey == l_suppkey & )
+!(s_acctbal != s_acctbal & l_suppkey == l_suppkey & )
+!(s_phone != s_phone & l_suppkey == l_suppkey & )
+!(s_address != s_address & l_suppkey == l_suppkey & )
+!(s_name != s_name & l_suppkey == l_suppkey & )
+!(s_nationkey != s_nationkey & l_suppkey == l_suppkey & )
+!(s_comment != s_comment & s_address == s_address & )
+!(s_acctbal != s_acctbal & s_address == s_address & )
+!(s_phone != s_phone & s_address == s_address & )
+!(s_name != s_name & s_address == s_address & )
+!(l_suppkey != l_suppkey & s_address == s_address & )
+!(s_nationkey != s_nationkey & s_address == s_address & )
+section
+--- join_lineitem_part_supplier ---
+denial_constraint
+!(p_mfgr != p_mfgr & p_brand == p_brand & )
+!(s_comment != s_comment & s_acctbal == s_acctbal & )
+!(s_name != s_name & s_acctbal == s_acctbal & )
+!(s_address != s_address & s_acctbal == s_acctbal & )
+!(s_phone != s_phone & s_acctbal == s_acctbal & )
+!(l_suppkey != l_suppkey & s_acctbal == s_acctbal & )
+!(s_nationkey != s_nationkey & s_acctbal == s_acctbal & )
+!(s_comment != s_comment & s_address == s_address & )
+!(s_name != s_name & s_address == s_address & )
+!(s_phone != s_phone & s_address == s_address & )
+!(s_acctbal != s_acctbal & s_address == s_address & )
+!(l_suppkey != l_suppkey & s_address == s_address & )
+!(s_nationkey != s_nationkey & s_address == s_address & )
+!(s_comment != s_comment & s_phone == s_phone & )
+!(s_name != s_name & s_phone == s_phone & )
+!(s_address != s_address & s_phone == s_phone & )
+!(s_acctbal != s_acctbal & s_phone == s_phone & )
+!(l_suppkey != l_suppkey & s_phone == s_phone & )
+!(s_nationkey != s_nationkey & s_phone == s_phone & )
+!(s_name != s_name & s_comment == s_comment & )
+!(s_address != s_address & s_comment == s_comment & )
+!(s_phone != s_phone & s_comment == s_comment & )
+!(s_acctbal != s_acctbal & s_comment == s_comment & )
+!(l_suppkey != l_suppkey & s_comment == s_comment & )
+!(s_nationkey != s_nationkey & s_comment == s_comment & )
+!(s_comment != s_comment & l_suppkey == l_suppkey & )
+!(s_name != s_name & l_suppkey == l_suppkey & )
+!(s_address != s_address & l_suppkey == l_suppkey & )
+!(s_phone != s_phone & l_suppkey == l_suppkey & )
+!(s_acctbal != s_acctbal & l_suppkey == l_suppkey & )
+!(s_nationkey != s_nationkey & l_suppkey == l_suppkey & )
+!(s_comment != s_comment & s_name == s_name & )
+!(s_address != s_address & s_name == s_name & )
+!(s_phone != s_phone & s_name == s_name & )
+!(s_acctbal != s_acctbal & s_name == s_name & )
+!(l_suppkey != l_suppkey & s_name == s_name & )
+!(s_nationkey != s_nationkey & s_name == s_name & )

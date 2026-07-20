@@ -1,4 +1,4 @@
--- systemd-run --user --scope -p MemoryMax=6G ./build/release/duckdb -unsigned -cmd ".mode csv" < testes/test_tpch_joins.sql > testes/resultados/test_tpch_joins_00000001.txt
+-- systemd-run --user --scope -p MemoryMax=6G ./build/release/duckdb -unsigned -cmd ".mode csv" < testes/test_tpch_joins.sql > testes/resultados/test_tpch_joins_01.txt
 -- GEN=ninja PROC=4 make release -j 4 -l 6
 
 .mode csv
@@ -78,60 +78,60 @@ JOIN supplier ON l_suppkey = s_suppkey;
 
 -- Run discovery on the original individual tables
 SELECT '--- customer ---' AS section;
-SELECT * FROM lima_discover('customer', threshold=0.00000001);
+SELECT * FROM lima_discover('customer', threshold=0.01);
 
 SELECT '--- lineitem ---' AS section;
-SELECT * FROM lima_discover('lineitem', threshold=0.00000001);
+SELECT * FROM lima_discover('lineitem', threshold=0.01);
 
 SELECT '--- nation ---' AS section;
-SELECT * FROM lima_discover('nation', threshold=0.00000001);
+SELECT * FROM lima_discover('nation', threshold=0.01);
 
 SELECT '--- orders ---' AS section;
-SELECT * FROM lima_discover('orders', threshold=0.00000001);
+SELECT * FROM lima_discover('orders', threshold=0.01);
 
 SELECT '--- part ---' AS section;
-SELECT * FROM lima_discover('part', threshold=0.00000001);
+SELECT * FROM lima_discover('part', threshold=0.01);
 
 SELECT '--- partsupp ---' AS section;
-SELECT * FROM lima_discover('partsupp', threshold=0.00000001);
+SELECT * FROM lima_discover('partsupp', threshold=0.01);
 
 SELECT '--- region ---' AS section;
-SELECT * FROM lima_discover('region', threshold=0.00000001);
+SELECT * FROM lima_discover('region', threshold=0.01);
 
 SELECT '--- supplier ---' AS section;
-SELECT * FROM lima_discover('supplier', threshold=0.00000001);
+SELECT * FROM lima_discover('supplier', threshold=0.01);
 
 -- Run discovery on the joined tables
 SELECT '--- join_lineitem_orders ---' AS section;
-SELECT * FROM lima_discover('join_lineitem_orders', threshold=0.00000001);
+SELECT * FROM lima_discover('join_lineitem_orders', threshold=0.01);
 
 SELECT '--- join_lineitem_partsupp ---' AS section;
-SELECT * FROM lima_discover('join_lineitem_partsupp', threshold=0.00000001);
+SELECT * FROM lima_discover('join_lineitem_partsupp', threshold=0.01);
 
 SELECT '--- join_customer_orders ---' AS section;
-SELECT * FROM lima_discover('join_customer_orders', threshold=0.00000001);
+SELECT * FROM lima_discover('join_customer_orders', threshold=0.01);
 
 SELECT '--- join_partsupp_part ---' AS section;
-SELECT * FROM lima_discover('join_partsupp_part', threshold=0.00000001);
+SELECT * FROM lima_discover('join_partsupp_part', threshold=0.01);
 
 SELECT '--- join_partsupp_supplier ---' AS section;
-SELECT * FROM lima_discover('join_partsupp_supplier', threshold=0.00000001);
+SELECT * FROM lima_discover('join_partsupp_supplier', threshold=0.01);
 
 SELECT '--- join_customer_nation ---' AS section;
-SELECT * FROM lima_discover('join_customer_nation', threshold=0.00000001);
+SELECT * FROM lima_discover('join_customer_nation', threshold=0.01);
 
 SELECT '--- join_nation_supplier ---' AS section;
-SELECT * FROM lima_discover('join_nation_supplier', threshold=0.00000001);
+SELECT * FROM lima_discover('join_nation_supplier', threshold=0.01);
 
 SELECT '--- join_nation_region ---' AS section;
-SELECT * FROM lima_discover('join_nation_region', threshold=0.00000001);
+SELECT * FROM lima_discover('join_nation_region', threshold=0.01);
 
 SELECT '--- join_lineitem_part ---' AS section;
-SELECT * FROM lima_discover('join_lineitem_part', threshold=0.00000001);
+SELECT * FROM lima_discover('join_lineitem_part', threshold=0.01);
 
 SELECT '--- join_lineitem_supplier ---' AS section;
-SELECT * FROM lima_discover('join_lineitem_supplier', threshold=0.00000001);
+SELECT * FROM lima_discover('join_lineitem_supplier', threshold=0.01);
 
 -- Run discovery on the 3-way join
 SELECT '--- join_lineitem_part_supplier ---' AS section;
-SELECT * FROM lima_discover('join_lineitem_part_supplier', threshold=0.00000001);
+SELECT * FROM lima_discover('join_lineitem_part_supplier', threshold=0.01);
