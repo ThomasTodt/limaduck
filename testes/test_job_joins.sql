@@ -1,7 +1,5 @@
 .mode csv
 .maxrows 999999
-
-.maxrows 999999
 LOAD 'lima';
 
 -- Limit CPU threads and memory usage to prevent freezing and OOM kills
@@ -62,28 +60,28 @@ DROP TABLE IF EXISTS join_aka_title_title;
 -- Loading the full files and discovering DCs on millions of rows would cause OOM memory crashes on most PCs.
 -- To change the data limit, simply increase or decrease the LIMIT values below.
 
-INSERT INTO comp_cast_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/comp_cast_type.csv', header=false, delim=',', quote='"', escape='\');
-INSERT INTO company_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/company_type.csv', header=false, delim=',', quote='"', escape='\');
-INSERT INTO info_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/info_type.csv', header=false, delim=',', quote='"', escape='\');
-INSERT INTO kind_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/kind_type.csv', header=false, delim=',', quote='"', escape='\');
-INSERT INTO link_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/link_type.csv', header=false, delim=',', quote='"', escape='\');
-INSERT INTO role_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/role_type.csv', header=false, delim=',', quote='"', escape='\');
+INSERT INTO comp_cast_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/comp_cast_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
+INSERT INTO company_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/company_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
+INSERT INTO info_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/info_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
+INSERT INTO kind_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/kind_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
+INSERT INTO link_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/link_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
+INSERT INTO role_type SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/role_type.csv', ignore_errors=true, header=false, delim=',', quote='"', escape='\');
 
-INSERT INTO aka_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/aka_name.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO aka_title SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/aka_title.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO cast_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/cast_info.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO char_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/char_name.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO company_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/company_name.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO complete_cast SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/complete_cast.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO keyword SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/keyword.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO movie_companies SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_companies.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO movie_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_info.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO movie_info_idx SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_info_idx.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO movie_keyword SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_keyword.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO movie_link SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_link.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/name.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO person_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/person_info.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
-INSERT INTO title SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/title.csv', header=false, delim=',', auto_detect=true) LIMIT 20000;
+INSERT INTO aka_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/aka_name.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO aka_title SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/aka_title.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO cast_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/cast_info.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO char_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/char_name.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO company_name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/company_name.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO complete_cast SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/complete_cast.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO keyword SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/keyword.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO movie_companies SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_companies.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO movie_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_info.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO movie_info_idx SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_info_idx.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO movie_keyword SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_keyword.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO movie_link SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/movie_link.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO name SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/name.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO person_info SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/person_info.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
+INSERT INTO title SELECT * FROM read_csv('/home/thomas/mestrado/JOB/imdb/title.csv', ignore_errors=true, header=false, delim=',', auto_detect=true); -- LIMIT 20000;
 
 -- 3. Create Joined Tables
 -- Columns are explicitly projected and prefixed to avoid duplicate column name errors.
@@ -517,129 +515,129 @@ JOIN title t ON akt.movie_id = t.id;
 
 -- 4. Run LIMA discovery on the individual tables
 SELECT '--- aka_name ---' AS section;
-SELECT * FROM lima_discover('aka_name', threshold=0.01);
+SELECT * FROM lima_discover('aka_name', threshold=0.00000001);
 
 SELECT '--- aka_title ---' AS section;
-SELECT * FROM lima_discover('aka_title', threshold=0.01);
+SELECT * FROM lima_discover('aka_title', threshold=0.00000001);
 
 SELECT '--- cast_info ---' AS section;
-SELECT * FROM lima_discover('cast_info', threshold=0.01);
+SELECT * FROM lima_discover('cast_info', threshold=0.00000001);
 
 SELECT '--- char_name ---' AS section;
-SELECT * FROM lima_discover('char_name', threshold=0.01);
+SELECT * FROM lima_discover('char_name', threshold=0.00000001);
 
 SELECT '--- comp_cast_type ---' AS section;
-SELECT * FROM lima_discover('comp_cast_type', threshold=0.01);
+SELECT * FROM lima_discover('comp_cast_type', threshold=0.00000001);
 
 SELECT '--- company_name ---' AS section;
-SELECT * FROM lima_discover('company_name', threshold=0.01);
+SELECT * FROM lima_discover('company_name', threshold=0.00000001);
 
 SELECT '--- company_type ---' AS section;
-SELECT * FROM lima_discover('company_type', threshold=0.01);
+SELECT * FROM lima_discover('company_type', threshold=0.00000001);
 
 SELECT '--- complete_cast ---' AS section;
-SELECT * FROM lima_discover('complete_cast', threshold=0.01);
+SELECT * FROM lima_discover('complete_cast', threshold=0.00000001);
 
 SELECT '--- info_type ---' AS section;
-SELECT * FROM lima_discover('info_type', threshold=0.01);
+SELECT * FROM lima_discover('info_type', threshold=0.00000001);
 
 SELECT '--- keyword ---' AS section;
-SELECT * FROM lima_discover('keyword', threshold=0.01);
+SELECT * FROM lima_discover('keyword', threshold=0.00000001);
 
 SELECT '--- kind_type ---' AS section;
-SELECT * FROM lima_discover('kind_type', threshold=0.01);
+SELECT * FROM lima_discover('kind_type', threshold=0.00000001);
 
 SELECT '--- link_type ---' AS section;
-SELECT * FROM lima_discover('link_type', threshold=0.01);
+SELECT * FROM lima_discover('link_type', threshold=0.00000001);
 
 SELECT '--- movie_companies ---' AS section;
-SELECT * FROM lima_discover('movie_companies', threshold=0.01);
+SELECT * FROM lima_discover('movie_companies', threshold=0.00000001);
 
 SELECT '--- movie_info ---' AS section;
-SELECT * FROM lima_discover('movie_info', threshold=0.01);
+SELECT * FROM lima_discover('movie_info', threshold=0.00000001);
 
 SELECT '--- movie_info_idx ---' AS section;
-SELECT * FROM lima_discover('movie_info_idx', threshold=0.01);
+SELECT * FROM lima_discover('movie_info_idx', threshold=0.00000001);
 
 SELECT '--- movie_keyword ---' AS section;
-SELECT * FROM lima_discover('movie_keyword', threshold=0.01);
+SELECT * FROM lima_discover('movie_keyword', threshold=0.00000001);
 
 SELECT '--- movie_link ---' AS section;
-SELECT * FROM lima_discover('movie_link', threshold=0.01);
+SELECT * FROM lima_discover('movie_link', threshold=0.00000001);
 
 SELECT '--- name ---' AS section;
-SELECT * FROM lima_discover('name', threshold=0.01);
+SELECT * FROM lima_discover('name', threshold=0.00000001);
 
 SELECT '--- person_info ---' AS section;
-SELECT * FROM lima_discover('person_info', threshold=0.01);
+SELECT * FROM lima_discover('person_info', threshold=0.00000001);
 
 SELECT '--- role_type ---' AS section;
-SELECT * FROM lima_discover('role_type', threshold=0.01);
+SELECT * FROM lima_discover('role_type', threshold=0.00000001);
 
 SELECT '--- title ---' AS section;
-SELECT * FROM lima_discover('title', threshold=0.01);
+SELECT * FROM lima_discover('title', threshold=0.00000001);
 
 
 -- 5. Run LIMA discovery on the joined tables
 SELECT '--- join_char_name_cast_info ---' AS section;
-SELECT * FROM lima_discover('join_char_name_cast_info', threshold=0.01);
+SELECT * FROM lima_discover('join_char_name_cast_info', threshold=0.00000001);
 
 SELECT '--- join_role_type_cast_info ---' AS section;
-SELECT * FROM lima_discover('join_role_type_cast_info', threshold=0.01);
+SELECT * FROM lima_discover('join_role_type_cast_info', threshold=0.00000001);
 
 SELECT '--- join_cast_info_name ---' AS section;
-SELECT * FROM lima_discover('join_cast_info_name', threshold=0.01);
+SELECT * FROM lima_discover('join_cast_info_name', threshold=0.00000001);
 
 SELECT '--- join_cast_info_title ---' AS section;
-SELECT * FROM lima_discover('join_cast_info_title', threshold=0.01);
+SELECT * FROM lima_discover('join_cast_info_title', threshold=0.00000001);
 
 SELECT '--- join_name_aka_name ---' AS section;
-SELECT * FROM lima_discover('join_name_aka_name', threshold=0.01);
+SELECT * FROM lima_discover('join_name_aka_name', threshold=0.00000001);
 
 SELECT '--- join_name_person_info ---' AS section;
-SELECT * FROM lima_discover('join_name_person_info', threshold=0.01);
+SELECT * FROM lima_discover('join_name_person_info', threshold=0.00000001);
 
 SELECT '--- join_person_info_info_type ---' AS section;
-SELECT * FROM lima_discover('join_person_info_info_type', threshold=0.01);
+SELECT * FROM lima_discover('join_person_info_info_type', threshold=0.00000001);
 
 SELECT '--- join_info_type_movie_info ---' AS section;
-SELECT * FROM lima_discover('join_info_type_movie_info', threshold=0.01);
+SELECT * FROM lima_discover('join_info_type_movie_info', threshold=0.00000001);
 
 SELECT '--- join_movie_info_title ---' AS section;
-SELECT * FROM lima_discover('join_movie_info_title', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_info_title', threshold=0.00000001);
 
 SELECT '--- join_movie_info_idx_info_type ---' AS section;
-SELECT * FROM lima_discover('join_movie_info_idx_info_type', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_info_idx_info_type', threshold=0.00000001);
 
 SELECT '--- join_movie_info_idx_title ---' AS section;
-SELECT * FROM lima_discover('join_movie_info_idx_title', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_info_idx_title', threshold=0.00000001);
 
 SELECT '--- join_kind_type_title ---' AS section;
-SELECT * FROM lima_discover('join_kind_type_title', threshold=0.01);
+SELECT * FROM lima_discover('join_kind_type_title', threshold=0.00000001);
 
 SELECT '--- join_title_movie_keyword ---' AS section;
-SELECT * FROM lima_discover('join_title_movie_keyword', threshold=0.01);
+SELECT * FROM lima_discover('join_title_movie_keyword', threshold=0.00000001);
 
 SELECT '--- join_movie_keyword_keyword ---' AS section;
-SELECT * FROM lima_discover('join_movie_keyword_keyword', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_keyword_keyword', threshold=0.00000001);
 
 SELECT '--- join_company_name_movie_companies ---' AS section;
-SELECT * FROM lima_discover('join_company_name_movie_companies', threshold=0.01);
+SELECT * FROM lima_discover('join_company_name_movie_companies', threshold=0.00000001);
 
 SELECT '--- join_movie_companies_company_type ---' AS section;
-SELECT * FROM lima_discover('join_movie_companies_company_type', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_companies_company_type', threshold=0.00000001);
 
 SELECT '--- join_movie_companies_title ---' AS section;
-SELECT * FROM lima_discover('join_movie_companies_title', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_companies_title', threshold=0.00000001);
 
 SELECT '--- join_complete_cast_comp_cast_type ---' AS section;
-SELECT * FROM lima_discover('join_complete_cast_comp_cast_type', threshold=0.01);
+SELECT * FROM lima_discover('join_complete_cast_comp_cast_type', threshold=0.00000001);
 
 SELECT '--- join_movie_link_link_type ---' AS section;
-SELECT * FROM lima_discover('join_movie_link_link_type', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_link_link_type', threshold=0.00000001);
 
 SELECT '--- join_movie_link_title ---' AS section;
-SELECT * FROM lima_discover('join_movie_link_title', threshold=0.01);
+SELECT * FROM lima_discover('join_movie_link_title', threshold=0.00000001);
 
 SELECT '--- join_aka_title_title ---' AS section;
-SELECT * FROM lima_discover('join_aka_title_title', threshold=0.01);
+SELECT * FROM lima_discover('join_aka_title_title', threshold=0.00000001);

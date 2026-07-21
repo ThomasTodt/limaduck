@@ -1,1285 +1,893 @@
-┌──────────────────┐
-│     section      │
-│     varchar      │
-├──────────────────┤
-│ --- aka_name --- │
-└──────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- aka_title --- │
-└───────────────────┘
-┌──────────────────────────────────────────────────────────────────────────┐
-│                            denial_constraint                             │
-│                                 varchar                                  │
-├──────────────────────────────────────────────────────────────────────────┤
-│ !(movie_id < movie_id & id >= id & )                                     │
-│ !(movie_id <= movie_id & id >= id & )                                    │
-│ !(id <= id & movie_id > movie_id & )                                     │
-│ !(id < id & movie_id > movie_id & )                                      │
-│ !(movie_id < movie_id & id > id & )                                      │
-│ !(movie_id <= movie_id & id > id & )                                     │
-│ !(id <= id & movie_id >= movie_id & )                                    │
-│ !(id < id & movie_id >= movie_id & )                                     │
-│ !(kind_id == kind_id & episode_of_id != episode_of_id & )                │
-│ !(episode_of_id == episode_of_id & season_nr != season_nr & )            │
-│ !(kind_id == kind_id & season_nr != season_nr & )                        │
-│ !(season_nr == season_nr & episode_nr != episode_nr & )                  │
-│ !(episode_of_id == episode_of_id & episode_nr != episode_nr & )          │
-│ !(kind_id == kind_id & episode_nr != episode_nr & )                      │
-│ !(kind_id >= kind_id & episode_of_id < episode_of_id & )                 │
-│ !(production_year < production_year & episode_of_id < episode_of_id & )  │
-│ !(kind_id == kind_id & episode_of_id < episode_of_id & )                 │
-│ !(kind_id > kind_id & episode_of_id < episode_of_id & )                  │
-│ !(episode_of_id >= episode_of_id & season_nr < season_nr & )             │
-│ !(episode_nr >= episode_nr & season_nr < season_nr & )                   │
-│ !(episode_nr == episode_nr & season_nr < season_nr & )                   │
-│ !(episode_of_id == episode_of_id & season_nr < season_nr & )             │
-│ !(kind_id >= kind_id & season_nr < season_nr & )                         │
-│ !(production_year < production_year & season_nr < season_nr & )          │
-│ !(kind_id == kind_id & season_nr < season_nr & )                         │
-│ !(kind_id > kind_id & season_nr < season_nr & )                          │
-│ !(season_nr >= season_nr & episode_nr < episode_nr & )                   │
-│ !(episode_of_id >= episode_of_id & episode_nr < episode_nr & )           │
-│ !(season_nr == season_nr & episode_nr < episode_nr & )                   │
-│ !(episode_of_id == episode_of_id & episode_nr < episode_nr & )           │
-│ !(kind_id >= kind_id & episode_nr < episode_nr & )                       │
-│ !(production_year < production_year & episode_nr < episode_nr & )        │
-│ !(kind_id == kind_id & episode_nr < episode_nr & )                       │
-│ !(kind_id > kind_id & episode_nr < episode_nr & )                        │
-│ !(kind_id <= kind_id & episode_of_id > episode_of_id & )                 │
-│ !(production_year >= production_year & episode_of_id > episode_of_id & ) │
-│ !(production_year > production_year & episode_of_id > episode_of_id & )  │
-│ !(kind_id == kind_id & episode_of_id > episode_of_id & )                 │
-│ !(episode_of_id <= episode_of_id & season_nr > season_nr & )             │
-│ !(episode_of_id == episode_of_id & season_nr > season_nr & )             │
-│ !(kind_id <= kind_id & season_nr > season_nr & )                         │
-│ !(production_year >= production_year & season_nr > season_nr & )         │
-│ !(production_year > production_year & season_nr > season_nr & )          │
-│ !(kind_id == kind_id & season_nr > season_nr & )                         │
-│ !(season_nr <= season_nr & episode_nr > episode_nr & )                   │
-│ !(episode_of_id <= episode_of_id & episode_nr > episode_nr & )           │
-│ !(season_nr == season_nr & episode_nr > episode_nr & )                   │
-│ !(episode_of_id == episode_of_id & episode_nr > episode_nr & )           │
-│ !(kind_id <= kind_id & episode_nr > episode_nr & )                       │
-│ !(production_year >= production_year & episode_nr > episode_nr & )       │
-│ !(production_year > production_year & episode_nr > episode_nr & )        │
-│ !(kind_id == kind_id & episode_nr > episode_nr & )                       │
-├──────────────────────────────────────────────────────────────────────────┤
-│                                 52 rows                                  │
-└──────────────────────────────────────────────────────────────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- cast_info --- │
-└───────────────────┘
-┌─────────────────────────────────────────┐
-│            denial_constraint            │
-│                 varchar                 │
-├─────────────────────────────────────────┤
-│ !(id <= id & person_id >= person_id & ) │
-│ !(id < id & person_id >= person_id & )  │
-│ !(id > id & person_id < person_id & )   │
-│ !(person_id < person_id & id >= id & )  │
-│ !(id <= id & person_id > person_id & )  │
-│ !(id < id & person_id > person_id & )   │
-└─────────────────────────────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- char_name --- │
-└───────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌────────────────────────┐
-│        section         │
-│        varchar         │
-├────────────────────────┤
-│ --- comp_cast_type --- │
-└────────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌──────────────────────┐
-│       section        │
-│       varchar        │
-├──────────────────────┤
-│ --- company_name --- │
-└──────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌──────────────────────┐
-│       section        │
-│       varchar        │
-├──────────────────────┤
-│ --- company_type --- │
-└──────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────────┐
-│        section        │
-│        varchar        │
-├───────────────────────┤
-│ --- complete_cast --- │
-└───────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- info_type --- │
-└───────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌─────────────────┐
-│     section     │
-│     varchar     │
-├─────────────────┤
-│ --- keyword --- │
-└─────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- kind_type --- │
-└───────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- link_type --- │
-└───────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌─────────────────────────┐
-│         section         │
-│         varchar         │
-├─────────────────────────┤
-│ --- movie_companies --- │
-└─────────────────────────┘
-┌───────────────────────────────────────┐
-│           denial_constraint           │
-│                varchar                │
-├───────────────────────────────────────┤
-│ !(id <= id & movie_id >= movie_id & ) │
-│ !(id < id & movie_id >= movie_id & )  │
-│ !(id <= id & movie_id > movie_id & )  │
-│ !(id < id & movie_id > movie_id & )   │
-└───────────────────────────────────────┘
-┌────────────────────┐
-│      section       │
-│      varchar       │
-├────────────────────┤
-│ --- movie_info --- │
-└────────────────────┘
-┌───────────────────────────────────────┐
-│           denial_constraint           │
-│                varchar                │
-├───────────────────────────────────────┤
-│ !(movie_id < movie_id & id >= id & )  │
-│ !(movie_id <= movie_id & id >= id & ) │
-│ !(movie_id >= movie_id & id < id & )  │
-│ !(movie_id > movie_id & id < id & )   │
-│ !(movie_id >= movie_id & id <= id & ) │
-│ !(movie_id > movie_id & id <= id & )  │
-│ !(movie_id < movie_id & id > id & )   │
-│ !(movie_id <= movie_id & id > id & )  │
-└───────────────────────────────────────┘
-┌────────────────────────┐
-│        section         │
-│        varchar         │
-├────────────────────────┤
-│ --- movie_info_idx --- │
-└────────────────────────┘
-┌───────────────────────────────────────┐
-│           denial_constraint           │
-│                varchar                │
-├───────────────────────────────────────┤
-│ !(id >= id & movie_id <= movie_id & ) │
-│ !(id > id & movie_id <= movie_id & )  │
-│ !(id >= id & movie_id < movie_id & )  │
-│ !(id > id & movie_id < movie_id & )   │
-└───────────────────────────────────────┘
-┌───────────────────────┐
-│        section        │
-│        varchar        │
-├───────────────────────┤
-│ --- movie_keyword --- │
-└───────────────────────┘
-┌───────────────────────────────────────┐
-│           denial_constraint           │
-│                varchar                │
-├───────────────────────────────────────┤
-│ !(movie_id < movie_id & id >= id & )  │
-│ !(movie_id <= movie_id & id >= id & ) │
-│ !(movie_id >= movie_id & id < id & )  │
-│ !(movie_id > movie_id & id < id & )   │
-│ !(movie_id >= movie_id & id <= id & ) │
-│ !(movie_id > movie_id & id <= id & )  │
-│ !(movie_id < movie_id & id > id & )   │
-│ !(movie_id <= movie_id & id > id & )  │
-└───────────────────────────────────────┘
-┌────────────────────┐
-│      section       │
-│      varchar       │
-├────────────────────┤
-│ --- movie_link --- │
-└────────────────────┘
-┌───────────────────────────────────────┐
-│           denial_constraint           │
-│                varchar                │
-├───────────────────────────────────────┤
-│ !(id > id & movie_id <= movie_id & )  │
-│ !(id <= id & movie_id > movie_id & )  │
-│ !(movie_id > movie_id & id < id & )   │
-│ !(movie_id <= movie_id & id >= id & ) │
-│ !(id > id & movie_id < movie_id & )   │
-│ !(id >= id & movie_id < movie_id & )  │
-└───────────────────────────────────────┘
-┌──────────────┐
-│   section    │
-│   varchar    │
-├──────────────┤
-│ --- name --- │
-└──────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌─────────────────────┐
-│       section       │
-│       varchar       │
-├─────────────────────┤
-│ --- person_info --- │
-└─────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────┐
-│      section      │
-│      varchar      │
-├───────────────────┤
-│ --- role_type --- │
-└───────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────┐
-│    section    │
-│    varchar    │
-├───────────────┤
-│ --- title --- │
-└───────────────┘
-┌──────────────────────────────────────────────────────────┐
-│                    denial_constraint                     │
-│                         varchar                          │
-├──────────────────────────────────────────────────────────┤
-│ !(season_nr > season_nr & episode_nr == episode_nr & )   │
-│ !(series_years == series_years & kind_id != kind_id & )  │
-│ !(series_years == series_years & kind_id > kind_id & )   │
-│ !(episode_of_id < episode_of_id & kind_id > kind_id & )  │
-│ !(episode_of_id <= episode_of_id & kind_id > kind_id & ) │
-│ !(episode_nr < episode_nr & kind_id > kind_id & )        │
-│ !(season_nr < season_nr & kind_id > kind_id & )          │
-│ !(series_years == series_years & kind_id < kind_id & )   │
-│ !(episode_of_id >= episode_of_id & kind_id < kind_id & ) │
-│ !(episode_of_id > episode_of_id & kind_id < kind_id & )  │
-│ !(episode_nr > episode_nr & kind_id < kind_id & )        │
-├──────────────────────────────────────────────────────────┤
-│                         11 rows                          │
-└──────────────────────────────────────────────────────────┘
-┌──────────────────────────────────┐
-│             section              │
-│             varchar              │
-├──────────────────────────────────┤
-│ --- join_char_name_cast_info --- │
-└──────────────────────────────────┘
-┌───────────────────────────────────────────────────────────────────────────────────────┐
-│                                   denial_constraint                                   │
-│                                        varchar                                        │
-├───────────────────────────────────────────────────────────────────────────────────────┤
-│ !(ci_person_id < ci_person_id & ci_id >= ci_id & )                                    │
-│ !(ci_person_id < ci_person_id & ci_id > ci_id & )                                     │
-│ !(ci_person_role_id < ci_person_role_id & chn_id >= chn_id & )                        │
-│ !(chn_id < chn_id & ci_person_role_id >= ci_person_role_id & )                        │
-│ !(ci_id <= ci_id & ci_person_id > ci_person_id & )                                    │
-│ !(ci_id < ci_id & ci_person_id > ci_person_id & )                                     │
-│ !(chn_id <= chn_id & ci_person_role_id > ci_person_role_id & )                        │
-│ !(chn_id < chn_id & ci_person_role_id > ci_person_role_id & )                         │
-│ !(ci_person_role_id <= ci_person_role_id & chn_id > chn_id & )                        │
-│ !(ci_person_role_id < ci_person_role_id & chn_id > chn_id & )                         │
-│ !(ci_person_role_id != ci_person_role_id & chn_id == chn_id & )                       │
-│ !(chn_md5sum != chn_md5sum & chn_id == chn_id & )                                     │
-│ !(chn_name_pcode_nf != chn_name_pcode_nf & chn_id == chn_id & )                       │
-│ !(chn_name != chn_name & chn_id == chn_id & )                                         │
-│ !(chn_id != chn_id & ci_person_role_id == ci_person_role_id & )                       │
-│ !(chn_md5sum != chn_md5sum & ci_person_role_id == ci_person_role_id & )               │
-│ !(chn_name_pcode_nf != chn_name_pcode_nf & ci_person_role_id == ci_person_role_id & ) │
-│ !(chn_name != chn_name & ci_person_role_id == ci_person_role_id & )                   │
-│ !(chn_id != chn_id & chn_name == chn_name & )                                         │
-│ !(ci_person_role_id != ci_person_role_id & chn_name == chn_name & )                   │
-│ !(chn_md5sum != chn_md5sum & chn_name == chn_name & )                                 │
-│ !(chn_name_pcode_nf != chn_name_pcode_nf & chn_name == chn_name & )                   │
-│ !(chn_id != chn_id & chn_md5sum == chn_md5sum & )                                     │
-│ !(ci_person_role_id != ci_person_role_id & chn_md5sum == chn_md5sum & )               │
-│ !(chn_name_pcode_nf != chn_name_pcode_nf & chn_md5sum == chn_md5sum & )               │
-│ !(chn_name != chn_name & chn_md5sum == chn_md5sum & )                                 │
-├───────────────────────────────────────────────────────────────────────────────────────┤
-│                                        26 rows                                        │
-└───────────────────────────────────────────────────────────────────────────────────────┘
-┌──────────────────────────────────┐
-│             section              │
-│             varchar              │
-├──────────────────────────────────┤
-│ --- join_role_type_cast_info --- │
-└──────────────────────────────────┘
-┌─────────────────────────────────────────────────────┐
-│                  denial_constraint                  │
-│                       varchar                       │
-├─────────────────────────────────────────────────────┤
-│ !(ci_person_id < ci_person_id & ci_id >= ci_id & )  │
-│ !(ci_person_id >= ci_person_id & ci_id < ci_id & )  │
-│ !(ci_person_id >= ci_person_id & ci_id <= ci_id & ) │
-│ !(ci_person_id < ci_person_id & ci_id > ci_id & )   │
-│ !(ci_id < ci_id & ci_person_id > ci_person_id & )   │
-│ !(ci_id <= ci_id & ci_person_id > ci_person_id & )  │
-└─────────────────────────────────────────────────────┘
-┌─────────────────────────────┐
-│           section           │
-│           varchar           │
-├─────────────────────────────┤
-│ --- join_cast_info_name --- │
-└─────────────────────────────┘
-┌─────────────────────────────────────────────────────┐
-│                  denial_constraint                  │
-│                       varchar                       │
-├─────────────────────────────────────────────────────┤
-│ !(ci_person_id < ci_person_id & ci_id >= ci_id & )  │
-│ !(ci_person_id < ci_person_id & ci_id > ci_id & )   │
-│ !(ci_id <= ci_id & ci_person_id >= ci_person_id & ) │
-│ !(ci_id < ci_id & ci_person_id >= ci_person_id & )  │
-│ !(ci_id <= ci_id & ci_person_id > ci_person_id & )  │
-│ !(ci_id < ci_id & ci_person_id > ci_person_id & )   │
-└─────────────────────────────────────────────────────┘
-┌──────────────────────────────┐
-│           section            │
-│           varchar            │
-├──────────────────────────────┤
-│ --- join_cast_info_title --- │
-└──────────────────────────────┘
-┌──────────────────────────────────────────────────────────────────┐
-│                        denial_constraint                         │
-│                             varchar                              │
-├──────────────────────────────────────────────────────────────────┤
-│ !(ci_person_id < ci_person_id & ci_id > ci_id & )                │
-│ !(ci_person_id < ci_person_id & ci_id >= ci_id & )               │
-│ !(ci_id < ci_id & ci_person_id > ci_person_id & )                │
-│ !(ci_id <= ci_id & ci_person_id > ci_person_id & )               │
-│ !(t_series_years == t_series_years & t_kind_id != t_kind_id & )  │
-│ !(t_series_years == t_series_years & t_kind_id > t_kind_id & )   │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & ) │
-│ !(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )  │
-│ !(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )        │
-│ !(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )          │
-│ !(t_series_years == t_series_years & t_kind_id < t_kind_id & )   │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & ) │
-│ !(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )  │
-│ !(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )        │
-│ !(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )          │
-├──────────────────────────────────────────────────────────────────┤
-│                             15 rows                              │
-└──────────────────────────────────────────────────────────────────┘
-┌────────────────────────────┐
-│          section           │
-│          varchar           │
-├────────────────────────────┤
-│ --- join_name_aka_name --- │
-└────────────────────────────┘
-┌─────────────────────────────────────────────────────┐
-│                  denial_constraint                  │
-│                       varchar                       │
-├─────────────────────────────────────────────────────┤
-│ !(an_id < an_id & n_id > n_id & )                   │
-│ !(an_person_id < an_person_id & n_id > n_id & )     │
-│ !(an_person_id <= an_person_id & n_id > n_id & )    │
-│ !(an_id <= an_id & n_id > n_id & )                  │
-│ !(n_id <= n_id & an_id > an_id & )                  │
-│ !(n_id < n_id & an_id > an_id & )                   │
-│ !(an_person_id < an_person_id & an_id > an_id & )   │
-│ !(an_person_id <= an_person_id & an_id > an_id & )  │
-│ !(an_id < an_id & an_person_id >= an_person_id & )  │
-│ !(n_id <= n_id & an_person_id >= an_person_id & )   │
-│ !(n_id < n_id & an_person_id >= an_person_id & )    │
-│ !(an_id <= an_id & an_person_id >= an_person_id & ) │
-│ !(n_id <= n_id & an_id >= an_id & )                 │
-│ !(n_id < n_id & an_id >= an_id & )                  │
-│ !(an_person_id < an_person_id & an_id >= an_id & )  │
-│ !(an_person_id <= an_person_id & an_id >= an_id & ) │
-│ !(an_id < an_id & n_id >= n_id & )                  │
-│ !(an_person_id < an_person_id & n_id >= n_id & )    │
-│ !(an_person_id <= an_person_id & n_id >= n_id & )   │
-│ !(an_id <= an_id & n_id >= n_id & )                 │
-│ !(an_id < an_id & an_person_id > an_person_id & )   │
-│ !(n_id <= n_id & an_person_id > an_person_id & )    │
-│ !(n_id < n_id & an_person_id > an_person_id & )     │
-│ !(an_id <= an_id & an_person_id > an_person_id & )  │
-├─────────────────────────────────────────────────────┤
-│                       24 rows                       │
-└─────────────────────────────────────────────────────┘
-┌───────────────────────────────┐
-│            section            │
-│            varchar            │
-├───────────────────────────────┤
-│ --- join_name_person_info --- │
-└───────────────────────────────┘
-┌─────────────────────────────────────────────────────┐
-│                  denial_constraint                  │
-│                       varchar                       │
-├─────────────────────────────────────────────────────┤
-│ !(n_id > n_id & pi_person_id <= pi_person_id & )    │
-│ !(pi_id > pi_id & pi_person_id <= pi_person_id & )  │
-│ !(pi_id >= pi_id & pi_person_id <= pi_person_id & ) │
-│ !(n_id >= n_id & pi_person_id <= pi_person_id & )   │
-│ !(n_id > n_id & pi_id < pi_id & )                   │
-│ !(pi_person_id >= pi_person_id & pi_id < pi_id & )  │
-│ !(pi_person_id > pi_person_id & pi_id < pi_id & )   │
-│ !(n_id >= n_id & pi_id < pi_id & )                  │
-│ !(n_id > n_id & pi_id <= pi_id & )                  │
-│ !(pi_person_id >= pi_person_id & pi_id <= pi_id & ) │
-│ !(pi_person_id > pi_person_id & pi_id <= pi_id & )  │
-│ !(n_id >= n_id & pi_id <= pi_id & )                 │
-│ !(n_id > n_id & pi_person_id < pi_person_id & )     │
-│ !(pi_id > pi_id & pi_person_id < pi_person_id & )   │
-│ !(pi_id >= pi_id & pi_person_id < pi_person_id & )  │
-│ !(n_id >= n_id & pi_person_id < pi_person_id & )    │
-│ !(pi_id > pi_id & n_id < n_id & )                   │
-│ !(pi_person_id >= pi_person_id & n_id < n_id & )    │
-│ !(pi_person_id > pi_person_id & n_id < n_id & )     │
-│ !(pi_id >= pi_id & n_id < n_id & )                  │
-│ !(pi_id > pi_id & n_id <= n_id & )                  │
-│ !(pi_person_id >= pi_person_id & n_id <= n_id & )   │
-│ !(pi_person_id > pi_person_id & n_id <= n_id & )    │
-│ !(pi_id >= pi_id & n_id <= n_id & )                 │
-├─────────────────────────────────────────────────────┤
-│                       24 rows                       │
-└─────────────────────────────────────────────────────┘
-┌────────────────────────────────────┐
-│              section               │
-│              varchar               │
-├────────────────────────────────────┤
-│ --- join_person_info_info_type --- │
-└────────────────────────────────────┘
-┌───────────────────────────────────────────────────────────────┐
-│                       denial_constraint                       │
-│                            varchar                            │
-├───────────────────────────────────────────────────────────────┤
-│ !(it_info != it_info & pi_info_type_id == pi_info_type_id & ) │
-│ !(pi_info_type_id != pi_info_type_id & it_info == it_info & ) │
-│ !(pi_info_type_id < pi_info_type_id & it_info == it_info & )  │
-└───────────────────────────────────────────────────────────────┘
-┌───────────────────────────────────┐
-│              section              │
-│              varchar              │
-├───────────────────────────────────┤
-│ --- join_info_type_movie_info --- │
-└───────────────────────────────────┘
-┌───────────────────────────────────────────────────┐
-│                 denial_constraint                 │
-│                      varchar                      │
-├───────────────────────────────────────────────────┤
-│ !(mi_id <= mi_id & mi_movie_id > mi_movie_id & )  │
-│ !(mi_id < mi_id & mi_movie_id > mi_movie_id & )   │
-│ !(mi_id > mi_id & mi_movie_id <= mi_movie_id & )  │
-│ !(mi_id >= mi_id & mi_movie_id <= mi_movie_id & ) │
-│ !(mi_id > mi_id & mi_movie_id < mi_movie_id & )   │
-│ !(mi_id >= mi_id & mi_movie_id < mi_movie_id & )  │
-│ !(mi_id <= mi_id & mi_movie_id >= mi_movie_id & ) │
-│ !(mi_id < mi_id & mi_movie_id >= mi_movie_id & )  │
-└───────────────────────────────────────────────────┘
-┌───────────────────────────────┐
-│            section            │
-│            varchar            │
-├───────────────────────────────┤
-│ --- join_movie_info_title --- │
-└───────────────────────────────┘
-┌───────────────────┐
-│ denial_constraint │
-│      varchar      │
-├───────────────────┤
-│      0 rows       │
-└───────────────────┘
-┌───────────────────────────────────────┐
-│                section                │
-│                varchar                │
-├───────────────────────────────────────┤
-│ --- join_movie_info_idx_info_type --- │
-└───────────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────┐
-│                        denial_constraint                        │
-│                             varchar                             │
-├─────────────────────────────────────────────────────────────────┤
-│ !(mii_id >= mii_id & mii_movie_id < mii_movie_id & )            │
-│ !(mii_id > mii_id & mii_movie_id < mii_movie_id & )             │
-│ !(mii_id >= mii_id & mii_movie_id <= mii_movie_id & )           │
-│ !(mii_id > mii_id & mii_movie_id <= mii_movie_id & )            │
-│ !(it_info != it_info & mii_info_type_id == mii_info_type_id & ) │
-│ !(mii_info_type_id != mii_info_type_id & it_info == it_info & ) │
-│ !(mii_info_type_id > mii_info_type_id & it_info == it_info & )  │
-│ !(it_info == it_info & mii_info_type_id < mii_info_type_id & )  │
-└─────────────────────────────────────────────────────────────────┘
-┌───────────────────────────────────┐
-│              section              │
-│              varchar              │
-├───────────────────────────────────┤
-│ --- join_movie_info_idx_title --- │
-└───────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                            denial_constraint                                            │
-│                                                 varchar                                                 │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ !(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )    │
-│ !(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )          │
-│ !(t_kind_id >= t_kind_id & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & )     │
-│ !(t_kind_id >= t_kind_id & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )           │
-│ !(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )       │
-│ !(t_kind_id >= t_kind_id & t_season_nr < t_season_nr & t_series_years != t_series_years & )             │
-│ !(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_series_years != t_series_years & )       │
-│ !(t_kind_id <= t_kind_id & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )           │
-│ !(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )       │
-│ !(t_kind_id <= t_kind_id & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & )     │
-│ !(t_season_nr <= t_season_nr & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & ) │
-│ !(t_kind_id <= t_kind_id & t_season_nr > t_season_nr & t_series_years != t_series_years & )             │
-│ !(t_series_years == t_series_years & t_kind_id != t_kind_id & )                                         │
-│ !(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )                 │
-│ !(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )                 │
-│ !(t_season_nr <= t_season_nr & t_episode_of_id >= t_episode_of_id & t_kind_id != t_kind_id & )          │
-│ !(t_episode_nr <= t_episode_nr & t_episode_of_id >= t_episode_of_id & t_kind_id != t_kind_id & )        │
-│ !(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )                 │
-│ !(t_episode_of_id <= t_episode_of_id & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )         │
-│ !(t_season_nr <= t_season_nr & t_episode_of_id > t_episode_of_id & t_kind_id != t_kind_id & )           │
-│ !(t_series_years == t_series_years & t_kind_id < t_kind_id & )                                          │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )                                        │
-│ !(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )                                               │
-│ !(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )                                         │
-│ !(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )                                                 │
-│ !(t_season_nr <= t_season_nr & t_kind_id > t_kind_id & )                                                │
-│ !(t_series_years == t_series_years & t_kind_id > t_kind_id & )                                          │
-│ !(t_episode_nr <= t_episode_nr & t_kind_id > t_kind_id & )                                              │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )                                        │
-│ !(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )                                         │
-│ !(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )                                               │
-│ !(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )                                                 │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                 32 rows                                                 │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-┌──────────────────────────────┐
-│           section            │
-│           varchar            │
-├──────────────────────────────┤
-│ --- join_kind_type_title --- │
-└──────────────────────────────┘
-┌────────────────────────────────────────────────────────────────┐
-│                       denial_constraint                        │
-│                            varchar                             │
-├────────────────────────────────────────────────────────────────┤
-│ !(t_season_nr > t_season_nr & t_episode_nr == t_episode_nr & ) │
-│ !(kt_id == kt_id & kt_kind != kt_kind & )                      │
-│ !(t_series_years == t_series_years & kt_kind != kt_kind & )    │
-│ !(kt_kind == kt_kind & kt_id != kt_id & )                      │
-│ !(t_series_years == t_series_years & kt_id != kt_id & )        │
-│ !(kt_kind == kt_kind & kt_id > kt_id & )                       │
-│ !(t_series_years == t_series_years & kt_id > kt_id & )         │
-│ !(t_episode_of_id < t_episode_of_id & kt_id > kt_id & )        │
-│ !(t_episode_of_id <= t_episode_of_id & kt_id > kt_id & )       │
-│ !(t_episode_nr < t_episode_nr & kt_id > kt_id & )              │
-│ !(t_season_nr < t_season_nr & kt_id > kt_id & )                │
-│ !(kt_kind == kt_kind & kt_id < kt_id & )                       │
-│ !(t_series_years == t_series_years & kt_id < kt_id & )         │
-│ !(t_episode_of_id >= t_episode_of_id & kt_id < kt_id & )       │
-│ !(t_episode_of_id > t_episode_of_id & kt_id < kt_id & )        │
-│ !(t_episode_nr > t_episode_nr & kt_id < kt_id & )              │
-├────────────────────────────────────────────────────────────────┤
-│                            16 rows                             │
-└────────────────────────────────────────────────────────────────┘
-┌──────────────────────────────────┐
-│             section              │
-│             varchar              │
-├──────────────────────────────────┤
-│ --- join_title_movie_keyword --- │
-└──────────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                            denial_constraint                                                            │
-│                                                                 varchar                                                                 │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ !(t_episode_nr != t_episode_nr & t_kind_id >= t_kind_id & t_season_nr <= t_season_nr & t_series_years != t_series_years & )             │
-│ !(t_season_nr != t_season_nr & t_kind_id >= t_kind_id & t_episode_nr <= t_episode_nr & t_series_years != t_series_years & )             │
-│ !(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )                                    │
-│ !(t_season_nr != t_season_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )                                            │
-│ !(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )                                          │
-│ !(t_season_nr != t_season_nr & t_kind_id >= t_kind_id & t_episode_of_id <= t_episode_of_id & t_series_years != t_series_years & )       │
-│ !(t_episode_nr != t_episode_nr & t_kind_id >= t_kind_id & t_episode_of_id <= t_episode_of_id & t_series_years != t_series_years & )     │
-│ !(t_kind_id <= t_kind_id & t_season_nr != t_season_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )       │
-│ !(t_kind_id <= t_kind_id & t_episode_nr != t_episode_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )     │
-│ !(t_episode_nr != t_episode_nr & t_season_nr <= t_season_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & ) │
-│ !(t_season_nr != t_season_nr & t_episode_nr <= t_episode_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & ) │
-│ !(mk_movie_id > mk_movie_id & mk_id <= mk_id & )                                                                                        │
-│ !(t_id > t_id & mk_id <= mk_id & )                                                                                                      │
-│ !(mk_movie_id > mk_movie_id & mk_id < mk_id & )                                                                                         │
-│ !(t_id > t_id & mk_id < mk_id & )                                                                                                       │
-│ !(mk_movie_id > mk_movie_id & t_id <= t_id & )                                                                                          │
-│ !(mk_id > mk_id & t_id <= t_id & )                                                                                                      │
-│ !(mk_id >= mk_id & t_id <= t_id & )                                                                                                     │
-│ !(mk_id > mk_id & mk_movie_id <= mk_movie_id & )                                                                                        │
-│ !(mk_id >= mk_id & mk_movie_id <= mk_movie_id & )                                                                                       │
-│ !(t_id > t_id & mk_movie_id <= mk_movie_id & )                                                                                          │
-│ !(mk_movie_id >= mk_movie_id & t_id < t_id & )                                                                                          │
-│ !(mk_movie_id > mk_movie_id & t_id < t_id & )                                                                                           │
-│ !(mk_id > mk_id & t_id < t_id & )                                                                                                       │
-│ !(mk_id >= mk_id & t_id < t_id & )                                                                                                      │
-│ !(t_id >= t_id & mk_movie_id < mk_movie_id & )                                                                                          │
-│ !(mk_id > mk_id & mk_movie_id < mk_movie_id & )                                                                                         │
-│ !(mk_id >= mk_id & mk_movie_id < mk_movie_id & )                                                                                        │
-│ !(t_id > t_id & mk_movie_id < mk_movie_id & )                                                                                           │
-│ !(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_season_nr < t_season_nr & )                                             │
-│ !(t_kind_id == t_kind_id & t_series_years != t_series_years & t_season_nr < t_season_nr & )                                             │
-│ !(t_series_years != t_series_years & t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & )                                       │
-│ !(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_nr < t_episode_nr & )                                           │
-│ !(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_nr < t_episode_nr & )                                           │
-│ !(t_episode_of_id >= t_episode_of_id & mk_id <= mk_id & t_episode_nr < t_episode_nr & )                                                 │
-│ !(t_episode_of_id >= t_episode_of_id & mk_id < mk_id & t_episode_nr < t_episode_nr & )                                                  │
-│ !(t_episode_of_id >= t_episode_of_id & t_id <= t_id & t_episode_nr < t_episode_nr & )                                                   │
-│ !(t_episode_of_id >= t_episode_of_id & mk_movie_id <= mk_movie_id & t_episode_nr < t_episode_nr & )                                     │
-│ !(t_episode_of_id >= t_episode_of_id & t_id < t_id & t_episode_nr < t_episode_nr & )                                                    │
-│ !(t_episode_of_id >= t_episode_of_id & mk_movie_id < mk_movie_id & t_episode_nr < t_episode_nr & )                                      │
-│ !(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )                                     │
-│ !(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )                                     │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_of_id > t_episode_of_id & )                                     │
-│ !(t_series_years != t_series_years & t_episode_nr < t_episode_nr & t_episode_of_id > t_episode_of_id & )                                │
-│ !(t_series_years == t_series_years & t_kind_id != t_kind_id & )                                                                         │
-│ !(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )                                           │
-│ !(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )                                                 │
-│ !(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )                                         │
-│ !(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )                                                 │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )                                           │
-│ !(t_season_nr <= t_season_nr & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )                                       │
-│ !(t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & t_episode_nr > t_episode_nr & )                                │
-│ !(t_season_nr <= t_season_nr & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )                                                 │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )                                         │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_season_nr > t_season_nr & )                                             │
-│ !(t_episode_nr <= t_episode_nr & t_series_years != t_series_years & t_season_nr > t_season_nr & )                                       │
-│ !(t_episode_nr <= t_episode_nr & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )                                                 │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )                                                                        │
-│ !(t_series_years == t_series_years & t_kind_id < t_kind_id & )                                                                          │
-│ !(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )                                                                         │
-│ !(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )                                                                               │
-│ !(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )                                                                                 │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )                                                                        │
-│ !(t_series_years == t_series_years & t_kind_id > t_kind_id & )                                                                          │
-│ !(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )                                                                                 │
-│ !(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )                                                                               │
-│ !(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )                                                                         │
-│ !(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )                                                                       │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                                 68 rows                                                                 │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-┌────────────────────────────────────┐
-│              section               │
-│              varchar               │
-├────────────────────────────────────┤
-│ --- join_movie_keyword_keyword --- │
-└────────────────────────────────────┘
-┌──────────────────────────────────────────────────┐
-│                denial_constraint                 │
-│                     varchar                      │
-├──────────────────────────────────────────────────┤
-│ !(mk_id < mk_id & mk_movie_id > mk_movie_id & )  │
-│ !(mk_id <= mk_id & mk_movie_id > mk_movie_id & ) │
-└──────────────────────────────────────────────────┘
-┌───────────────────────────────────────────┐
-│                  section                  │
-│                  varchar                  │
-├───────────────────────────────────────────┤
-│ --- join_company_name_movie_companies --- │
-└───────────────────────────────────────────┘
-┌───────────────────────────────────────────────────────────────────────────────────┐
-│                                 denial_constraint                                 │
-│                                      varchar                                      │
-├───────────────────────────────────────────────────────────────────────────────────┤
-│ !(mc_company_id <= mc_company_id & cn_id > cn_id & )                              │
-│ !(cn_id <= cn_id & mc_company_id > mc_company_id & )                              │
-│ !(mc_id <= mc_id & mc_movie_id > mc_movie_id & )                                  │
-│ !(mc_id < mc_id & mc_movie_id > mc_movie_id & )                                   │
-│ !(mc_id <= mc_id & mc_movie_id >= mc_movie_id & )                                 │
-│ !(mc_id < mc_id & mc_movie_id >= mc_movie_id & )                                  │
-│ !(cn_id >= cn_id & mc_company_id < mc_company_id & )                              │
-│ !(cn_id > cn_id & mc_company_id < mc_company_id & )                               │
-│ !(mc_company_id >= mc_company_id & cn_id < cn_id & )                              │
-│ !(mc_company_id > mc_company_id & cn_id < cn_id & )                               │
-│ !(mc_company_id != mc_company_id & cn_id == cn_id & )                             │
-│ !(cn_md5sum != cn_md5sum & cn_id == cn_id & )                                     │
-│ !(cn_name_pcode_sf != cn_name_pcode_sf & cn_id == cn_id & )                       │
-│ !(cn_name_pcode_nf != cn_name_pcode_nf & cn_id == cn_id & )                       │
-│ !(cn_name != cn_name & cn_id == cn_id & )                                         │
-│ !(cn_country_code != cn_country_code & cn_id == cn_id & )                         │
-│ !(mc_company_id > mc_company_id & cn_id == cn_id & )                              │
-│ !(mc_company_id < mc_company_id & cn_id == cn_id & )                              │
-│ !(cn_id != cn_id & mc_company_id == mc_company_id & )                             │
-│ !(cn_md5sum != cn_md5sum & mc_company_id == mc_company_id & )                     │
-│ !(cn_name_pcode_sf != cn_name_pcode_sf & mc_company_id == mc_company_id & )       │
-│ !(cn_name_pcode_nf != cn_name_pcode_nf & mc_company_id == mc_company_id & )       │
-│ !(cn_name != cn_name & mc_company_id == mc_company_id & )                         │
-│ !(cn_country_code != cn_country_code & mc_company_id == mc_company_id & )         │
-│ !(cn_id > cn_id & mc_company_id == mc_company_id & )                              │
-│ !(cn_id < cn_id & mc_company_id == mc_company_id & )                              │
-│ !(cn_id != cn_id & cn_name == cn_name & )                                         │
-│ !(mc_company_id != mc_company_id & cn_name == cn_name & )                         │
-│ !(cn_md5sum != cn_md5sum & cn_name == cn_name & )                                 │
-│ !(cn_name_pcode_sf != cn_name_pcode_sf & cn_name == cn_name & )                   │
-│ !(cn_name_pcode_nf != cn_name_pcode_nf & cn_name == cn_name & )                   │
-│ !(cn_country_code != cn_country_code & cn_name == cn_name & )                     │
-│ !(cn_id > cn_id & cn_name == cn_name & )                                          │
-│ !(mc_company_id > mc_company_id & cn_name == cn_name & )                          │
-│ !(mc_company_id < mc_company_id & cn_name == cn_name & )                          │
-│ !(cn_id < cn_id & cn_name == cn_name & )                                          │
-│ !(cn_id != cn_id & cn_md5sum == cn_md5sum & )                                     │
-│ !(mc_company_id != mc_company_id & cn_md5sum == cn_md5sum & )                     │
-│ !(cn_name_pcode_sf != cn_name_pcode_sf & cn_md5sum == cn_md5sum & )               │
-│ !(cn_name_pcode_nf != cn_name_pcode_nf & cn_md5sum == cn_md5sum & )               │
-│ !(cn_name != cn_name & cn_md5sum == cn_md5sum & )                                 │
-│ !(cn_country_code != cn_country_code & cn_md5sum == cn_md5sum & )                 │
-│ !(cn_id > cn_id & cn_md5sum == cn_md5sum & )                                      │
-│ !(mc_company_id > mc_company_id & cn_md5sum == cn_md5sum & )                      │
-│ !(mc_company_id < mc_company_id & cn_md5sum == cn_md5sum & )                      │
-│ !(cn_id < cn_id & cn_md5sum == cn_md5sum & )                                      │
-│ !(cn_id != cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )                       │
-│ !(mc_company_id != mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )       │
-│ !(cn_md5sum != cn_md5sum & cn_name_pcode_sf == cn_name_pcode_sf & )               │
-│ !(cn_name_pcode_nf != cn_name_pcode_nf & cn_name_pcode_sf == cn_name_pcode_sf & ) │
-│ !(cn_name != cn_name & cn_name_pcode_sf == cn_name_pcode_sf & )                   │
-│ !(cn_country_code != cn_country_code & cn_name_pcode_sf == cn_name_pcode_sf & )   │
-│ !(cn_id > cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )                        │
-│ !(mc_company_id > mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )        │
-│ !(mc_company_id < mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )        │
-│ !(cn_id < cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )                        │
-│ !(cn_id != cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )                       │
-│ !(mc_company_id != mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )       │
-│ !(cn_md5sum != cn_md5sum & cn_name_pcode_nf == cn_name_pcode_nf & )               │
-│ !(cn_name_pcode_sf != cn_name_pcode_sf & cn_name_pcode_nf == cn_name_pcode_nf & ) │
-│ !(cn_name != cn_name & cn_name_pcode_nf == cn_name_pcode_nf & )                   │
-│ !(cn_country_code != cn_country_code & cn_name_pcode_nf == cn_name_pcode_nf & )   │
-│ !(cn_id > cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )                        │
-│ !(mc_company_id > mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )        │
-│ !(mc_company_id < mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )        │
-│ !(cn_id < cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )                        │
-├───────────────────────────────────────────────────────────────────────────────────┤
-│                                      66 rows                                      │
-└───────────────────────────────────────────────────────────────────────────────────┘
-┌───────────────────────────────────────────┐
-│                  section                  │
-│                  varchar                  │
-├───────────────────────────────────────────┤
-│ --- join_movie_companies_company_type --- │
-└───────────────────────────────────────────┘
-┌───────────────────────────────────────────────────┐
-│                 denial_constraint                 │
-│                      varchar                      │
-├───────────────────────────────────────────────────┤
-│ !(mc_id <= mc_id & mc_movie_id > mc_movie_id & )  │
-│ !(mc_id < mc_id & mc_movie_id > mc_movie_id & )   │
-│ !(mc_id <= mc_id & mc_movie_id >= mc_movie_id & ) │
-│ !(mc_id < mc_id & mc_movie_id >= mc_movie_id & )  │
-└───────────────────────────────────────────────────┘
-┌────────────────────────────────────┐
-│              section               │
-│              varchar               │
-├────────────────────────────────────┤
-│ --- join_movie_companies_title --- │
-└────────────────────────────────────┘
-┌──────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                            denial_constraint                                             │
-│                                                 varchar                                                  │
-├──────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ !(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )     │
-│ !(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )           │
-│ !(t_season_nr != t_season_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )             │
-│ !(t_kind_id <= t_kind_id & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )            │
-│ !(t_kind_id >= t_kind_id & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & )      │
-│ !(t_episode_nr > t_episode_nr & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & ) │
-│ !(t_kind_id <= t_kind_id & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & )      │
-│ !(t_kind_id >= t_kind_id & t_season_nr < t_season_nr & t_series_years != t_series_years & )              │
-│ !(t_episode_nr > t_episode_nr & t_season_nr < t_season_nr & t_series_years != t_series_years & )         │
-│ !(t_kind_id >= t_kind_id & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )            │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_season_nr > t_season_nr & )              │
-│ !(t_series_years == t_series_years & t_kind_id != t_kind_id & )                                          │
-│ !(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )                  │
-│ !(t_episode_of_id <= t_episode_of_id & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )          │
-│ !(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )                  │
-│ !(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )            │
-│ !(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )          │
-│ !(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )                  │
-│ !(t_series_years == t_series_years & t_kind_id < t_kind_id & )                                           │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )                                         │
-│ !(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )                                                │
-│ !(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )                                          │
-│ !(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )                                                  │
-│ !(t_series_years == t_series_years & t_kind_id > t_kind_id & )                                           │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )                                         │
-│ !(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )                                          │
-│ !(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )                                                  │
-│ !(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )                                                │
-│ !(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )                                        │
-├──────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                 29 rows                                                  │
-└──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-┌───────────────────────────────────────────┐
-│                  section                  │
-│                  varchar                  │
-├───────────────────────────────────────────┤
-│ --- join_complete_cast_comp_cast_type --- │
-└───────────────────────────────────────────┘
-┌───────────────────────────────────────────────────────────────────────┐
-│                           denial_constraint                           │
-│                                varchar                                │
-├───────────────────────────────────────────────────────────────────────┤
-│ !(cc_status_id == cc_status_id & cc_status_kind != cc_status_kind & ) │
-│ !(cc_status_kind == cc_status_kind & cc_status_id != cc_status_id & ) │
-│ !(cc_status_kind == cc_status_kind & cc_status_id > cc_status_id & )  │
-│ !(cc_status_kind == cc_status_kind & cc_status_id < cc_status_id & )  │
-└───────────────────────────────────────────────────────────────────────┘
-┌───────────────────────────────────┐
-│              section              │
-│              varchar              │
-├───────────────────────────────────┤
-│ --- join_movie_link_link_type --- │
-└───────────────────────────────────┘
-┌───────────────────────────────────────────────────────────────┐
-│                       denial_constraint                       │
-│                            varchar                            │
-├───────────────────────────────────────────────────────────────┤
-│ !(ml_id > ml_id & ml_movie_id <= ml_movie_id & )              │
-│ !(ml_movie_id <= ml_movie_id & ml_id >= ml_id & )             │
-│ !(ml_movie_id > ml_movie_id & ml_id < ml_id & )               │
-│ !(ml_movie_id > ml_movie_id & ml_id <= ml_id & )              │
-│ !(ml_id > ml_id & ml_movie_id < ml_movie_id & )               │
-│ !(ml_id >= ml_id & ml_movie_id < ml_movie_id & )              │
-│ !(lt_link != lt_link & ml_link_type_id == ml_link_type_id & ) │
-│ !(ml_link_type_id != ml_link_type_id & lt_link == lt_link & ) │
-│ !(ml_link_type_id > ml_link_type_id & lt_link == lt_link & )  │
-│ !(ml_link_type_id < ml_link_type_id & lt_link == lt_link & )  │
-├───────────────────────────────────────────────────────────────┤
-│                            10 rows                            │
-└───────────────────────────────────────────────────────────────┘
-┌───────────────────────────────┐
-│            section            │
-│            varchar            │
-├───────────────────────────────┤
-│ --- join_movie_link_title --- │
-└───────────────────────────────┘
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                          denial_constraint                                          │
-│                                               varchar                                               │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ !(ml_id <= ml_id & ml_movie_id > ml_movie_id & )                                                    │
-│ !(ml_id < ml_id & ml_movie_id > ml_movie_id & )                                                     │
-│ !(ml_id > ml_id & ml_movie_id < ml_movie_id & )                                                     │
-│ !(ml_id >= ml_id & ml_movie_id < ml_movie_id & )                                                    │
-│ !(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & ) │
-│ !(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & ) │
-│ !(t_episode_of_id >= t_episode_of_id & ml_movie_id <= ml_movie_id & t_episode_nr < t_episode_nr & ) │
-│ !(t_episode_of_id >= t_episode_of_id & ml_id <= ml_id & t_episode_nr < t_episode_nr & )             │
-│ !(t_episode_of_id >= t_episode_of_id & ml_id < ml_id & t_episode_nr < t_episode_nr & )              │
-│ !(t_episode_of_id >= t_episode_of_id & ml_movie_id < ml_movie_id & t_episode_nr < t_episode_nr & )  │
-│ !(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )             │
-│ !(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )     │
-│ !(t_series_years == t_series_years & t_kind_id != t_kind_id & )                                     │
-│ !(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )       │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_of_id > t_episode_of_id & ) │
-│ !(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )       │
-│ !(t_season_nr <= t_season_nr & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )             │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )     │
-│ !(t_episode_nr <= t_episode_nr & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )             │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )       │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )                                    │
-│ !(t_series_years == t_series_years & t_kind_id < t_kind_id & )                                      │
-│ !(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )                                     │
-│ !(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )                                           │
-│ !(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )                                             │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )                                    │
-│ !(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )                                     │
-│ !(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )                                           │
-│ !(t_series_years == t_series_years & t_kind_id > t_kind_id & )                                      │
-│ !(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )                                             │
-│ !(t_episode_nr < t_episode_nr & t_episode_of_id == t_episode_of_id & )                              │
-│ !(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )                                   │
-│ !(t_md5sum != t_md5sum & t_title == t_title & )                                                     │
-│ !(ml_movie_id != ml_movie_id & t_title == t_title & )                                               │
-│ !(t_phonetic_code != t_phonetic_code & t_title == t_title & )                                       │
-│ !(t_production_year != t_production_year & t_title == t_title & )                                   │
-│ !(t_episode_of_id != t_episode_of_id & t_title == t_title & )                                       │
-│ !(t_episode_nr != t_episode_nr & t_title == t_title & )                                             │
-│ !(t_season_nr != t_season_nr & t_title == t_title & )                                               │
-│ !(t_md5sum != t_md5sum & ml_movie_id == ml_movie_id & )                                             │
-│ !(t_title != t_title & ml_movie_id == ml_movie_id & )                                               │
-│ !(t_phonetic_code != t_phonetic_code & ml_movie_id == ml_movie_id & )                               │
-│ !(t_production_year != t_production_year & ml_movie_id == ml_movie_id & )                           │
-│ !(t_episode_of_id != t_episode_of_id & ml_movie_id == ml_movie_id & )                               │
-│ !(t_episode_nr != t_episode_nr & ml_movie_id == ml_movie_id & )                                     │
-│ !(t_season_nr != t_season_nr & ml_movie_id == ml_movie_id & )                                       │
-│ !(t_title != t_title & t_md5sum == t_md5sum & )                                                     │
-│ !(ml_movie_id != ml_movie_id & t_md5sum == t_md5sum & )                                             │
-│ !(t_phonetic_code != t_phonetic_code & t_md5sum == t_md5sum & )                                     │
-│ !(t_production_year != t_production_year & t_md5sum == t_md5sum & )                                 │
-│ !(t_episode_of_id != t_episode_of_id & t_md5sum == t_md5sum & )                                     │
-│ !(t_episode_nr != t_episode_nr & t_md5sum == t_md5sum & )                                           │
-│ !(t_season_nr != t_season_nr & t_md5sum == t_md5sum & )                                             │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                               53 rows                                               │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────┘
-┌──────────────────────────────┐
-│           section            │
-│           varchar            │
-├──────────────────────────────┤
-│ --- join_aka_title_title --- │
-└──────────────────────────────┘
-┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                     denial_constraint                                                     │
-│                                                          varchar                                                          │
-├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ !(at_id > at_id & at_movie_id < at_movie_id & )                                                                           │
-│ !(at_id >= at_id & at_movie_id < at_movie_id & )                                                                          │
-│ !(at_movie_id >= at_movie_id & at_id < at_id & )                                                                          │
-│ !(at_movie_id > at_movie_id & at_id < at_id & )                                                                           │
-│ !(at_movie_id >= at_movie_id & at_id <= at_id & )                                                                         │
-│ !(at_movie_id > at_movie_id & at_id <= at_id & )                                                                          │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_of_id != at_episode_of_id & )                                           │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )           │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )             │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )       │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )     │
-│ !(at_production_year > at_production_year & t_episode_nr >= t_episode_nr & at_episode_of_id != at_episode_of_id & )       │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )         │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & ) │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & )           │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & ) │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & )             │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_of_id != t_episode_of_id & )                                           │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )             │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )               │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )         │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )       │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )         │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )           │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & ) │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & )             │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & )               │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & ) │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_episode_nr != at_episode_nr & )          │
-│ !(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_episode_nr != at_episode_nr & )          │
-│ !(at_episode_of_id == at_episode_of_id & at_episode_nr != at_episode_nr & )                                               │
-│ !(t_episode_nr == t_episode_nr & at_episode_nr != at_episode_nr & )                                                       │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_nr != at_episode_nr & )                                                 │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )                 │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )                   │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )             │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )             │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )               │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )     │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )       │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )                 │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )       │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )                   │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )     │
-│ !(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )             │
-│ !(t_season_nr <= t_season_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )               │
-│ !(at_season_nr <= at_season_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )             │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_episode_nr != t_episode_nr & )            │
-│ !(t_episode_of_id >= t_episode_of_id & at_episode_of_id <= at_episode_of_id & t_episode_nr != t_episode_nr & )            │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_nr != t_episode_nr & )                                                 │
-│ !(at_episode_nr == at_episode_nr & t_episode_nr != t_episode_nr & )                                                       │
-│ !(t_episode_of_id == t_episode_of_id & t_episode_nr != t_episode_nr & )                                                   │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )                   │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )                     │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )               │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )             │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )                 │
-│ !(at_production_year > at_production_year & at_episode_of_id >= at_episode_of_id & t_episode_nr != t_episode_nr & )       │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )         │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )                   │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )         │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )                     │
-│ !(at_production_year < at_production_year & at_episode_of_id <= at_episode_of_id & t_episode_nr != t_episode_nr & )       │
-│ !(t_season_nr <= t_season_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )                 │
-│ !(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )             │
-│ !(at_season_nr <= at_season_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )               │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_season_nr != at_season_nr & )            │
-│ !(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_season_nr != at_season_nr & )            │
-│ !(at_episode_of_id == at_episode_of_id & at_season_nr != at_season_nr & )                                                 │
-│ !(t_season_nr == t_season_nr & at_season_nr != at_season_nr & )                                                           │
-│ !(t_episode_of_id == t_episode_of_id & at_season_nr != at_season_nr & )                                                   │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )                   │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )                     │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )             │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )               │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )                 │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )       │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )         │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )                   │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )         │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )                     │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )       │
-│ !(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )               │
-│ !(t_season_nr <= t_season_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )                 │
-│ !(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )             │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_season_nr != t_season_nr & )              │
-│ !(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & t_season_nr != t_season_nr & )              │
-│ !(at_episode_of_id == at_episode_of_id & t_season_nr != t_season_nr & )                                                   │
-│ !(at_season_nr == at_season_nr & t_season_nr != t_season_nr & )                                                           │
-│ !(t_episode_of_id == t_episode_of_id & t_season_nr != t_season_nr & )                                                     │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )                     │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )                       │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )                 │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )               │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )                 │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )         │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )           │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )                     │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )           │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )                       │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )         │
-│ !(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )                 │
-│ !(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )               │
-│ !(at_season_nr <= at_season_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )                 │
-│ !(t_episode_of_id <= t_episode_of_id & at_kind_id >= at_kind_id & t_kind_id != t_kind_id & )                              │
-│ !(at_episode_of_id <= at_episode_of_id & at_kind_id >= at_kind_id & t_kind_id != t_kind_id & )                            │
-│ !(at_kind_id <= at_kind_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )                                    │
-│ !(t_episode_of_id <= t_episode_of_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )                          │
-│ !(at_episode_of_id <= at_episode_of_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )                        │
-│ !(at_kind_id <= at_kind_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )                                  │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )                        │
-│ !(at_episode_of_id <= at_episode_of_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )                      │
-│ !(at_kind_id <= at_kind_id & at_episode_of_id >= at_episode_of_id & t_kind_id != t_kind_id & )                            │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_kind_id != t_kind_id & )                  │
-│ !(at_kind_id == at_kind_id & t_kind_id != t_kind_id & )                                                                   │
-│ !(at_episode_of_id == at_episode_of_id & t_kind_id != t_kind_id & )                                                       │
-│ !(t_episode_of_id == t_episode_of_id & t_kind_id != t_kind_id & )                                                         │
-│ !(at_kind_id <= at_kind_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )                        │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )              │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )            │
-│ !(at_kind_id >= at_kind_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )                        │
-│ !(at_season_nr >= at_season_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )                    │
-│ !(at_episode_nr >= at_episode_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )                  │
-│ !(t_episode_nr >= t_episode_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )                    │
-│ !(t_season_nr >= t_season_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )                      │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )            │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )              │
-│ !(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )                         │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )                     │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )                   │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )                     │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )                       │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )             │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )               │
-│ !(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )                         │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )               │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )             │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id >= t_kind_id & at_kind_id != at_kind_id & )                              │
-│ !(at_episode_of_id <= at_episode_of_id & t_kind_id >= t_kind_id & at_kind_id != at_kind_id & )                            │
-│ !(t_episode_of_id <= t_episode_of_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )                        │
-│ !(t_kind_id <= t_kind_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )                                    │
-│ !(at_episode_of_id <= at_episode_of_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )                      │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )                      │
-│ !(t_kind_id <= t_kind_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )                                  │
-│ !(at_episode_of_id <= at_episode_of_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )                    │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_kind_id != at_kind_id & )                │
-│ !(t_kind_id <= t_kind_id & at_episode_of_id >= at_episode_of_id & at_kind_id != at_kind_id & )                            │
-│ !(t_kind_id <= t_kind_id & t_episode_of_id >= t_episode_of_id & at_kind_id != at_kind_id & )                              │
-│ !(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_kind_id != at_kind_id & )                │
-│ !(t_kind_id == t_kind_id & at_kind_id != at_kind_id & )                                                                   │
-│ !(at_episode_of_id == at_episode_of_id & at_kind_id != at_kind_id & )                                                     │
-│ !(t_episode_of_id == t_episode_of_id & at_kind_id != at_kind_id & )                                                       │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )            │
-│ !(t_kind_id <= t_kind_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )                        │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )          │
-│ !(t_kind_id >= t_kind_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )                        │
-│ !(at_season_nr >= at_season_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )                  │
-│ !(at_episode_nr >= at_episode_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )                │
-│ !(t_episode_nr >= t_episode_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )                  │
-│ !(t_season_nr >= t_season_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )                    │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )          │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )            │
-│ !(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )                         │
-│ !(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )                   │
-│ !(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )                 │
-│ !(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )                   │
-│ !(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )                     │
-│ !(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )           │
-│ !(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )             │
-│ !(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )             │
-│ !(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )                         │
-│ !(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )           │
-│ !(t_episode_of_id >= t_episode_of_id & at_episode_of_id < at_episode_of_id & )                                            │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_of_id < at_episode_of_id & )                                            │
-│ !(at_production_year < at_production_year & at_episode_of_id < at_episode_of_id & )                                       │
-│ !(at_episode_of_id >= at_episode_of_id & t_episode_of_id < t_episode_of_id & )                                            │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_of_id < t_episode_of_id & )                                            │
-│ !(at_production_year < at_production_year & t_episode_of_id < t_episode_of_id & )                                         │
-│ !(at_episode_nr >= at_episode_nr & t_episode_nr < t_episode_nr & )                                                        │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_nr < t_episode_nr & )                                                  │
-│ !(at_episode_nr == at_episode_nr & t_episode_nr < t_episode_nr & )                                                        │
-│ !(t_episode_of_id == t_episode_of_id & t_episode_nr < t_episode_nr & )                                                    │
-│ !(at_production_year < at_production_year & t_episode_nr < t_episode_nr & )                                               │
-│ !(at_season_nr >= at_season_nr & t_season_nr < t_season_nr & )                                                            │
-│ !(at_episode_of_id == at_episode_of_id & t_season_nr < t_season_nr & )                                                    │
-│ !(at_season_nr == at_season_nr & t_season_nr < t_season_nr & )                                                            │
-│ !(t_episode_of_id == t_episode_of_id & t_season_nr < t_season_nr & )                                                      │
-│ !(at_production_year < at_production_year & t_season_nr < t_season_nr & )                                                 │
-│ !(t_episode_nr >= t_episode_nr & at_episode_nr < at_episode_nr & )                                                        │
-│ !(at_episode_of_id == at_episode_of_id & at_episode_nr < at_episode_nr & )                                                │
-│ !(t_episode_nr == t_episode_nr & at_episode_nr < at_episode_nr & )                                                        │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_nr < at_episode_nr & )                                                  │
-│ !(at_production_year < at_production_year & at_episode_nr < at_episode_nr & )                                             │
-│ !(t_season_nr >= t_season_nr & at_season_nr < at_season_nr & )                                                            │
-│ !(at_episode_of_id == at_episode_of_id & at_season_nr < at_season_nr & )                                                  │
-│ !(t_season_nr == t_season_nr & at_season_nr < at_season_nr & )                                                            │
-│ !(t_episode_of_id == t_episode_of_id & at_season_nr < at_season_nr & )                                                    │
-│ !(at_production_year < at_production_year & at_season_nr < at_season_nr & )                                               │
-│ !(at_kind_id >= at_kind_id & t_kind_id < t_kind_id & )                                                                    │
-│ !(at_season_nr >= at_season_nr & t_kind_id < t_kind_id & )                                                                │
-│ !(at_episode_nr >= at_episode_nr & t_kind_id < t_kind_id & )                                                              │
-│ !(t_episode_nr >= t_episode_nr & t_kind_id < t_kind_id & )                                                                │
-│ !(t_season_nr >= t_season_nr & t_kind_id < t_kind_id & )                                                                  │
-│ !(at_episode_of_id >= at_episode_of_id & t_kind_id < t_kind_id & )                                                        │
-│ !(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )                                                          │
-│ !(at_kind_id == at_kind_id & t_kind_id < t_kind_id & )                                                                    │
-│ !(at_episode_of_id == at_episode_of_id & t_kind_id < t_kind_id & )                                                        │
-│ !(t_episode_nr == t_episode_nr & t_kind_id < t_kind_id & )                                                                │
-│ !(at_episode_nr == at_episode_nr & t_kind_id < t_kind_id & )                                                              │
-│ !(t_season_nr == t_season_nr & t_kind_id < t_kind_id & )                                                                  │
-│ !(at_season_nr == at_season_nr & t_kind_id < t_kind_id & )                                                                │
-│ !(t_episode_of_id == t_episode_of_id & t_kind_id < t_kind_id & )                                                          │
-│ !(at_production_year <= at_production_year & t_kind_id < t_kind_id & )                                                    │
-│ !(at_production_year < at_production_year & t_kind_id < t_kind_id & )                                                     │
-│ !(t_kind_id >= t_kind_id & at_kind_id < at_kind_id & )                                                                    │
-│ !(at_season_nr >= at_season_nr & at_kind_id < at_kind_id & )                                                              │
-│ !(at_episode_nr >= at_episode_nr & at_kind_id < at_kind_id & )                                                            │
-│ !(t_episode_nr >= t_episode_nr & at_kind_id < at_kind_id & )                                                              │
-│ !(t_season_nr >= t_season_nr & at_kind_id < at_kind_id & )                                                                │
-│ !(at_episode_of_id >= at_episode_of_id & at_kind_id < at_kind_id & )                                                      │
-│ !(t_episode_of_id >= t_episode_of_id & at_kind_id < at_kind_id & )                                                        │
-│ !(t_kind_id == t_kind_id & at_kind_id < at_kind_id & )                                                                    │
-│ !(at_episode_of_id == at_episode_of_id & at_kind_id < at_kind_id & )                                                      │
-│ !(t_episode_nr == t_episode_nr & at_kind_id < at_kind_id & )                                                              │
-│ !(at_episode_nr == at_episode_nr & at_kind_id < at_kind_id & )                                                            │
-│ !(t_season_nr == t_season_nr & at_kind_id < at_kind_id & )                                                                │
-│ !(at_season_nr == at_season_nr & at_kind_id < at_kind_id & )                                                              │
-│ !(t_episode_of_id == t_episode_of_id & at_kind_id < at_kind_id & )                                                        │
-│ !(at_production_year <= at_production_year & at_kind_id < at_kind_id & )                                                  │
-│ !(at_production_year < at_production_year & at_kind_id < at_kind_id & )                                                   │
-│ !(at_episode_nr <= at_episode_nr & t_episode_nr > t_episode_nr & )                                                        │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_nr > t_episode_nr & )                                                  │
-│ !(at_episode_nr == at_episode_nr & t_episode_nr > t_episode_nr & )                                                        │
-│ !(t_episode_of_id == t_episode_of_id & t_episode_nr > t_episode_nr & )                                                    │
-│ !(at_production_year > at_production_year & t_episode_nr > t_episode_nr & )                                               │
-│ !(t_episode_nr <= t_episode_nr & at_episode_nr > at_episode_nr & )                                                        │
-│ !(at_episode_of_id == at_episode_of_id & at_episode_nr > at_episode_nr & )                                                │
-│ !(t_episode_nr == t_episode_nr & at_episode_nr > at_episode_nr & )                                                        │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_nr > at_episode_nr & )                                                  │
-│ !(at_production_year > at_production_year & at_episode_nr > at_episode_nr & )                                             │
-│ !(t_episode_of_id <= t_episode_of_id & at_episode_of_id > at_episode_of_id & )                                            │
-│ !(t_episode_of_id == t_episode_of_id & at_episode_of_id > at_episode_of_id & )                                            │
-│ !(at_production_year > at_production_year & at_episode_of_id > at_episode_of_id & )                                       │
-│ !(at_episode_of_id <= at_episode_of_id & t_episode_of_id > t_episode_of_id & )                                            │
-│ !(at_episode_of_id == at_episode_of_id & t_episode_of_id > t_episode_of_id & )                                            │
-│ !(at_production_year > at_production_year & t_episode_of_id > t_episode_of_id & )                                         │
-│ !(t_season_nr <= t_season_nr & at_season_nr > at_season_nr & )                                                            │
-│ !(at_episode_of_id == at_episode_of_id & at_season_nr > at_season_nr & )                                                  │
-│ !(t_episode_nr == t_episode_nr & at_season_nr > at_season_nr & )                                                          │
-│ !(at_episode_nr == at_episode_nr & at_season_nr > at_season_nr & )                                                        │
-│ !(t_season_nr == t_season_nr & at_season_nr > at_season_nr & )                                                            │
-│ !(t_episode_of_id == t_episode_of_id & at_season_nr > at_season_nr & )                                                    │
-│ !(at_production_year > at_production_year & at_season_nr > at_season_nr & )                                               │
-│ !(at_season_nr <= at_season_nr & t_season_nr > t_season_nr & )                                                            │
-│ !(at_episode_of_id == at_episode_of_id & t_season_nr > t_season_nr & )                                                    │
-│ !(t_episode_nr == t_episode_nr & t_season_nr > t_season_nr & )                                                            │
-│ !(at_episode_nr == at_episode_nr & t_season_nr > t_season_nr & )                                                          │
-│ !(at_season_nr == at_season_nr & t_season_nr > t_season_nr & )                                                            │
-│ !(t_episode_of_id == t_episode_of_id & t_season_nr > t_season_nr & )                                                      │
-│ !(at_production_year > at_production_year & t_season_nr > t_season_nr & )                                                 │
-│ !(t_episode_of_id <= t_episode_of_id & at_kind_id > at_kind_id & )                                                        │
-│ !(t_kind_id <= t_kind_id & at_kind_id > at_kind_id & )                                                                    │
-│ !(at_episode_of_id <= at_episode_of_id & at_kind_id > at_kind_id & )                                                      │
-│ !(t_kind_id == t_kind_id & at_kind_id > at_kind_id & )                                                                    │
-│ !(at_episode_of_id == at_episode_of_id & at_kind_id > at_kind_id & )                                                      │
-│ !(t_episode_of_id == t_episode_of_id & at_kind_id > at_kind_id & )                                                        │
-│ !(at_production_year >= at_production_year & at_kind_id > at_kind_id & )                                                  │
-│ !(at_production_year > at_production_year & at_kind_id > at_kind_id & )                                                   │
-│ !(at_kind_id <= at_kind_id & t_kind_id > t_kind_id & )                                                                    │
-│ !(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )                                                          │
-│ !(at_episode_of_id <= at_episode_of_id & t_kind_id > t_kind_id & )                                                        │
-│ !(at_kind_id == at_kind_id & t_kind_id > t_kind_id & )                                                                    │
-│ !(at_episode_of_id == at_episode_of_id & t_kind_id > t_kind_id & )                                                        │
-│ !(t_episode_of_id == t_episode_of_id & t_kind_id > t_kind_id & )                                                          │
-│ !(at_production_year >= at_production_year & t_kind_id > t_kind_id & )                                                    │
-│ !(at_production_year > at_production_year & t_kind_id > t_kind_id & )                                                     │
-│ !(at_imdb_index == at_imdb_index & t_imdb_index != t_imdb_index & )                                                       │
-│ !(t_imdb_index == t_imdb_index & at_imdb_index != at_imdb_index & )                                                       │
-├───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│                                                         278 rows                                                          │
-└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+section
+--- aka_name ---
+section
+--- aka_title ---
+denial_constraint
+!(movie_id < movie_id & id >= id & )
+!(movie_id <= movie_id & id >= id & )
+!(id <= id & movie_id > movie_id & )
+!(id < id & movie_id > movie_id & )
+!(movie_id < movie_id & id > id & )
+!(movie_id <= movie_id & id > id & )
+!(id <= id & movie_id >= movie_id & )
+!(id < id & movie_id >= movie_id & )
+!(kind_id == kind_id & episode_of_id != episode_of_id & )
+!(episode_of_id == episode_of_id & season_nr != season_nr & )
+!(kind_id == kind_id & season_nr != season_nr & )
+!(season_nr == season_nr & episode_nr != episode_nr & )
+!(episode_of_id == episode_of_id & episode_nr != episode_nr & )
+!(kind_id == kind_id & episode_nr != episode_nr & )
+!(kind_id >= kind_id & episode_of_id < episode_of_id & )
+!(production_year < production_year & episode_of_id < episode_of_id & )
+!(kind_id == kind_id & episode_of_id < episode_of_id & )
+!(kind_id > kind_id & episode_of_id < episode_of_id & )
+!(episode_of_id >= episode_of_id & season_nr < season_nr & )
+!(episode_nr >= episode_nr & season_nr < season_nr & )
+!(episode_nr == episode_nr & season_nr < season_nr & )
+!(episode_of_id == episode_of_id & season_nr < season_nr & )
+!(kind_id >= kind_id & season_nr < season_nr & )
+!(production_year < production_year & season_nr < season_nr & )
+!(kind_id == kind_id & season_nr < season_nr & )
+!(kind_id > kind_id & season_nr < season_nr & )
+!(season_nr >= season_nr & episode_nr < episode_nr & )
+!(episode_of_id >= episode_of_id & episode_nr < episode_nr & )
+!(season_nr == season_nr & episode_nr < episode_nr & )
+!(episode_of_id == episode_of_id & episode_nr < episode_nr & )
+!(kind_id >= kind_id & episode_nr < episode_nr & )
+!(production_year < production_year & episode_nr < episode_nr & )
+!(kind_id == kind_id & episode_nr < episode_nr & )
+!(kind_id > kind_id & episode_nr < episode_nr & )
+!(kind_id <= kind_id & episode_of_id > episode_of_id & )
+!(production_year >= production_year & episode_of_id > episode_of_id & )
+!(production_year > production_year & episode_of_id > episode_of_id & )
+!(kind_id == kind_id & episode_of_id > episode_of_id & )
+!(episode_of_id <= episode_of_id & season_nr > season_nr & )
+!(episode_of_id == episode_of_id & season_nr > season_nr & )
+!(kind_id <= kind_id & season_nr > season_nr & )
+!(production_year >= production_year & season_nr > season_nr & )
+!(production_year > production_year & season_nr > season_nr & )
+!(kind_id == kind_id & season_nr > season_nr & )
+!(season_nr <= season_nr & episode_nr > episode_nr & )
+!(episode_of_id <= episode_of_id & episode_nr > episode_nr & )
+!(season_nr == season_nr & episode_nr > episode_nr & )
+!(episode_of_id == episode_of_id & episode_nr > episode_nr & )
+!(kind_id <= kind_id & episode_nr > episode_nr & )
+!(production_year >= production_year & episode_nr > episode_nr & )
+!(production_year > production_year & episode_nr > episode_nr & )
+!(kind_id == kind_id & episode_nr > episode_nr & )
+section
+--- cast_info ---
+denial_constraint
+!(id <= id & person_id >= person_id & )
+!(id < id & person_id >= person_id & )
+!(id > id & person_id < person_id & )
+!(person_id < person_id & id >= id & )
+!(id <= id & person_id > person_id & )
+!(id < id & person_id > person_id & )
+section
+--- char_name ---
+section
+--- comp_cast_type ---
+section
+--- company_name ---
+section
+--- company_type ---
+section
+--- complete_cast ---
+section
+--- info_type ---
+section
+--- keyword ---
+section
+--- kind_type ---
+section
+--- link_type ---
+section
+--- movie_companies ---
+denial_constraint
+!(id <= id & movie_id >= movie_id & )
+!(id < id & movie_id >= movie_id & )
+!(id <= id & movie_id > movie_id & )
+!(id < id & movie_id > movie_id & )
+section
+--- movie_info ---
+denial_constraint
+!(movie_id < movie_id & id >= id & )
+!(movie_id <= movie_id & id >= id & )
+!(movie_id >= movie_id & id < id & )
+!(movie_id > movie_id & id < id & )
+!(movie_id >= movie_id & id <= id & )
+!(movie_id > movie_id & id <= id & )
+!(movie_id < movie_id & id > id & )
+!(movie_id <= movie_id & id > id & )
+section
+--- movie_info_idx ---
+denial_constraint
+!(id >= id & movie_id <= movie_id & )
+!(id > id & movie_id <= movie_id & )
+!(id >= id & movie_id < movie_id & )
+!(id > id & movie_id < movie_id & )
+section
+--- movie_keyword ---
+denial_constraint
+!(movie_id < movie_id & id >= id & )
+!(movie_id <= movie_id & id >= id & )
+!(movie_id >= movie_id & id < id & )
+!(movie_id > movie_id & id < id & )
+!(movie_id >= movie_id & id <= id & )
+!(movie_id > movie_id & id <= id & )
+!(movie_id < movie_id & id > id & )
+!(movie_id <= movie_id & id > id & )
+section
+--- movie_link ---
+denial_constraint
+!(id > id & movie_id <= movie_id & )
+!(id <= id & movie_id > movie_id & )
+!(movie_id > movie_id & id < id & )
+!(movie_id <= movie_id & id >= id & )
+!(id > id & movie_id < movie_id & )
+!(id >= id & movie_id < movie_id & )
+section
+--- name ---
+section
+--- person_info ---
+section
+--- role_type ---
+section
+--- title ---
+denial_constraint
+!(season_nr > season_nr & episode_nr == episode_nr & )
+!(series_years == series_years & kind_id != kind_id & )
+!(series_years == series_years & kind_id > kind_id & )
+!(episode_of_id < episode_of_id & kind_id > kind_id & )
+!(episode_of_id <= episode_of_id & kind_id > kind_id & )
+!(episode_nr < episode_nr & kind_id > kind_id & )
+!(season_nr < season_nr & kind_id > kind_id & )
+!(series_years == series_years & kind_id < kind_id & )
+!(episode_of_id >= episode_of_id & kind_id < kind_id & )
+!(episode_of_id > episode_of_id & kind_id < kind_id & )
+!(episode_nr > episode_nr & kind_id < kind_id & )
+section
+--- join_char_name_cast_info ---
+denial_constraint
+!(ci_person_id < ci_person_id & ci_id >= ci_id & )
+!(ci_person_id < ci_person_id & ci_id > ci_id & )
+!(ci_person_role_id < ci_person_role_id & chn_id >= chn_id & )
+!(chn_id < chn_id & ci_person_role_id >= ci_person_role_id & )
+!(ci_id <= ci_id & ci_person_id > ci_person_id & )
+!(ci_id < ci_id & ci_person_id > ci_person_id & )
+!(chn_id <= chn_id & ci_person_role_id > ci_person_role_id & )
+!(chn_id < chn_id & ci_person_role_id > ci_person_role_id & )
+!(ci_person_role_id <= ci_person_role_id & chn_id > chn_id & )
+!(ci_person_role_id < ci_person_role_id & chn_id > chn_id & )
+!(ci_person_role_id != ci_person_role_id & chn_id == chn_id & )
+!(chn_md5sum != chn_md5sum & chn_id == chn_id & )
+!(chn_name_pcode_nf != chn_name_pcode_nf & chn_id == chn_id & )
+!(chn_name != chn_name & chn_id == chn_id & )
+!(chn_id != chn_id & ci_person_role_id == ci_person_role_id & )
+!(chn_md5sum != chn_md5sum & ci_person_role_id == ci_person_role_id & )
+!(chn_name_pcode_nf != chn_name_pcode_nf & ci_person_role_id == ci_person_role_id & )
+!(chn_name != chn_name & ci_person_role_id == ci_person_role_id & )
+!(chn_id != chn_id & chn_name == chn_name & )
+!(ci_person_role_id != ci_person_role_id & chn_name == chn_name & )
+!(chn_md5sum != chn_md5sum & chn_name == chn_name & )
+!(chn_name_pcode_nf != chn_name_pcode_nf & chn_name == chn_name & )
+!(chn_id != chn_id & chn_md5sum == chn_md5sum & )
+!(ci_person_role_id != ci_person_role_id & chn_md5sum == chn_md5sum & )
+!(chn_name_pcode_nf != chn_name_pcode_nf & chn_md5sum == chn_md5sum & )
+!(chn_name != chn_name & chn_md5sum == chn_md5sum & )
+section
+--- join_role_type_cast_info ---
+denial_constraint
+!(ci_person_id < ci_person_id & ci_id >= ci_id & )
+!(ci_person_id >= ci_person_id & ci_id < ci_id & )
+!(ci_person_id >= ci_person_id & ci_id <= ci_id & )
+!(ci_person_id < ci_person_id & ci_id > ci_id & )
+!(ci_id < ci_id & ci_person_id > ci_person_id & )
+!(ci_id <= ci_id & ci_person_id > ci_person_id & )
+section
+--- join_cast_info_name ---
+denial_constraint
+!(ci_person_id < ci_person_id & ci_id >= ci_id & )
+!(ci_person_id < ci_person_id & ci_id > ci_id & )
+!(ci_id <= ci_id & ci_person_id >= ci_person_id & )
+!(ci_id < ci_id & ci_person_id >= ci_person_id & )
+!(ci_id <= ci_id & ci_person_id > ci_person_id & )
+!(ci_id < ci_id & ci_person_id > ci_person_id & )
+section
+--- join_cast_info_title ---
+denial_constraint
+!(ci_person_id < ci_person_id & ci_id > ci_id & )
+!(ci_person_id < ci_person_id & ci_id >= ci_id & )
+!(ci_id < ci_id & ci_person_id > ci_person_id & )
+!(ci_id <= ci_id & ci_person_id > ci_person_id & )
+!(t_series_years == t_series_years & t_kind_id != t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id > t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )
+!(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id < t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )
+!(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )
+section
+--- join_name_aka_name ---
+denial_constraint
+!(an_id < an_id & n_id > n_id & )
+!(an_person_id < an_person_id & n_id > n_id & )
+!(an_person_id <= an_person_id & n_id > n_id & )
+!(an_id <= an_id & n_id > n_id & )
+!(n_id <= n_id & an_id > an_id & )
+!(n_id < n_id & an_id > an_id & )
+!(an_person_id < an_person_id & an_id > an_id & )
+!(an_person_id <= an_person_id & an_id > an_id & )
+!(an_id < an_id & an_person_id >= an_person_id & )
+!(n_id <= n_id & an_person_id >= an_person_id & )
+!(n_id < n_id & an_person_id >= an_person_id & )
+!(an_id <= an_id & an_person_id >= an_person_id & )
+!(n_id <= n_id & an_id >= an_id & )
+!(n_id < n_id & an_id >= an_id & )
+!(an_person_id < an_person_id & an_id >= an_id & )
+!(an_person_id <= an_person_id & an_id >= an_id & )
+!(an_id < an_id & n_id >= n_id & )
+!(an_person_id < an_person_id & n_id >= n_id & )
+!(an_person_id <= an_person_id & n_id >= n_id & )
+!(an_id <= an_id & n_id >= n_id & )
+!(an_id < an_id & an_person_id > an_person_id & )
+!(n_id <= n_id & an_person_id > an_person_id & )
+!(n_id < n_id & an_person_id > an_person_id & )
+!(an_id <= an_id & an_person_id > an_person_id & )
+section
+--- join_name_person_info ---
+denial_constraint
+!(n_id > n_id & pi_person_id <= pi_person_id & )
+!(pi_id > pi_id & pi_person_id <= pi_person_id & )
+!(pi_id >= pi_id & pi_person_id <= pi_person_id & )
+!(n_id >= n_id & pi_person_id <= pi_person_id & )
+!(n_id > n_id & pi_id < pi_id & )
+!(pi_person_id >= pi_person_id & pi_id < pi_id & )
+!(pi_person_id > pi_person_id & pi_id < pi_id & )
+!(n_id >= n_id & pi_id < pi_id & )
+!(n_id > n_id & pi_id <= pi_id & )
+!(pi_person_id >= pi_person_id & pi_id <= pi_id & )
+!(pi_person_id > pi_person_id & pi_id <= pi_id & )
+!(n_id >= n_id & pi_id <= pi_id & )
+!(n_id > n_id & pi_person_id < pi_person_id & )
+!(pi_id > pi_id & pi_person_id < pi_person_id & )
+!(pi_id >= pi_id & pi_person_id < pi_person_id & )
+!(n_id >= n_id & pi_person_id < pi_person_id & )
+!(pi_id > pi_id & n_id < n_id & )
+!(pi_person_id >= pi_person_id & n_id < n_id & )
+!(pi_person_id > pi_person_id & n_id < n_id & )
+!(pi_id >= pi_id & n_id < n_id & )
+!(pi_id > pi_id & n_id <= n_id & )
+!(pi_person_id >= pi_person_id & n_id <= n_id & )
+!(pi_person_id > pi_person_id & n_id <= n_id & )
+!(pi_id >= pi_id & n_id <= n_id & )
+section
+--- join_person_info_info_type ---
+denial_constraint
+!(it_info != it_info & pi_info_type_id == pi_info_type_id & )
+!(pi_info_type_id != pi_info_type_id & it_info == it_info & )
+!(pi_info_type_id < pi_info_type_id & it_info == it_info & )
+section
+--- join_info_type_movie_info ---
+denial_constraint
+!(mi_id <= mi_id & mi_movie_id > mi_movie_id & )
+!(mi_id < mi_id & mi_movie_id > mi_movie_id & )
+!(mi_id > mi_id & mi_movie_id <= mi_movie_id & )
+!(mi_id >= mi_id & mi_movie_id <= mi_movie_id & )
+!(mi_id > mi_id & mi_movie_id < mi_movie_id & )
+!(mi_id >= mi_id & mi_movie_id < mi_movie_id & )
+!(mi_id <= mi_id & mi_movie_id >= mi_movie_id & )
+!(mi_id < mi_id & mi_movie_id >= mi_movie_id & )
+section
+--- join_movie_info_title ---
+section
+--- join_movie_info_idx_info_type ---
+denial_constraint
+!(mii_id >= mii_id & mii_movie_id < mii_movie_id & )
+!(mii_id > mii_id & mii_movie_id < mii_movie_id & )
+!(mii_id >= mii_id & mii_movie_id <= mii_movie_id & )
+!(mii_id > mii_id & mii_movie_id <= mii_movie_id & )
+!(it_info != it_info & mii_info_type_id == mii_info_type_id & )
+!(mii_info_type_id != mii_info_type_id & it_info == it_info & )
+!(mii_info_type_id > mii_info_type_id & it_info == it_info & )
+!(it_info == it_info & mii_info_type_id < mii_info_type_id & )
+section
+--- join_movie_info_idx_title ---
+denial_constraint
+!(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )
+!(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_season_nr < t_season_nr & t_series_years != t_series_years & )
+!(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )
+!(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & )
+!(t_season_nr <= t_season_nr & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_season_nr > t_season_nr & t_series_years != t_series_years & )
+!(t_series_years == t_series_years & t_kind_id != t_kind_id & )
+!(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_season_nr <= t_season_nr & t_episode_of_id >= t_episode_of_id & t_kind_id != t_kind_id & )
+!(t_episode_nr <= t_episode_nr & t_episode_of_id >= t_episode_of_id & t_kind_id != t_kind_id & )
+!(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )
+!(t_season_nr <= t_season_nr & t_episode_of_id > t_episode_of_id & t_kind_id != t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id < t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )
+!(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )
+!(t_season_nr <= t_season_nr & t_kind_id > t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id > t_kind_id & )
+!(t_episode_nr <= t_episode_nr & t_kind_id > t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )
+!(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )
+section
+--- join_kind_type_title ---
+denial_constraint
+!(t_season_nr > t_season_nr & t_episode_nr == t_episode_nr & )
+!(kt_id == kt_id & kt_kind != kt_kind & )
+!(t_series_years == t_series_years & kt_kind != kt_kind & )
+!(kt_kind == kt_kind & kt_id != kt_id & )
+!(t_series_years == t_series_years & kt_id != kt_id & )
+!(kt_kind == kt_kind & kt_id > kt_id & )
+!(t_series_years == t_series_years & kt_id > kt_id & )
+!(t_episode_of_id < t_episode_of_id & kt_id > kt_id & )
+!(t_episode_of_id <= t_episode_of_id & kt_id > kt_id & )
+!(t_episode_nr < t_episode_nr & kt_id > kt_id & )
+!(t_season_nr < t_season_nr & kt_id > kt_id & )
+!(kt_kind == kt_kind & kt_id < kt_id & )
+!(t_series_years == t_series_years & kt_id < kt_id & )
+!(t_episode_of_id >= t_episode_of_id & kt_id < kt_id & )
+!(t_episode_of_id > t_episode_of_id & kt_id < kt_id & )
+!(t_episode_nr > t_episode_nr & kt_id < kt_id & )
+section
+--- join_title_movie_keyword ---
+denial_constraint
+!(t_episode_nr != t_episode_nr & t_kind_id >= t_kind_id & t_season_nr <= t_season_nr & t_series_years != t_series_years & )
+!(t_season_nr != t_season_nr & t_kind_id >= t_kind_id & t_episode_nr <= t_episode_nr & t_series_years != t_series_years & )
+!(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_season_nr != t_season_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_season_nr != t_season_nr & t_kind_id >= t_kind_id & t_episode_of_id <= t_episode_of_id & t_series_years != t_series_years & )
+!(t_episode_nr != t_episode_nr & t_kind_id >= t_kind_id & t_episode_of_id <= t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_season_nr != t_season_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_episode_nr != t_episode_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )
+!(t_episode_nr != t_episode_nr & t_season_nr <= t_season_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )
+!(t_season_nr != t_season_nr & t_episode_nr <= t_episode_nr & t_episode_of_id >= t_episode_of_id & t_series_years != t_series_years & )
+!(mk_movie_id > mk_movie_id & mk_id <= mk_id & )
+!(t_id > t_id & mk_id <= mk_id & )
+!(mk_movie_id > mk_movie_id & mk_id < mk_id & )
+!(t_id > t_id & mk_id < mk_id & )
+!(mk_movie_id > mk_movie_id & t_id <= t_id & )
+!(mk_id > mk_id & t_id <= t_id & )
+!(mk_id >= mk_id & t_id <= t_id & )
+!(mk_id > mk_id & mk_movie_id <= mk_movie_id & )
+!(mk_id >= mk_id & mk_movie_id <= mk_movie_id & )
+!(t_id > t_id & mk_movie_id <= mk_movie_id & )
+!(mk_movie_id >= mk_movie_id & t_id < t_id & )
+!(mk_movie_id > mk_movie_id & t_id < t_id & )
+!(mk_id > mk_id & t_id < t_id & )
+!(mk_id >= mk_id & t_id < t_id & )
+!(t_id >= t_id & mk_movie_id < mk_movie_id & )
+!(mk_id > mk_id & mk_movie_id < mk_movie_id & )
+!(mk_id >= mk_id & mk_movie_id < mk_movie_id & )
+!(t_id > t_id & mk_movie_id < mk_movie_id & )
+!(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_season_nr < t_season_nr & )
+!(t_kind_id == t_kind_id & t_series_years != t_series_years & t_season_nr < t_season_nr & )
+!(t_series_years != t_series_years & t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & )
+!(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_nr < t_episode_nr & )
+!(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & mk_id <= mk_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & mk_id < mk_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & t_id <= t_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & mk_movie_id <= mk_movie_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & t_id < t_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & mk_movie_id < mk_movie_id & t_episode_nr < t_episode_nr & )
+!(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )
+!(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_of_id > t_episode_of_id & )
+!(t_series_years != t_series_years & t_episode_nr < t_episode_nr & t_episode_of_id > t_episode_of_id & )
+!(t_series_years == t_series_years & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )
+!(t_season_nr <= t_season_nr & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )
+!(t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & t_episode_nr > t_episode_nr & )
+!(t_season_nr <= t_season_nr & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_season_nr > t_season_nr & )
+!(t_episode_nr <= t_episode_nr & t_series_years != t_series_years & t_season_nr > t_season_nr & )
+!(t_episode_nr <= t_episode_nr & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id < t_kind_id & )
+!(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )
+!(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id > t_kind_id & )
+!(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )
+!(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )
+section
+--- join_movie_keyword_keyword ---
+denial_constraint
+!(mk_id < mk_id & mk_movie_id > mk_movie_id & )
+!(mk_id <= mk_id & mk_movie_id > mk_movie_id & )
+section
+--- join_company_name_movie_companies ---
+denial_constraint
+!(mc_company_id <= mc_company_id & cn_id > cn_id & )
+!(cn_id <= cn_id & mc_company_id > mc_company_id & )
+!(mc_id <= mc_id & mc_movie_id > mc_movie_id & )
+!(mc_id < mc_id & mc_movie_id > mc_movie_id & )
+!(mc_id <= mc_id & mc_movie_id >= mc_movie_id & )
+!(mc_id < mc_id & mc_movie_id >= mc_movie_id & )
+!(cn_id >= cn_id & mc_company_id < mc_company_id & )
+!(cn_id > cn_id & mc_company_id < mc_company_id & )
+!(mc_company_id >= mc_company_id & cn_id < cn_id & )
+!(mc_company_id > mc_company_id & cn_id < cn_id & )
+!(mc_company_id != mc_company_id & cn_id == cn_id & )
+!(cn_md5sum != cn_md5sum & cn_id == cn_id & )
+!(cn_name_pcode_sf != cn_name_pcode_sf & cn_id == cn_id & )
+!(cn_name_pcode_nf != cn_name_pcode_nf & cn_id == cn_id & )
+!(cn_name != cn_name & cn_id == cn_id & )
+!(cn_country_code != cn_country_code & cn_id == cn_id & )
+!(mc_company_id > mc_company_id & cn_id == cn_id & )
+!(mc_company_id < mc_company_id & cn_id == cn_id & )
+!(cn_id != cn_id & mc_company_id == mc_company_id & )
+!(cn_md5sum != cn_md5sum & mc_company_id == mc_company_id & )
+!(cn_name_pcode_sf != cn_name_pcode_sf & mc_company_id == mc_company_id & )
+!(cn_name_pcode_nf != cn_name_pcode_nf & mc_company_id == mc_company_id & )
+!(cn_name != cn_name & mc_company_id == mc_company_id & )
+!(cn_country_code != cn_country_code & mc_company_id == mc_company_id & )
+!(cn_id > cn_id & mc_company_id == mc_company_id & )
+!(cn_id < cn_id & mc_company_id == mc_company_id & )
+!(cn_id != cn_id & cn_name == cn_name & )
+!(mc_company_id != mc_company_id & cn_name == cn_name & )
+!(cn_md5sum != cn_md5sum & cn_name == cn_name & )
+!(cn_name_pcode_sf != cn_name_pcode_sf & cn_name == cn_name & )
+!(cn_name_pcode_nf != cn_name_pcode_nf & cn_name == cn_name & )
+!(cn_country_code != cn_country_code & cn_name == cn_name & )
+!(cn_id > cn_id & cn_name == cn_name & )
+!(mc_company_id > mc_company_id & cn_name == cn_name & )
+!(mc_company_id < mc_company_id & cn_name == cn_name & )
+!(cn_id < cn_id & cn_name == cn_name & )
+!(cn_id != cn_id & cn_md5sum == cn_md5sum & )
+!(mc_company_id != mc_company_id & cn_md5sum == cn_md5sum & )
+!(cn_name_pcode_sf != cn_name_pcode_sf & cn_md5sum == cn_md5sum & )
+!(cn_name_pcode_nf != cn_name_pcode_nf & cn_md5sum == cn_md5sum & )
+!(cn_name != cn_name & cn_md5sum == cn_md5sum & )
+!(cn_country_code != cn_country_code & cn_md5sum == cn_md5sum & )
+!(cn_id > cn_id & cn_md5sum == cn_md5sum & )
+!(mc_company_id > mc_company_id & cn_md5sum == cn_md5sum & )
+!(mc_company_id < mc_company_id & cn_md5sum == cn_md5sum & )
+!(cn_id < cn_id & cn_md5sum == cn_md5sum & )
+!(cn_id != cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(mc_company_id != mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_md5sum != cn_md5sum & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_name_pcode_nf != cn_name_pcode_nf & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_name != cn_name & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_country_code != cn_country_code & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_id > cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(mc_company_id > mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(mc_company_id < mc_company_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_id < cn_id & cn_name_pcode_sf == cn_name_pcode_sf & )
+!(cn_id != cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(mc_company_id != mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_md5sum != cn_md5sum & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_name_pcode_sf != cn_name_pcode_sf & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_name != cn_name & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_country_code != cn_country_code & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_id > cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(mc_company_id > mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(mc_company_id < mc_company_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+!(cn_id < cn_id & cn_name_pcode_nf == cn_name_pcode_nf & )
+section
+--- join_movie_companies_company_type ---
+denial_constraint
+!(mc_id <= mc_id & mc_movie_id > mc_movie_id & )
+!(mc_id < mc_id & mc_movie_id > mc_movie_id & )
+!(mc_id <= mc_id & mc_movie_id >= mc_movie_id & )
+!(mc_id < mc_id & mc_movie_id >= mc_movie_id & )
+section
+--- join_movie_companies_title ---
+denial_constraint
+!(t_episode_of_id != t_episode_of_id & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_episode_nr != t_episode_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_season_nr != t_season_nr & t_kind_id == t_kind_id & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_episode_nr > t_episode_nr & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & )
+!(t_episode_nr > t_episode_nr & t_episode_of_id < t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_episode_of_id > t_episode_of_id & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_season_nr < t_season_nr & t_series_years != t_series_years & )
+!(t_episode_nr > t_episode_nr & t_season_nr < t_season_nr & t_series_years != t_series_years & )
+!(t_kind_id >= t_kind_id & t_episode_nr < t_episode_nr & t_series_years != t_series_years & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_season_nr > t_season_nr & )
+!(t_series_years == t_series_years & t_kind_id != t_kind_id & )
+!(t_season_nr <= t_season_nr & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_episode_nr > t_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_nr >= t_episode_nr & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id < t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )
+!(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id > t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )
+!(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )
+section
+--- join_complete_cast_comp_cast_type ---
+denial_constraint
+!(cc_status_id == cc_status_id & cc_status_kind != cc_status_kind & )
+!(cc_status_kind == cc_status_kind & cc_status_id != cc_status_id & )
+!(cc_status_kind == cc_status_kind & cc_status_id > cc_status_id & )
+!(cc_status_kind == cc_status_kind & cc_status_id < cc_status_id & )
+section
+--- join_movie_link_link_type ---
+denial_constraint
+!(ml_id > ml_id & ml_movie_id <= ml_movie_id & )
+!(ml_movie_id <= ml_movie_id & ml_id >= ml_id & )
+!(ml_movie_id > ml_movie_id & ml_id < ml_id & )
+!(ml_movie_id > ml_movie_id & ml_id <= ml_id & )
+!(ml_id > ml_id & ml_movie_id < ml_movie_id & )
+!(ml_id >= ml_id & ml_movie_id < ml_movie_id & )
+!(lt_link != lt_link & ml_link_type_id == ml_link_type_id & )
+!(ml_link_type_id != ml_link_type_id & lt_link == lt_link & )
+!(ml_link_type_id > ml_link_type_id & lt_link == lt_link & )
+!(ml_link_type_id < ml_link_type_id & lt_link == lt_link & )
+section
+--- join_movie_link_title ---
+denial_constraint
+!(ml_id <= ml_id & ml_movie_id > ml_movie_id & )
+!(ml_id < ml_id & ml_movie_id > ml_movie_id & )
+!(ml_id > ml_id & ml_movie_id < ml_movie_id & )
+!(ml_id >= ml_id & ml_movie_id < ml_movie_id & )
+!(t_kind_id >= t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )
+!(t_kind_id == t_kind_id & t_series_years != t_series_years & t_episode_of_id < t_episode_of_id & )
+!(t_episode_of_id >= t_episode_of_id & ml_movie_id <= ml_movie_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & ml_id <= ml_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & ml_id < ml_id & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & ml_movie_id < ml_movie_id & t_episode_nr < t_episode_nr & )
+!(t_season_nr >= t_season_nr & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_episode_nr < t_episode_nr & t_kind_id != t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_season_nr < t_season_nr & t_kind_id != t_kind_id & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_of_id > t_episode_of_id & )
+!(t_kind_id <= t_kind_id & t_series_years != t_series_years & t_episode_nr > t_episode_nr & )
+!(t_season_nr <= t_season_nr & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_episode_nr > t_episode_nr & )
+!(t_episode_nr <= t_episode_nr & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id != t_kind_id & t_season_nr > t_season_nr & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id < t_kind_id & )
+!(t_episode_of_id > t_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr > t_episode_nr & t_kind_id < t_kind_id & )
+!(t_season_nr > t_season_nr & t_kind_id < t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id < t_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_kind_id > t_kind_id & )
+!(t_series_years == t_series_years & t_kind_id > t_kind_id & )
+!(t_season_nr < t_season_nr & t_kind_id > t_kind_id & )
+!(t_episode_nr < t_episode_nr & t_episode_of_id == t_episode_of_id & )
+!(t_kind_id != t_kind_id & t_episode_of_id == t_episode_of_id & )
+!(t_md5sum != t_md5sum & t_title == t_title & )
+!(ml_movie_id != ml_movie_id & t_title == t_title & )
+!(t_phonetic_code != t_phonetic_code & t_title == t_title & )
+!(t_production_year != t_production_year & t_title == t_title & )
+!(t_episode_of_id != t_episode_of_id & t_title == t_title & )
+!(t_episode_nr != t_episode_nr & t_title == t_title & )
+!(t_season_nr != t_season_nr & t_title == t_title & )
+!(t_md5sum != t_md5sum & ml_movie_id == ml_movie_id & )
+!(t_title != t_title & ml_movie_id == ml_movie_id & )
+!(t_phonetic_code != t_phonetic_code & ml_movie_id == ml_movie_id & )
+!(t_production_year != t_production_year & ml_movie_id == ml_movie_id & )
+!(t_episode_of_id != t_episode_of_id & ml_movie_id == ml_movie_id & )
+!(t_episode_nr != t_episode_nr & ml_movie_id == ml_movie_id & )
+!(t_season_nr != t_season_nr & ml_movie_id == ml_movie_id & )
+!(t_title != t_title & t_md5sum == t_md5sum & )
+!(ml_movie_id != ml_movie_id & t_md5sum == t_md5sum & )
+!(t_phonetic_code != t_phonetic_code & t_md5sum == t_md5sum & )
+!(t_production_year != t_production_year & t_md5sum == t_md5sum & )
+!(t_episode_of_id != t_episode_of_id & t_md5sum == t_md5sum & )
+!(t_episode_nr != t_episode_nr & t_md5sum == t_md5sum & )
+!(t_season_nr != t_season_nr & t_md5sum == t_md5sum & )
+section
+--- join_aka_title_title ---
+denial_constraint
+!(at_id > at_id & at_movie_id < at_movie_id & )
+!(at_id >= at_id & at_movie_id < at_movie_id & )
+!(at_movie_id >= at_movie_id & at_id < at_id & )
+!(at_movie_id > at_movie_id & at_id < at_id & )
+!(at_movie_id >= at_movie_id & at_id <= at_id & )
+!(at_movie_id > at_movie_id & at_id <= at_id & )
+!(t_episode_of_id == t_episode_of_id & at_episode_of_id != at_episode_of_id & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(at_production_year > at_production_year & t_episode_nr >= t_episode_nr & at_episode_of_id != at_episode_of_id & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_episode_of_id != at_episode_of_id & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_episode_of_id != at_episode_of_id & )
+!(at_episode_of_id == at_episode_of_id & t_episode_of_id != t_episode_of_id & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_episode_of_id != t_episode_of_id & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_episode_of_id != t_episode_of_id & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_episode_nr != at_episode_nr & )
+!(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_episode_nr != at_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & at_episode_nr != at_episode_nr & )
+!(t_episode_nr == t_episode_nr & at_episode_nr != at_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & at_episode_nr != at_episode_nr & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_episode_nr != at_episode_nr & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(t_season_nr <= t_season_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(at_season_nr <= at_season_nr & at_production_year < at_production_year & at_episode_nr != at_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_episode_nr != t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & at_episode_of_id <= at_episode_of_id & t_episode_nr != t_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & t_episode_nr != t_episode_nr & )
+!(at_episode_nr == at_episode_nr & t_episode_nr != t_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & t_episode_nr != t_episode_nr & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(at_production_year > at_production_year & at_episode_of_id >= at_episode_of_id & t_episode_nr != t_episode_nr & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_episode_nr != t_episode_nr & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(at_production_year < at_production_year & at_episode_of_id <= at_episode_of_id & t_episode_nr != t_episode_nr & )
+!(t_season_nr <= t_season_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(at_season_nr <= at_season_nr & at_production_year < at_production_year & t_episode_nr != t_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_season_nr != at_season_nr & )
+!(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_season_nr != at_season_nr & )
+!(at_episode_of_id == at_episode_of_id & at_season_nr != at_season_nr & )
+!(t_season_nr == t_season_nr & at_season_nr != at_season_nr & )
+!(t_episode_of_id == t_episode_of_id & at_season_nr != at_season_nr & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_season_nr != at_season_nr & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(t_season_nr <= t_season_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & at_season_nr != at_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_season_nr != t_season_nr & )
+!(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & t_season_nr != t_season_nr & )
+!(at_episode_of_id == at_episode_of_id & t_season_nr != t_season_nr & )
+!(at_season_nr == at_season_nr & t_season_nr != t_season_nr & )
+!(t_episode_of_id == t_episode_of_id & t_season_nr != t_season_nr & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_season_nr != t_season_nr & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(t_episode_nr <= t_episode_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(at_episode_nr <= at_episode_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(at_season_nr <= at_season_nr & at_production_year < at_production_year & t_season_nr != t_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_kind_id >= at_kind_id & t_kind_id != t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_kind_id >= at_kind_id & t_kind_id != t_kind_id & )
+!(at_kind_id <= at_kind_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_season_nr >= at_season_nr & t_kind_id != t_kind_id & )
+!(at_kind_id <= at_kind_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_episode_nr >= at_episode_nr & t_kind_id != t_kind_id & )
+!(at_kind_id <= at_kind_id & at_episode_of_id >= at_episode_of_id & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & t_kind_id != t_kind_id & )
+!(at_kind_id == at_kind_id & t_kind_id != t_kind_id & )
+!(at_episode_of_id == at_episode_of_id & t_kind_id != t_kind_id & )
+!(t_episode_of_id == t_episode_of_id & t_kind_id != t_kind_id & )
+!(at_kind_id <= at_kind_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year <= at_production_year & t_kind_id != t_kind_id & )
+!(at_kind_id >= at_kind_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(at_season_nr >= at_season_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_nr >= t_episode_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(t_season_nr >= t_season_nr & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year >= at_production_year & t_kind_id != t_kind_id & )
+!(at_kind_id >= at_kind_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & t_kind_id != t_kind_id & )
+!(at_kind_id <= at_kind_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & t_kind_id != t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id >= t_kind_id & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & t_kind_id >= t_kind_id & at_kind_id != at_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_season_nr >= at_season_nr & at_kind_id != at_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_episode_nr >= at_episode_nr & at_kind_id != at_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id >= at_episode_of_id & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & at_episode_of_id >= at_episode_of_id & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & t_episode_of_id >= t_episode_of_id & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & t_episode_of_id >= t_episode_of_id & at_kind_id != at_kind_id & )
+!(t_kind_id == t_kind_id & at_kind_id != at_kind_id & )
+!(at_episode_of_id == at_episode_of_id & at_kind_id != at_kind_id & )
+!(t_episode_of_id == t_episode_of_id & at_kind_id != at_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year <= at_production_year & at_kind_id != at_kind_id & )
+!(t_kind_id >= t_kind_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(at_season_nr >= at_season_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_nr >= t_episode_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(t_season_nr >= t_season_nr & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year >= at_production_year & at_kind_id != at_kind_id & )
+!(t_kind_id >= t_kind_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(at_season_nr >= at_season_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_nr >= at_episode_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_nr >= t_episode_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(t_season_nr >= t_season_nr & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_production_year > at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )
+!(t_kind_id <= t_kind_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_production_year < at_production_year & at_kind_id != at_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_episode_of_id < at_episode_of_id & )
+!(t_episode_of_id == t_episode_of_id & at_episode_of_id < at_episode_of_id & )
+!(at_production_year < at_production_year & at_episode_of_id < at_episode_of_id & )
+!(at_episode_of_id >= at_episode_of_id & t_episode_of_id < t_episode_of_id & )
+!(at_episode_of_id == at_episode_of_id & t_episode_of_id < t_episode_of_id & )
+!(at_production_year < at_production_year & t_episode_of_id < t_episode_of_id & )
+!(at_episode_nr >= at_episode_nr & t_episode_nr < t_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & t_episode_nr < t_episode_nr & )
+!(at_episode_nr == at_episode_nr & t_episode_nr < t_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & t_episode_nr < t_episode_nr & )
+!(at_production_year < at_production_year & t_episode_nr < t_episode_nr & )
+!(at_season_nr >= at_season_nr & t_season_nr < t_season_nr & )
+!(at_episode_of_id == at_episode_of_id & t_season_nr < t_season_nr & )
+!(at_season_nr == at_season_nr & t_season_nr < t_season_nr & )
+!(t_episode_of_id == t_episode_of_id & t_season_nr < t_season_nr & )
+!(at_production_year < at_production_year & t_season_nr < t_season_nr & )
+!(t_episode_nr >= t_episode_nr & at_episode_nr < at_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & at_episode_nr < at_episode_nr & )
+!(t_episode_nr == t_episode_nr & at_episode_nr < at_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & at_episode_nr < at_episode_nr & )
+!(at_production_year < at_production_year & at_episode_nr < at_episode_nr & )
+!(t_season_nr >= t_season_nr & at_season_nr < at_season_nr & )
+!(at_episode_of_id == at_episode_of_id & at_season_nr < at_season_nr & )
+!(t_season_nr == t_season_nr & at_season_nr < at_season_nr & )
+!(t_episode_of_id == t_episode_of_id & at_season_nr < at_season_nr & )
+!(at_production_year < at_production_year & at_season_nr < at_season_nr & )
+!(at_kind_id >= at_kind_id & t_kind_id < t_kind_id & )
+!(at_season_nr >= at_season_nr & t_kind_id < t_kind_id & )
+!(at_episode_nr >= at_episode_nr & t_kind_id < t_kind_id & )
+!(t_episode_nr >= t_episode_nr & t_kind_id < t_kind_id & )
+!(t_season_nr >= t_season_nr & t_kind_id < t_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & t_kind_id < t_kind_id & )
+!(at_kind_id == at_kind_id & t_kind_id < t_kind_id & )
+!(at_episode_of_id == at_episode_of_id & t_kind_id < t_kind_id & )
+!(t_episode_nr == t_episode_nr & t_kind_id < t_kind_id & )
+!(at_episode_nr == at_episode_nr & t_kind_id < t_kind_id & )
+!(t_season_nr == t_season_nr & t_kind_id < t_kind_id & )
+!(at_season_nr == at_season_nr & t_kind_id < t_kind_id & )
+!(t_episode_of_id == t_episode_of_id & t_kind_id < t_kind_id & )
+!(at_production_year <= at_production_year & t_kind_id < t_kind_id & )
+!(at_production_year < at_production_year & t_kind_id < t_kind_id & )
+!(t_kind_id >= t_kind_id & at_kind_id < at_kind_id & )
+!(at_season_nr >= at_season_nr & at_kind_id < at_kind_id & )
+!(at_episode_nr >= at_episode_nr & at_kind_id < at_kind_id & )
+!(t_episode_nr >= t_episode_nr & at_kind_id < at_kind_id & )
+!(t_season_nr >= t_season_nr & at_kind_id < at_kind_id & )
+!(at_episode_of_id >= at_episode_of_id & at_kind_id < at_kind_id & )
+!(t_episode_of_id >= t_episode_of_id & at_kind_id < at_kind_id & )
+!(t_kind_id == t_kind_id & at_kind_id < at_kind_id & )
+!(at_episode_of_id == at_episode_of_id & at_kind_id < at_kind_id & )
+!(t_episode_nr == t_episode_nr & at_kind_id < at_kind_id & )
+!(at_episode_nr == at_episode_nr & at_kind_id < at_kind_id & )
+!(t_season_nr == t_season_nr & at_kind_id < at_kind_id & )
+!(at_season_nr == at_season_nr & at_kind_id < at_kind_id & )
+!(t_episode_of_id == t_episode_of_id & at_kind_id < at_kind_id & )
+!(at_production_year <= at_production_year & at_kind_id < at_kind_id & )
+!(at_production_year < at_production_year & at_kind_id < at_kind_id & )
+!(at_episode_nr <= at_episode_nr & t_episode_nr > t_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & t_episode_nr > t_episode_nr & )
+!(at_episode_nr == at_episode_nr & t_episode_nr > t_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & t_episode_nr > t_episode_nr & )
+!(at_production_year > at_production_year & t_episode_nr > t_episode_nr & )
+!(t_episode_nr <= t_episode_nr & at_episode_nr > at_episode_nr & )
+!(at_episode_of_id == at_episode_of_id & at_episode_nr > at_episode_nr & )
+!(t_episode_nr == t_episode_nr & at_episode_nr > at_episode_nr & )
+!(t_episode_of_id == t_episode_of_id & at_episode_nr > at_episode_nr & )
+!(at_production_year > at_production_year & at_episode_nr > at_episode_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_episode_of_id > at_episode_of_id & )
+!(t_episode_of_id == t_episode_of_id & at_episode_of_id > at_episode_of_id & )
+!(at_production_year > at_production_year & at_episode_of_id > at_episode_of_id & )
+!(at_episode_of_id <= at_episode_of_id & t_episode_of_id > t_episode_of_id & )
+!(at_episode_of_id == at_episode_of_id & t_episode_of_id > t_episode_of_id & )
+!(at_production_year > at_production_year & t_episode_of_id > t_episode_of_id & )
+!(t_season_nr <= t_season_nr & at_season_nr > at_season_nr & )
+!(at_episode_of_id == at_episode_of_id & at_season_nr > at_season_nr & )
+!(t_episode_nr == t_episode_nr & at_season_nr > at_season_nr & )
+!(at_episode_nr == at_episode_nr & at_season_nr > at_season_nr & )
+!(t_season_nr == t_season_nr & at_season_nr > at_season_nr & )
+!(t_episode_of_id == t_episode_of_id & at_season_nr > at_season_nr & )
+!(at_production_year > at_production_year & at_season_nr > at_season_nr & )
+!(at_season_nr <= at_season_nr & t_season_nr > t_season_nr & )
+!(at_episode_of_id == at_episode_of_id & t_season_nr > t_season_nr & )
+!(t_episode_nr == t_episode_nr & t_season_nr > t_season_nr & )
+!(at_episode_nr == at_episode_nr & t_season_nr > t_season_nr & )
+!(at_season_nr == at_season_nr & t_season_nr > t_season_nr & )
+!(t_episode_of_id == t_episode_of_id & t_season_nr > t_season_nr & )
+!(at_production_year > at_production_year & t_season_nr > t_season_nr & )
+!(t_episode_of_id <= t_episode_of_id & at_kind_id > at_kind_id & )
+!(t_kind_id <= t_kind_id & at_kind_id > at_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & at_kind_id > at_kind_id & )
+!(t_kind_id == t_kind_id & at_kind_id > at_kind_id & )
+!(at_episode_of_id == at_episode_of_id & at_kind_id > at_kind_id & )
+!(t_episode_of_id == t_episode_of_id & at_kind_id > at_kind_id & )
+!(at_production_year >= at_production_year & at_kind_id > at_kind_id & )
+!(at_production_year > at_production_year & at_kind_id > at_kind_id & )
+!(at_kind_id <= at_kind_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id <= t_episode_of_id & t_kind_id > t_kind_id & )
+!(at_episode_of_id <= at_episode_of_id & t_kind_id > t_kind_id & )
+!(at_kind_id == at_kind_id & t_kind_id > t_kind_id & )
+!(at_episode_of_id == at_episode_of_id & t_kind_id > t_kind_id & )
+!(t_episode_of_id == t_episode_of_id & t_kind_id > t_kind_id & )
+!(at_production_year >= at_production_year & t_kind_id > t_kind_id & )
+!(at_production_year > at_production_year & t_kind_id > t_kind_id & )
+!(at_imdb_index == at_imdb_index & t_imdb_index != t_imdb_index & )
+!(t_imdb_index == t_imdb_index & at_imdb_index != at_imdb_index & )
