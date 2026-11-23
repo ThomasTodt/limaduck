@@ -6,7 +6,6 @@
 
 // Nossos cabeçalhos do LIMA
 #include "Scheduler.hpp"
-// #include "CSVDataset.hpp"
 #include "DuckDBDataset.hpp"
 
 namespace duckdb {
@@ -15,11 +14,12 @@ struct LimaDiscoverBindData : public TableFunctionData {
 	string file_name;
 	int32_t num_lines;
 	double threshold;
+	bool constant_dcs;
+	double min_support;
 };
 
 // --- 1. Estado Global ---
 struct LimaDiscoverGlobalState : public GlobalTableFunctionState {
-	// Usando o nosso CSVDataset temporariamente para teste
 	std::unique_ptr<DuckDBDataset> dataset;
 	std::unique_ptr<Scheduler> scheduler;
 
@@ -39,6 +39,8 @@ unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionB
 	// 2. Valores Padrão
 	result->num_lines = -1;        // -1 será o nosso código secreto para "Leia o arquivo inteiro"
 	result->threshold = 0.0000001; // Padrão do Java: 0.00001 * 0.01 = 1e-7
+	result->constant_dcs = false;  // Padrão: apenas Variable DCs
+	result->min_support = 0.01;    // Suporte mínimo padrão para Constant DCs (1% das linhas)
 
 	// 3. Verifica se o usuário passou o 'num_lines' opcional
 	auto num_lines_it = input.named_parameters.find("num_lines");
@@ -50,6 +52,18 @@ unique_ptr<FunctionData> LimaDiscoverBind(ClientContext &context, TableFunctionB
 	auto threshold_it = input.named_parameters.find("threshold");
 	if (threshold_it != input.named_parameters.end()) {
 		result->threshold = threshold_it->second.GetValue<double>();
+	}
+
+	// 5. Verifica se o usuário ativou o modo Constant LIMA ('constant_dcs')
+	auto constant_dcs_it = input.named_parameters.find("constant_dcs");
+	if (constant_dcs_it != input.named_parameters.end()) {
+		result->constant_dcs = constant_dcs_it->second.GetValue<bool>();
+	}
+
+	// 6. Verifica se o usuário passou o suporte mínimo ('min_support') para Constant DCs
+	auto min_support_it = input.named_parameters.find("min_support");
+	if (min_support_it != input.named_parameters.end()) {
+		result->min_support = min_support_it->second.GetValue<double>();
 	}
 
 	return_types.push_back(LogicalType::VARCHAR);
@@ -66,7 +80,8 @@ unique_ptr<GlobalTableFunctionState> LimaDiscoverInit(ClientContext &context, Ta
 
 	state->dataset = make_uniq<DuckDBDataset>(context, bind_data.file_name, bind_data.num_lines);
 
-	state->scheduler = make_uniq<Scheduler>(state->dataset.get(), real_threshold);
+	state->scheduler =
+	    make_uniq<Scheduler>(state->dataset.get(), real_threshold, bind_data.constant_dcs, bind_data.min_support);
 
 	return std::move(state);
 }
@@ -109,6 +124,8 @@ void RegisterLimaDiscover(ExtensionLoader &loader) {
 	// Registra os parâmetros nomeados opcionais
 	lima_discover_fun.named_parameters["num_lines"] = LogicalType::INTEGER;
 	lima_discover_fun.named_parameters["threshold"] = LogicalType::DOUBLE;
+	lima_discover_fun.named_parameters["constant_dcs"] = LogicalType::BOOLEAN;
+	lima_discover_fun.named_parameters["min_support"] = LogicalType::DOUBLE;
 
 	loader.RegisterFunction(lima_discover_fun);
 }

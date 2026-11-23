@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <string>
 #include <memory>
 #include <algorithm>
 #include <iostream>
@@ -33,19 +34,8 @@ public:
 		bool sound = false;
 	};
 
-	// Especialização da Lattice para o Agendador.
-	// Usamos unique_ptr para garantir que o SchedulerLattice seja o dono
-	// da memória alocada para os estados estendidos.
-	// class SchedulerLattice : public Lattice<std::unique_ptr<SchedulerNode>, std::unique_ptr<SchedulerEdge>> {
-	// public:
-	//     SchedulerLattice(Lattice<void*, void*>* base)
-	//         : Lattice<std::unique_ptr<SchedulerNode>, std::unique_ptr<SchedulerEdge>>(*base) {}
-	// };
-
 	class SchedulerLattice : public Lattice<std::unique_ptr<SchedulerNode>, std::unique_ptr<SchedulerEdge>> {
 	public:
-		// Passamos o ponteiro 'base' (convertido para void*)
-		// e pegamos o array de contagem 'preds_count' da Lattice original.
 		SchedulerLattice(Lattice<void *, void *> *base)
 		    : Lattice<std::unique_ptr<SchedulerNode>, std::unique_ptr<SchedulerEdge>>((void *)base, base->preds_count) {
 		}
@@ -59,30 +49,52 @@ public:
 		}
 	};
 
+	struct ContextSummary {
+		std::vector<PredSet> discovered_dcs;
+		std::vector<bool> l1_zero;
+		std::shared_ptr<TPSet> ref_tpset;
+	};
+
 	// --- Atributos da Classe ---
 
 	double minGrad = 1e-6;
+	bool enableConstantDCs = false;
+	double minSupport = 0.01;
 	static bool ar;
 
 	RelationalDataset *dataset;
 	std::unique_ptr<SchedulerLattice> schedulerLattice;
 
-	explicit Scheduler(RelationalDataset *ds, double threshold_val) : dataset(ds), minGrad(threshold_val) {
+	explicit Scheduler(RelationalDataset *ds, double threshold_val, bool constant_dcs = false,
+	                   double min_support = 0.01)
+	    : minGrad(threshold_val), enableConstantDCs(constant_dcs), minSupport(min_support), dataset(ds) {
 		schedulerLattice = make_uniq<SchedulerLattice>(ds->schema->lattice.get());
 	}
 
 	void populatePredicates(std::vector<std::string> &output_constraints);
 
 protected:
-	// Métodos auxiliares para garantir a existência dos objetos de estado
 	SchedulerNode *getNode(SchedulerLattice::Node *node);
 	SchedulerEdge *getEdge(SchedulerLattice::Edge *edge);
 
 	int32_t getBatchSize(int32_t batch);
 
+	void runSinglePass(std::vector<std::string> &output_constraints, ContextSummary &out_summary,
+	                   const ConstantCluster *cluster = nullptr,
+	                   const std::vector<const ContextSummary *> &parent_summaries = {});
+
+	static bool isSubsumedByParent(const PredSet &candidate, const ContextSummary &parent_summary,
+	                               const Schema *schema);
+
+	bool isSoundAgainstParentContext(SchedulerLattice::Edge *edge, const ContextSummary &parent_summary);
+
+	bool isL1SoundAgainstParentContext(int32_t pred_id, const BetaDistribution &child_dist,
+	                                   const ContextSummary &parent_summary);
+
 	// Motor de Busca em Profundidade (DFS)
 	void search(SchedulerLattice::Node *node, int32_t lastPredIdx, const std::vector<int32_t> &predIDXs,
-	            const std::vector<Predicate *> &preds, std::vector<ResultEntry> &res);
+	            const std::vector<Predicate *> &preds, std::vector<ResultEntry> &res,
+	            const ConstantCluster *cluster = nullptr);
 
 	void propagateAcross(SchedulerLattice::Edge *e, std::vector<ResultEntry> &res);
 
